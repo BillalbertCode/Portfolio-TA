@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 import Image from 'next/image'
+import { SimpleIcon } from './SimpleIcon'
 
 interface Project {
   id: number
@@ -25,27 +26,6 @@ interface ProjectsSectionProps {
   activeFilter?: string
   onFilterChange?: (filter: string) => void
   technologies?: Technology[]
-}
-
-const techIcons: Record<string, string> = {
-  React: '⚛️',
-  'Next.js': '▲',
-  TypeScript: '𝚃𝚂',
-  JavaScript: '𝙹𝚂',
-  'Three.js': '🎲',
-  'Framer Motion': '✨',
-  'Tailwind CSS': '🎨',
-  'Node.js': '🟢',
-  PostgreSQL: '🐘',
-  Firebase: '🔥',
-  GraphQL: '📊',
-  Python: '🐍',
-  'React Native': '📱',
-  Storybook: '📖',
-  'D3.js': '📈',
-  Stripe: '💳',
-  WebSocket: '🔌',
-  CSS: '🎨',
 }
 
 export default function ProjectsSection({ projects, activeFilter, onFilterChange, technologies = [] }: ProjectsSectionProps) {
@@ -113,7 +93,7 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
             }`}
             whileHover={{ scale: 1.05 }}
           >
-            <span>{techIcons[tech.name] || '◆'}</span>
+            <SimpleIcon name={tech.icon} size={16} />
             <span>{tech.name}</span>
           </motion.button>
         ))}

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { slideInRight } from '@/lib/animations'
+import { SimpleIcon } from './SimpleIcon'
 
 interface Technology {
   name: string
@@ -12,27 +13,6 @@ interface RightSidebarProps {
   technologies: Technology[]
   activeFilter?: string
   onFilterChange?: (filter: string) => void
-}
-
-const techIcons: Record<string, string> = {
-  React: '⚛️',
-  'Next.js': '▲',
-  TypeScript: '𝚃𝚂',
-  JavaScript: '𝙹𝚂',
-  'Three.js': '🎲',
-  'Framer Motion': '✨',
-  'Tailwind CSS': '🎨',
-  'Node.js': '🟢',
-  PostgreSQL: '🐘',
-  Firebase: '🔥',
-  GraphQL: '📊',
-  Python: '🐍',
-  'React Native': '📱',
-  Storybook: '📖',
-  'D3.js': '📈',
-  Stripe: '💳',
-  WebSocket: '🔌',
-  CSS: '🎨',
 }
 
 export default function RightSidebar({ technologies, activeFilter, onFilterChange }: RightSidebarProps) {
@@ -76,7 +56,7 @@ export default function RightSidebar({ technologies, activeFilter, onFilterChang
           whileHover={{ scale: 1.1 }}
           title={tech.name}
         >
-          {techIcons[tech.name] || '◆'}
+          <SimpleIcon name={tech.icon} size={20} />
         </motion.button>
       ))}
     </motion.aside>

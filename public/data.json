@@ -1,21 +1,21 @@
 {
-  "name": "Creative Developer",
-  "title": "Full-Stack Designer & Developer",
+  "name": "Billalbert Martinez",
+  "title": "Full-Stack Developer",
   "description": "Crafting beautiful, interactive digital experiences with code and design. Specializing in modern web development, 3D visualization, and user-centered design.",
-  "email": "hello@example.com",
+  "email": "billalbertcode@gmail.com",
   "socialLinks": [
-    { "name": "GitHub", "url": "https://github.com", "icon": "github" },
-    { "name": "LinkedIn", "url": "https://linkedin.com", "icon": "linkedin" },
-    { "name": "Twitter", "url": "https://twitter.com", "icon": "twitter" },
-    { "name": "Dribbble", "url": "https://dribbble.com", "icon": "dribbble" }
+    { "name": "GitHub", "url": "https://github.com/billalbertcode", "icon": "github" },
+    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/billalbertcode", "icon": "linkedin" },
+    { "name": "Twitter", "url": "https://twitter.com/BillalbertCode", "icon": "twitter" },
+    { "name": "Instagram", "url": "https://www.instagram.com/billalbertcode/", "icon": "instagram" }
   ],
   "projects": [
     {
       "id": 1,
-      "title": "Interactive 3D Portfolio",
-      "description": "A dynamic portfolio featuring 3D models, smooth animations, and real-time filtering of projects by technology.",
-      "image": "/placeholder.svg?height=300&width=400",
-      "tags": ["React", "Three.js", "Framer Motion", "Next.js"],
+      "title": "JobChatbotAI",
+      "description": "Chatbot Inteligente enfocado en la asistencia de Trabajo, con uso interactivo de Herramientas. creado con el LLM Gemini y IA SDK para facilicitar la creacion del chatbot.",
+      "image": "/project1.webp?height=300&width=400",
+      "tags": ["React", "TypeScript", "Framer Motion", "Next.js"],
       "link": "#",
       "details": "Built a showcase for creative work with interactive 3D elements and smooth UX transitions."
     },
@@ -104,16 +104,17 @@
     }
   ],
   "technologies": [
-    { "name": "React", "icon": "⚛️" },
-    { "name": "Next.js", "icon": "▲" },
-    { "name": "TypeScript", "icon": "𝚃𝚂" },
-    { "name": "Three.js", "icon": "🎲" },
-    { "name": "Framer Motion", "icon": "✨" },
-    { "name": "Tailwind CSS", "icon": "🎨" },
-    { "name": "Node.js", "icon": "🟢" },
-    { "name": "PostgreSQL", "icon": "🐘" },
-    { "name": "Firebase", "icon": "🔥" },
-    { "name": "GraphQL", "icon": "📊" },
-    { "name": "Stripe", "icon": "💳" }
+    { "name": "React", "icon": "react" },
+    { "name": "Next.js", "icon": "nextdotjs" },
+    { "name": "TypeScript", "icon": "typescript" },
+    { "name": "Three.js", "icon": "threedotjs" },
+    { "name": "Framer Motion", "icon": "framermotion" },
+    { "name": "Tailwind CSS", "icon": "tailwindcss" },
+    { "name": "Node.js", "icon": "nodedotjs" },
+    { "name": "Express", "icon": "express" },
+    { "name": "PostgreSQL", "icon": "postgresql" },
+    { "name": "Firebase", "icon": "firebase" },
+    { "name": "GraphQL", "icon": "graphql" },
+    { "name": "Stripe", "icon": "stripe" }
   ]
 }

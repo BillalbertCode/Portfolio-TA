@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { slideInLeft } from '@/lib/animations'
 import Link from 'next/link'
+import { SimpleIcon } from './SimpleIcon'
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -12,10 +13,10 @@ const navItems = [
 ]
 
 const socialLinks = [
-  { name: 'GitHub', href: 'https://github.com', icon: '↗' },
-  { name: 'LinkedIn', href: 'https://linkedin.com', icon: '↗' },
-  { name: 'Twitter', href: 'https://twitter.com', icon: '↗' },
-  { name: 'Dribbble', href: 'https://dribbble.com', icon: '↗' },
+  { name: 'GitHub', href: 'https://github.com/billalbertcode', icon: 'github' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/billalbertcode', icon: 'linkedin' },
+  { name: 'Twitter', href: 'https://twitter.com/BillalbertCode', icon: 'twitter' },
+  { name: 'Instagram', href: 'https://www.instagram.com/billalbertcode/', icon: 'instagram' },
 ]
 
 export default function LeftSidebar() {
@@ -28,8 +29,8 @@ export default function LeftSidebar() {
     >
       {/* Logo/Name */}
       <motion.div className="mb-12" whileHover={{ scale: 1.05 }}>
-        <h1 className="text-xl font-bold text-foreground">CD</h1>
-        <p className="text-xs text-muted-foreground mt-1">Creative Dev</p>
+        <h1 className="text-xl font-bold text-foreground">BM</h1>
+        <p className="text-xs text-muted-foreground mt-1">Full-Stack Developer</p>
       </motion.div>
 
       {/* Navigation */}
@@ -68,8 +69,8 @@ export default function LeftSidebar() {
               transition={{ delay: 0.3 + index * 0.05 }}
               whileHover={{ x: 4 }}
             >
+              <SimpleIcon name={link.icon} size={14} className="group-hover:text-accent transition-colors" />
               {link.name}
-              <span className="text-accent">{link.icon}</span>
             </motion.a>
           ))}
         </div>

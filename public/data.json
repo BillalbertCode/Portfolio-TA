@@ -1,105 +1,78 @@
 {
   "name": "Billalbert Martinez",
-  "title": "Full-Stack Developer",
-  "description": "Crafting beautiful, interactive digital experiences with code and design. Specializing in modern web development, 3D visualization, and user-centered design.",
+  "title": "Fullstack Developer",
+  "description": "Autodidacta con +3 años transformando ideas en apps que funcionan. De landing pages para clientes a chatbots IA, tracking live y automatizaciones serverless.",
+  "location": "Guarenas, Miranda, VE (Remote/Nearshoring)",
   "email": "billalbertcode@gmail.com",
   "socialLinks": [
-    { "name": "GitHub", "url": "https://github.com/billalbertcode", "icon": "github" },
-    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/billalbertcode", "icon": "linkedin" },
+    { "name": "GitHub", "url": "https://github.com/BillalbertCode", "icon": "github" },
+    { "name": "LinkedIn", "url": "https://linkedin.com/in/billalbertcode", "icon": "linkedin" },
     { "name": "Twitter", "url": "https://twitter.com/BillalbertCode", "icon": "twitter" },
     { "name": "Instagram", "url": "https://www.instagram.com/billalbertcode/", "icon": "instagram" }
   ],
   "projects": [
     {
       "id": 1,
-      "title": "JobChatbotAI",
-      "description": "Chatbot Inteligente enfocado en la asistencia de Trabajo, con uso interactivo de Herramientas. creado con el LLM Gemini y IA SDK para facilicitar la creacion del chatbot.",
-      "image": "/project1.webp?height=300&width=400",
-      "tags": ["React", "TypeScript", "Framer Motion", "Next.js"],
-      "link": "#",
-      "details": "Built a showcase for creative work with interactive 3D elements and smooth UX transitions."
+      "title": "Job Chatbot IA",
+      "description": "Chatbot Inteligente, basado en UI dinámica para asistencia laboral.",
+      "image": "/project1.webp",
+      "tags": ["Next.js", "Vercel AI SDK", "TypeScript", "React"],
+      "link": "https://job-chatbot-ia.vercel.app/",
+      "details": "Implementación de lógica de streaming con IA y herramientas interactivas."
     },
     {
       "id": 2,
-      "title": "E-Commerce Platform",
-      "description": "Full-featured shopping experience with product filtering, cart management, and checkout flow.",
-      "image": "/placeholder.svg?height=300&width=400",
-      "tags": ["React", "Node.js", "PostgreSQL", "Stripe"],
+      "title": "Sistema Seguimiento - Carbone",
+      "description": "Tracking real-time de pedidos.",
+      "image": "/project-sistema-seguimiento.webp",
+      "tags": ["Firebase", "Node.js", "API Integration", "React", "Tailwind CSS", "TypeScript", "Vite"],
       "link": "#",
-      "details": "Complete e-commerce solution with payment integration and inventory management."
-    },
-    {
-      "id": 3,
-      "title": "AI Chat Dashboard",
-      "description": "Real-time chat application with AI-powered responses and advanced analytics dashboard.",
-      "image": "/placeholder.svg?height=300&width=400",
-      "tags": ["React", "WebSocket", "Python", "Tailwind CSS"],
-      "link": "#",
-      "details": "Interactive dashboard for managing conversations and analyzing AI response metrics."
+      "details": "Proxy serverless con Firebase Functions para gestión segura de datos de logística."
     },
     {
       "id": 4,
-      "title": "Design System",
-      "description": "Comprehensive component library with documentation, accessible patterns, and consistent styling.",
-      "image": "/placeholder.svg?height=300&width=400",
-      "tags": ["React", "Storybook", "TypeScript", "CSS"],
-      "link": "#",
-      "details": "Reusable component library serving multiple product teams."
+      "title": "Raíces Workspace",
+      "description": "Imitación de Plataforma social con gestión de usuarios y publicaciones.",
+      "image": "/project-raices.webp",
+      "tags": ["React", "Express", "JWT", "Docker", "MongoDB", "Node.js", "Javascript"],
+      "link": "https://raicesworkspace.vercel.app/",
+      "details": "Arquitectura fullstack desplegada en Railway con contenedores Docker."
     },
     {
-      "id": 5,
-      "title": "Mobile App",
-      "description": "Cross-platform mobile application for task management with offline support.",
-      "image": "/placeholder.svg?height=300&width=400",
-      "tags": ["React Native", "Firebase", "TypeScript"],
+      "id": 3,
+      "title": "Orquestador Emails Empresarial",
+      "description": "Automatización de creditos a giftcards de Shopify mediante el parsing de emails.",
+      "image": "/GCP-Docker.webp",
+      "tags": ["Google Cloud", "Serverless", "Shopify API", "Express", "Node.js", "Docker"],
       "link": "#",
-      "details": "Feature-rich task manager with sync across devices."
-    },
-    {
-      "id": 6,
-      "title": "Data Visualization Tool",
-      "description": "Interactive dashboard for exploring complex datasets with custom visualizations.",
-      "image": "/placeholder.svg?height=300&width=400",
-      "tags": ["D3.js", "React", "Node.js", "PostgreSQL"],
-      "link": "#",
-      "details": "Powerful analytics tool for data-driven decision making."
+      "details": "Sistema serverless en Google Cloud Platform con monitoreo en Looker Studio."
     }
   ],
   "experience": [
     {
       "id": 1,
-      "company": "Creative Studio",
-      "role": "Lead Designer & Developer",
-      "period": "2022 - Present",
-      "description": "Leading design and development of cutting-edge digital products for Fortune 500 clients.",
+      "company": "Soy el Geek",
+      "role": "Desarrollador Web",
+      "period": "Oct 2024 - Ene 2026",
+      "description": "Optimización de e-commerce y desarrollo de soluciones corporativas.",
       "highlights": [
-        "Architected design system used by 50+ developers",
-        "Increased user engagement by 45% through UX improvements",
-        "Mentored 5 junior designers and developers"
+        "Automatización y Aplicaciones Web",
+        "Landing pages + e-commerce WooCommerce optimizados",
+        "+30% velocidad carga implementando CDN", 
+        "Migración y optimización bases de datos",
+        "Colaboración con PMs y equipos ágiles"
       ]
     },
     {
       "id": 2,
-      "company": "Tech Startup",
-      "role": "Full-Stack Developer",
-      "period": "2020 - 2022",
-      "description": "Built and scaled web applications from concept to production serving millions of users.",
+      "company": "Independiente",
+      "role": "Desarrollador Frontend Freelance",
+      "period": "Mar 2019 - Dic 2021",
+      "description": "Desarrollo de proyectos personalizados para clientes externos.",
       "highlights": [
-        "Reduced page load time by 60% through optimization",
-        "Implemented real-time collaboration features",
-        "Led technical hiring and onboarding of engineering team"
-      ]
-    },
-    {
-      "id": 3,
-      "company": "Digital Agency",
-      "role": "Frontend Developer",
-      "period": "2018 - 2020",
-      "description": "Developed responsive websites and interactive experiences for diverse client base.",
-      "highlights": [
-        "Delivered 20+ client projects on time and budget",
-        "Pioneered adoption of modern tooling and frameworks",
-        "Achieved 98% accessibility compliance across all projects"
+        "+5 proyectos web entregados a tiempo",
+        "Colaboración estrecha con clientes externos",
+        "Resolución de problemas técnicos complejos"
       ]
     }
   ],
@@ -107,14 +80,22 @@
     { "name": "React", "icon": "react" },
     { "name": "Next.js", "icon": "nextdotjs" },
     { "name": "TypeScript", "icon": "typescript" },
-    { "name": "Three.js", "icon": "threedotjs" },
-    { "name": "Framer Motion", "icon": "framermotion" },
-    { "name": "Tailwind CSS", "icon": "tailwindcss" },
     { "name": "Node.js", "icon": "nodedotjs" },
     { "name": "Express", "icon": "express" },
-    { "name": "PostgreSQL", "icon": "postgresql" },
+    { "name": "Tailwind CSS", "icon": "tailwindcss" },
     { "name": "Firebase", "icon": "firebase" },
-    { "name": "GraphQL", "icon": "graphql" },
-    { "name": "Stripe", "icon": "stripe" }
-  ]
+    { "name": "Docker", "icon": "docker" },
+    { "name": "MongoDB", "icon": "mongodb" },
+    { "name": "Vercel", "icon": "vercel" },
+    { "name": "Shopify", "icon": "shopify" },
+    { "name": "Google Cloud", "icon": "googlecloud" },
+    { "name": "Vite", "icon": "vite" },
+    { "name": "MySQL", "icon": "mysql"},
+    { "name": "PostgreSQL", "icon": "postgresql"},
+    { "name": "Javascript", "icon": "javascript"}
+  ],
+  "config": {
+    "languages": ["es", "en"],
+    "cta": "Big Tech Contracts | Remote Ready"
+  }
 }

@@ -31,7 +31,7 @@ interface ProjectsSectionProps {
 export default function ProjectsSection({ projects, activeFilter, onFilterChange, technologies = [] }: ProjectsSectionProps) {
   const [showAll, setShowAll] = useState(false)
 
-  // Memoize technologies list calculation to prevent re-renders during animations
+  // Memoize technologies to prevent unnecessary re-computations and flickers
   const uniqueTechs = useMemo(() => 
     Array.from(new Map(technologies.map(t => [t.name, t])).values()),
     [technologies]
@@ -47,12 +47,12 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
   const visibleProjects = showAll ? filteredProjects : filteredProjects.slice(0, 2)
 
   return (
-    <section id="projects" className="py-20 lg:py-32 space-y-12">
+    <section id="projects" className="py-20 lg:py-32 space-y-12 overflow-x-hidden">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Featured Projects</h2>
         <p className="text-muted-foreground max-w-lg">
@@ -60,42 +60,44 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
         </p>
       </motion.div>
 
-      {/* Technology Filters */}
+      {/* Technology Filters - Fixed jumping with layout and stable animations */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        layout
+        initial="hidden"
+        whileInView="visible"
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="flex flex-wrap gap-3"
+        variants={staggerContainer}
+        className="flex flex-wrap gap-3 origin-top"
       >
         <motion.button
+          layout
+          key="filter-all"
           onClick={() => onFilterChange?.('All')}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0 }}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+          variants={staggerItem}
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
             !activeFilter || activeFilter === 'All'
               ? 'bg-accent text-accent-foreground'
               : 'bg-muted/50 text-foreground hover:bg-muted'
           }`}
           whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           All
         </motion.button>
 
-        {uniqueTechs.map((tech, index) => (
+        {uniqueTechs.map((tech) => (
           <motion.button
-            key={`tech-${String(tech.name)}`}
+            layout
+            key={`filter-${tech.name}`}
             onClick={() => onFilterChange?.(tech.name)}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: (index + 1) * 0.05 }}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
+            variants={staggerItem}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2 ${
               activeFilter === tech.name
                 ? 'bg-accent text-accent-foreground'
                 : 'bg-muted/50 text-foreground hover:bg-muted'
             }`}
             whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <SimpleIcon name={tech.icon} size={16} />
             <span>{tech.name}</span>
@@ -103,35 +105,36 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
         ))}
       </motion.div>
 
-        <AnimatePresence mode="popLayout">
+      <div className="relative min-h-[400px]">
+        <AnimatePresence mode="popLayout" initial={false}>
           {filteredProjects.length === 0 ? (
             <motion.div
               key="empty-state"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="py-12 text-center"
+              className="py-12 text-center w-full"
             >
               <p className="text-muted-foreground">No projects match the selected filter.</p>
             </motion.div>
           ) : (
             <motion.div
-              key="projects-grid"
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+              key={activeFilter || 'all'}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full"
               variants={staggerContainer}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              animate="visible"
+              exit="hidden"
             >
               {visibleProjects.map((project) => (
                 <motion.div
                   key={project.id}
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
                   variants={staggerItem}
-                  transition={{ duration: 0.3 }}
+                  transition={{ 
+                    layout: { duration: 0.4, type: "spring", stiffness: 350, damping: 35 },
+                    opacity: { duration: 0.2 }
+                  }}
                   className="group rounded-lg overflow-hidden border border-border bg-muted/20 hover:border-accent/50 transition-all duration-300 cursor-pointer"
                 >
                   <div className="relative h-48 overflow-hidden bg-muted">
@@ -147,11 +150,11 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
                       <h3 className="text-lg font-bold text-foreground group-hover:text-accent transition-colors">
                         {project.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground mt-2">{project.description}</p>
+                      <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{project.description}</p>
                     </div>
 
                     <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, tagIndex) => (
+                      {project.tags.slice(0, 4).map((tag, tagIndex) => (
                         <span
                           key={`${project.id}-tag-${tagIndex}`}
                           className="px-2 py-1 text-xs rounded-md bg-accent/10 text-accent border border-accent/30 font-medium"
@@ -178,13 +181,14 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
             </motion.div>
           )}
         </AnimatePresence>
+      </div>
 
       {filteredProjects.length > 2 && (
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="flex justify-center"
+          className="flex justify-center mt-8"
         >
           <button
             onClick={() => setShowAll(!showAll)}

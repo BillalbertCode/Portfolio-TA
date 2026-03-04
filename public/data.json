@@ -82,16 +82,11 @@
     { "name": "TypeScript", "icon": "typescript" },
     { "name": "Node.js", "icon": "nodedotjs" },
     { "name": "Express", "icon": "express" },
-    { "name": "Tailwind CSS", "icon": "tailwindcss" },
-    { "name": "Firebase", "icon": "firebase" },
     { "name": "Docker", "icon": "docker" },
     { "name": "MongoDB", "icon": "mongodb" },
-    { "name": "Vercel", "icon": "vercel" },
-    { "name": "Shopify", "icon": "shopify" },
     { "name": "Google Cloud", "icon": "googlecloud" },
-    { "name": "Vite", "icon": "vite" },
-    { "name": "MySQL", "icon": "mysql"},
     { "name": "PostgreSQL", "icon": "postgresql"},
+    { "name": "Prisma", "icon": "prisma"},
     { "name": "Javascript", "icon": "javascript"}
   ],
   "config": {

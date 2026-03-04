@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 import Image from 'next/image'
 import { SimpleIcon } from './SimpleIcon'
@@ -12,7 +12,7 @@ interface Project {
   description: string
   image: string
   tags: string[]
-  link: string
+  link?: string
   details: string
 }
 
@@ -31,7 +31,11 @@ interface ProjectsSectionProps {
 export default function ProjectsSection({ projects, activeFilter, onFilterChange, technologies = [] }: ProjectsSectionProps) {
   const [showAll, setShowAll] = useState(false)
 
-  const uniqueTechs = Array.from(new Map(technologies.map(t => [t.name, t])).values())
+  // Memoize technologies list calculation to prevent re-renders during animations
+  const uniqueTechs = useMemo(() => 
+    Array.from(new Map(technologies.map(t => [t.name, t])).values()),
+    [technologies]
+  )
 
   const filteredProjects = useMemo(() => {
     if (!activeFilter || activeFilter === 'All') {
@@ -99,84 +103,96 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
         ))}
       </motion.div>
 
-      {filteredProjects.length === 0 ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="py-12 text-center"
-        >
-          <p className="text-muted-foreground">No projects match the selected filter.</p>
-        </motion.div>
-      ) : (
-        <>
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {visibleProjects.map((project) => (
-              <motion.div
-                key={project.id}
-                variants={staggerItem}
-                className="group rounded-lg overflow-hidden border border-border bg-muted/20 hover:border-accent/50 transition-all duration-300 cursor-pointer"
-              >
-                <div className="relative h-48 overflow-hidden bg-muted">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-6 space-y-4">
-                  <div>
-                    <h3 className="text-lg font-bold text-foreground group-hover:text-accent transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mt-2">{project.description}</p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, tagIndex) => (
-                      <span
-                        key={`${project.id}-tag-${tagIndex}`}
-                        className="px-2 py-1 text-xs rounded-md bg-accent/10 text-accent border border-accent/30 font-medium"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <a
-                    href={project.link}
-                    className="inline-flex items-center gap-2 text-sm text-accent hover:gap-3 transition-all font-semibold"
-                  >
-                    View Project
-                    <span>→</span>
-                  </a>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {filteredProjects.length > 2 && (
+        <AnimatePresence mode="popLayout">
+          {filteredProjects.length === 0 ? (
             <motion.div
+              key="empty-state"
               initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="flex justify-center"
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="py-12 text-center"
             >
-              <button
-                onClick={() => setShowAll(!showAll)}
-                className="px-6 py-3 rounded-lg border border-border text-foreground hover:bg-muted/50 transition-colors font-semibold text-sm"
-              >
-                {showAll ? 'Show Less' : `Show More (${filteredProjects.length - 2})`}
-              </button>
+              <p className="text-muted-foreground">No projects match the selected filter.</p>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="projects-grid"
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {visibleProjects.map((project) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  variants={staggerItem}
+                  transition={{ duration: 0.3 }}
+                  className="group rounded-lg overflow-hidden border border-border bg-muted/20 hover:border-accent/50 transition-all duration-300 cursor-pointer"
+                >
+                  <div className="relative h-48 overflow-hidden bg-muted">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-6 space-y-4">
+                    <div>
+                      <h3 className="text-lg font-bold text-foreground group-hover:text-accent transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground mt-2">{project.description}</p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag, tagIndex) => (
+                        <span
+                          key={`${project.id}-tag-${tagIndex}`}
+                          className="px-2 py-1 text-xs rounded-md bg-accent/10 text-accent border border-accent/30 font-medium"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm text-accent hover:gap-3 transition-all font-semibold"
+                      >
+                        View Project
+                        <span>→</span>
+                      </a>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
           )}
-        </>
+        </AnimatePresence>
+
+      {filteredProjects.length > 2 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="flex justify-center"
+        >
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="px-6 py-3 rounded-lg border border-border text-foreground hover:bg-muted/50 transition-colors font-semibold text-sm"
+          >
+            {showAll ? 'Show Less' : `Show More (${filteredProjects.length - 2})`}
+          </button>
+        </motion.div>
       )}
     </section>
   )

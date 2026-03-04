@@ -1,5 +1,27 @@
-import React from 'react';
-import * as SiIcons from 'react-icons/si';
+import React, { memo } from 'react';
+import { 
+  SiReact, 
+  SiNextdotjs, 
+  SiTypescript, 
+  SiNodedotjs, 
+  SiExpress, 
+  SiTailwindcss, 
+  SiFirebase, 
+  SiDocker, 
+  SiMongodb, 
+  SiVercel, 
+  SiShopify, 
+  SiGooglecloud, 
+  SiGithub, 
+  SiLinkedin, 
+  SiX, 
+  SiInstagram,
+  SiFramer,
+  SiPostgresql,
+  SiPrisma,
+  SiJavascript,
+  SiVite
+} from 'react-icons/si';
 import { IconType } from 'react-icons';
 
 interface SimpleIconProps {
@@ -8,44 +30,41 @@ interface SimpleIconProps {
   size?: number;
 }
 
-export const SimpleIcon: React.FC<SimpleIconProps> = ({ name, className, size = 24 }) => {
-  // Convert slug to PascalCase with Si prefix
-  // Example: 'nextdotjs' -> 'SiNextdotjs', 'react' -> 'SiReact'
-  const iconKey = `Si${name.charAt(0).toUpperCase()}${name.slice(1).toLowerCase()}` as keyof typeof SiIcons;
-  
-  // Some icons have special casing in Simple Icons (e.g., Next.js is SiNextdotjs)
-  // We need to handle those or provide a more robust mapping
-  
-  const IconComponent = (SiIcons as any)[getIconName(name)] as IconType;
+// Mapeo estático para evitar procesar miles de iconos y mejorar el performance
+const iconMap: Record<string, IconType> = {
+  'react': SiReact,
+  'nextdotjs': SiNextdotjs,
+  'typescript': SiTypescript,
+  'nodedotjs': SiNodedotjs,
+  'express': SiExpress,
+  'tailwindcss': SiTailwindcss,
+  'firebase': SiFirebase,
+  'docker': SiDocker,
+  'mongodb': SiMongodb,
+  'vercel': SiVercel,
+  'shopify': SiShopify,
+  'googlecloud': SiGooglecloud,
+  'github': SiGithub,
+  'linkedin': SiLinkedin,
+  'twitter': SiX,
+  'instagram': SiInstagram,
+  'framermotion': SiFramer,
+  'postgresql': SiPostgresql,
+  'prisma': SiPrisma,
+  'javascript': SiJavascript,
+  'vite': SiVite
+};
+
+const SimpleIconComponent: React.FC<SimpleIconProps> = ({ name, className, size = 24 }) => {
+  const IconComponent = iconMap[name.toLowerCase()];
 
   if (!IconComponent) {
-    console.warn(`Icon ${name} not found in react-icons/si`);
-    return null;
+    // Fallback silencioso pero visible para desarrollo
+    return <span className={className} style={{ width: size, height: size, display: 'inline-block' }}>◆</span>;
   }
 
   return <IconComponent className={className} size={size} />;
 };
 
-// Helper to map slugs to Si component names correctly
-function getIconName(slug: string): string {
-  const mapping: Record<string, string> = {
-    'react': 'SiReact',
-    'nextdotjs': 'SiNextdotjs',
-    'typescript': 'SiTypescript',
-    'threedotjs': 'SiThreedotjs',
-    'framermotion': 'SiFramer',
-    'tailwindcss': 'SiTailwindcss',
-    'nodedotjs': 'SiNodedotjs',
-    'express': 'SiExpress',
-    'postgresql': 'SiPostgresql',
-    'firebase': 'SiFirebase',
-    'graphql': 'SiGraphql',
-    'stripe': 'SiStripe',
-    'github': 'SiGithub',
-    'linkedin': 'SiLinkedin',
-    'twitter': 'SiTwitter',
-    'instagram': 'SiInstagram',
-  };
-
-  return mapping[slug.toLowerCase()] || `Si${slug.charAt(0).toUpperCase()}${slug.slice(1)}`;
-}
+// React.memo evita re-renders innecesarios de iconos estáticos
+export const SimpleIcon = memo(SimpleIconComponent);

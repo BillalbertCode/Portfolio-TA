@@ -1,0 +1,138 @@
+{
+  "name": "Billalbert Martinez",
+  "title": "Desarrollador Fullstack",
+  "description": "Autodidacta con +3 años transformando ideas en apps que funcionan. De landing pages para clientes a chatbots IA, tracking live y automatizaciones serverless.",
+  "location": "Guarenas, Miranda, VE (Remote/Nearshoring)",
+  "email": "billalbertcode@gmail.com",
+  "nav": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "welcome": "Bienvenido a mi portfolio",
+    "title": "Desarrollador Creativo",
+    "description": "Creo experiencias digitales hermosas e interactivas utilizando tecnologías web modernas. Especializado en React, Node.js y todo lo que hay en medio.",
+    "viewWork": "Ver mi trabajo",
+    "getInTouch": "Contacto",
+    "stats": {
+      "experience": "Años de Experiencia",
+      "projects": "Proyectos Completados",
+      "clients": "Clientes Felices"
+    }
+  },
+  "projects_section": {
+    "title": "Proyectos Destacados",
+    "description": "Una selección de mis mejores trabajos, mostrando experiencia en diseño, desarrollo y resolución de problemas.",
+    "view": "Ver Proyecto",
+    "showMore": "Mostrar más",
+    "showLess": "Mostrar menos",
+    "all": "Todos"
+  },
+  "experience_section": {
+    "title": "Experiencia Profesional",
+    "subtitle": "Una línea de tiempo de mi trayectoria profesional y el impacto que he logrado en el camino.",
+    "highlightsTitle": "Logros clave:",
+    "relatedProjects": "Ver proyectos relacionados"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "description": "Transformando ideas en soluciones digitales elegantes mediante diseño, desarrollo y resolución creativa de problemas.",
+    "quickLinksTitle": "Enlaces Rápidos",
+    "quickLinks": "Inicio",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "contact": "Contacto",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio"
+  },
+  "sidebar": {
+    "title": "BM",
+    "subtitle": "Desarrollador Fullstack"
+  },
+  "common": {
+    "loading": "Cargando portfolio...",
+    "allProjects": "Todos los proyectos",
+    "connect": "Conectar"
+  },
+  "projects": [
+    {
+      "id": 1,
+      "title": "Job Chatbot IA",
+      "description": "Chatbot Inteligente, basado en UI dinámica para asistencia laboral.",
+      "image": "/project1.webp",
+      "tags": ["Next.js", "Vercel AI SDK", "TypeScript", "React"],
+      "link": "https://job-chatbot-ia.vercel.app/",
+      "details": "Implementación de lógica de streaming con IA y herramientas interactivas."
+    },
+    {
+      "id": 2,
+      "title": "Sistema Seguimiento - Carbone",
+      "description": "Tracking real-time de pedidos.",
+      "image": "/project-sistema-seguimiento.webp",
+      "tags": ["Firebase", "Node.js", "API Integration", "React", "Tailwind CSS", "TypeScript", "Vite"],
+      "link": "#",
+      "details": "Proxy serverless con Firebase Functions para gestión segura de datos de logística."
+    },
+    {
+      "id": 4,
+      "title": "Raíces Workspace",
+      "description": "Imitación de Plataforma social con gestión de usuarios y publicaciones.",
+      "image": "/project-raices.webp",
+      "tags": ["React", "Express", "JWT", "Docker", "MongoDB", "Node.js", "Javascript"],
+      "link": "https://raicesworkspace.vercel.app/",
+      "details": "Arquitectura fullstack desplegada en Railway con contenedores Docker."
+    },
+    {
+      "id": 3,
+      "title": "Orquestador Emails Empresarial",
+      "description": "Automatización de creditos a giftcards de Shopify mediante el parsing de emails.",
+      "image": "/GCP-Docker.webp",
+      "tags": ["Google Cloud", "Serverless", "Shopify API", "Express", "Node.js", "Docker"],
+      "link": "#",
+      "details": "Sistema serverless en Google Cloud Platform con monitoreo en Looker Studio."
+    }
+  ],
+  "experience": [
+    {
+      "id": 1,
+      "company": "Soy el Geek",
+      "role": "Desarrollador Web",
+      "period": "Oct 2024 - Ene 2026",
+      "description": "Optimización de e-commerce y desarrollo de soluciones corporativas.",
+      "highlights": [
+        "Automatización y Aplicaciones Web",
+        "Landing pages + e-commerce WooCommerce optimizados",
+        "+30% velocidad carga implementando CDN", 
+        "Migración y optimización bases de datos",
+        "Colaboración con PMs y equipos ágiles"
+      ]
+    },
+    {
+      "id": 2,
+      "company": "Independiente",
+      "role": "Desarrollador Frontend Freelance",
+      "period": "Mar 2019 - Dic 2021",
+      "description": "Desarrollo de proyectos personalizados para clientes externos.",
+      "highlights": [
+        "+5 proyectos web entregados a tiempo",
+        "Colaboración estrecha con clientes externos",
+        "Resolución de problemas técnicos complejos"
+      ]
+    }
+  ],
+  "technologies": [
+    { "name": "React", "icon": "react" },
+    { "name": "Next.js", "icon": "nextdotjs" },
+    { "name": "TypeScript", "icon": "typescript" },
+    { "name": "Node.js", "icon": "nodedotjs" },
+    { "name": "Express", "icon": "express" },
+    { "name": "Docker", "icon": "docker" },
+    { "name": "MongoDB", "icon": "mongodb" },
+    { "name": "Google Cloud", "icon": "googlecloud" },
+    { "name": "PostgreSQL", "icon": "postgresql"},
+    { "name": "Prisma", "icon": "prisma"},
+    { "name": "Javascript", "icon": "javascript"}
+  ]
+}

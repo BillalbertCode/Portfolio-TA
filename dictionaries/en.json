@@ -1,0 +1,138 @@
+{
+  "name": "Billalbert Martinez",
+  "title": "Fullstack Developer",
+  "description": "Self-taught with +3 years transforming ideas into functional apps. From client landing pages to AI chatbots, live tracking, and serverless automations.",
+  "location": "Guarenas, Miranda, VE (Remote/Nearshoring)",
+  "email": "billalbertcode@gmail.com",
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "hero": {
+    "welcome": "Welcome to my portfolio",
+    "title": "Creative Developer",
+    "description": "I craft beautiful, interactive digital experiences using modern web technologies. Specializing in React, Node.js, and everything in between.",
+    "viewWork": "View My Work",
+    "getInTouch": "Get In Touch",
+    "stats": {
+      "experience": "Years Experience",
+      "projects": "Projects Completed",
+      "clients": "Happy Clients"
+    }
+  },
+  "projects_section": {
+    "title": "Featured Projects",
+    "description": "A selection of my best work, showcasing expertise in design, development, and problem-solving.",
+    "view": "View Project",
+    "showMore": "Show More",
+    "showLess": "Show Less",
+    "all": "All"
+  },
+  "experience_section": {
+    "title": "Professional Experience",
+    "subtitle": "A timeline of my professional journey and the impact I've made along the way.",
+    "highlightsTitle": "Key Highlights:",
+    "relatedProjects": "See related projects"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "description": "Transforming ideas into elegant digital solutions through design, development, and creative problem-solving.",
+    "quickLinksTitle": "Quick Links",
+    "quickLinks": "Home",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "sidebar": {
+    "title": "BM",
+    "subtitle": "Fullstack Developer"
+  },
+  "common": {
+    "loading": "Loading portfolio...",
+    "allProjects": "All Projects",
+    "connect": "Connect"
+  },
+  "projects": [
+    {
+      "id": 1,
+      "title": "Job Chatbot IA",
+      "description": "Intelligent Chatbot, based on dynamic UI for job assistance.",
+      "image": "/project1.webp",
+      "tags": ["Next.js", "Vercel AI SDK", "TypeScript", "React"],
+      "link": "https://job-chatbot-ia.vercel.app/",
+      "details": "Implementation of streaming logic with AI and interactive tools."
+    },
+    {
+      "id": 2,
+      "title": "Sistema Seguimiento - Carbone",
+      "description": "Real-time order tracking.",
+      "image": "/project-sistema-seguimiento.webp",
+      "tags": ["Firebase", "Node.js", "API Integration", "React", "Tailwind CSS", "TypeScript", "Vite"],
+      "link": "#",
+      "details": "Serverless proxy with Firebase Functions for secure logistics data management."
+    },
+    {
+      "id": 4,
+      "title": "Raíces Workspace",
+      "description": "Social platform clone with user and post management.",
+      "image": "/project-raices.webp",
+      "tags": ["React", "Express", "JWT", "Docker", "MongoDB", "Node.js", "Javascript"],
+      "link": "https://raicesworkspace.vercel.app/",
+      "details": "Fullstack architecture deployed on Railway using Docker containers."
+    },
+    {
+      "id": 3,
+      "title": "Orquestador Emails Empresarial",
+      "description": "Automation of Shopify gift card credits via email parsing.",
+      "image": "/GCP-Docker.webp",
+      "tags": ["Google Cloud", "Serverless", "Shopify API", "Express", "Node.js", "Docker"],
+      "link": "#",
+      "details": "Serverless system on Google Cloud Platform with Looker Studio monitoring."
+    }
+  ],
+  "experience": [
+    {
+      "id": 1,
+      "company": "Soy el Geek",
+      "role": "Web Developer",
+      "period": "Oct 2024 - Jan 2026",
+      "description": "E-commerce optimization and corporate solution development.",
+      "highlights": [
+        "Automation and Web Applications",
+        "Optimized landing pages + WooCommerce e-commerce",
+        "+30% load speed implementing CDN", 
+        "Database migration and optimization",
+        "Collaboration with PMs and agile teams"
+      ]
+    },
+    {
+      "id": 2,
+      "company": "Independent",
+      "role": "Freelance Frontend Developer",
+      "period": "Mar 2019 - Dec 2021",
+      "description": "Development of custom projects for external clients.",
+      "highlights": [
+        "+5 web projects delivered on time",
+        "Close collaboration with external clients",
+        "Solving complex technical problems"
+      ]
+    }
+  ],
+  "technologies": [
+    { "name": "React", "icon": "react" },
+    { "name": "Next.js", "icon": "nextdotjs" },
+    { "name": "TypeScript", "icon": "typescript" },
+    { "name": "Node.js", "icon": "nodedotjs" },
+    { "name": "Express", "icon": "express" },
+    { "name": "Docker", "icon": "docker" },
+    { "name": "MongoDB", "icon": "mongodb" },
+    { "name": "Google Cloud", "icon": "googlecloud" },
+    { "name": "PostgreSQL", "icon": "postgresql"},
+    { "name": "Prisma", "icon": "prisma"},
+    { "name": "Javascript", "icon": "javascript"}
+  ]
+}

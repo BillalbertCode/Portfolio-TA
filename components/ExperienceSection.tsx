@@ -15,9 +15,10 @@ interface Experience {
 
 interface ExperienceSectionProps {
   experiences: Experience[]
+  dict: any
 }
 
-export default function ExperienceSection({ experiences }: ExperienceSectionProps) {
+export default function ExperienceSection({ experiences, dict }: ExperienceSectionProps) {
   const [selectedId, setSelectedId] = useState(experiences[0]?.id)
 
   const selected = experiences.find((exp) => exp.id === selectedId)
@@ -30,14 +31,14 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Experience</h2>
+        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">{dict.title}</h2>
         <p className="text-muted-foreground max-w-lg">
-          A timeline of my professional journey and the impact I've made along the way.
+          {dict.subtitle}
         </p>
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-        {/* Companies List */}
+        {/* Companies List (Tabs) */}
         <motion.div
           className="lg:col-span-1 space-y-2"
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
@@ -67,7 +68,7 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
           ))}
         </motion.div>
 
-        {/* Experience Details */}
+        {/* Experience Details Content */}
         <motion.div
           className="lg:col-span-2"
           initial="hidden"
@@ -94,7 +95,7 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
                 <p className="text-foreground leading-relaxed">{selected.description}</p>
 
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-foreground text-sm">Key Highlights:</h4>
+                  <h4 className="font-semibold text-foreground text-sm">{dict.highlightsTitle}</h4>
                   <ul className="space-y-2">
                     {selected.highlights.map((highlight, index) => (
                       <motion.li
@@ -116,7 +117,7 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
                     href="#projects"
                     className="inline-flex items-center gap-2 text-accent hover:gap-3 transition-all font-semibold text-sm"
                   >
-                    See related projects
+                    {dict.relatedProjects}
                     <span>→</span>
                   </a>
                 </div>

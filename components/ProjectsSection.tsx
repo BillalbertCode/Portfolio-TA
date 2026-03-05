@@ -5,16 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 import Image from 'next/image'
 import { SimpleIcon } from './SimpleIcon'
-import { useLanguage } from '@/context/language-context'
-
 interface Project {
   id: number
-  title: string | { es: string; en: string }
-  description: string | { es: string; en: string }
+  title: string
+  description: string
   image: string
   tags: string[]
   link?: string
-  details: string | { es: string; en: string }
+  details: string
 }
 
 interface Technology {
@@ -24,14 +22,13 @@ interface Technology {
 
 interface ProjectsSectionProps {
   projects: Project[]
-  activeFilter?: string
-  onFilterChange?: (filter: string) => void
+  dict: any
   technologies?: Technology[]
 }
 
-export default function ProjectsSection({ projects, activeFilter, onFilterChange, technologies = [] }: ProjectsSectionProps) {
+export default function ProjectsSection({ projects, dict, technologies = [] }: ProjectsSectionProps) {
   const [showAll, setShowAll] = useState(false)
-  const { language, t } = useLanguage()
+  const [activeFilter, setActiveFilter] = useState('All')
 
   // Memoize technologies list calculation to prevent re-renders during animations
   const uniqueTechs = useMemo(() => 
@@ -48,14 +45,6 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
 
   const visibleProjects = showAll ? filteredProjects : filteredProjects.slice(0, 2)
 
-  // Helper to get translated text from data.json
-  const getTxt = (field: any) => {
-    if (typeof field === 'object' && field !== null) {
-      return field[language] || field['en'] || ''
-    }
-    return field || ''
-  }
-
   return (
     <section id="projects" className="py-20 lg:py-32 space-y-12 overflow-x-hidden">
       <motion.div
@@ -64,9 +53,9 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">{t('projects.title')}</h2>
+        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">{dict.title}</h2>
         <p className="text-muted-foreground max-w-lg">
-          {t('projects.description')}
+          {dict.description}
         </p>
       </motion.div>
 
@@ -82,24 +71,24 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
         <motion.button
           layout
           key="filter-all"
-          onClick={() => onFilterChange?.('All')}
+          onClick={() => setActiveFilter('All')}
           variants={staggerItem}
           className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-            !activeFilter || activeFilter === 'All'
+            activeFilter === 'All'
               ? 'bg-accent text-accent-foreground'
               : 'bg-muted/50 text-foreground hover:bg-muted'
           }`}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          {t('projects.all')}
+          {dict.all}
         </motion.button>
 
         {uniqueTechs.map((tech) => (
           <motion.button
             layout
             key={`filter-${tech.name}`}
-            onClick={() => onFilterChange?.(tech.name)}
+            onClick={() => setActiveFilter(tech.name)}
             variants={staggerItem}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2 ${
               activeFilter === tech.name
@@ -129,7 +118,7 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
             </motion.div>
           ) : (
             <motion.div
-              key={`${activeFilter || 'all'}-${language}`}
+              key={activeFilter}
               className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full"
               variants={staggerContainer}
               initial="hidden"
@@ -150,7 +139,7 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
                   <div className="relative h-48 overflow-hidden bg-muted">
                     <Image
                       src={project.image}
-                      alt={getTxt(project.title)}
+                      alt={project.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
@@ -158,10 +147,10 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
                   <div className="p-6 space-y-4">
                     <div>
                       <h3 className="text-lg font-bold text-foreground group-hover:text-accent transition-colors">
-                        {getTxt(project.title)}
+                        {project.title}
                       </h3>
                       <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
-                        {getTxt(project.description)}
+                        {project.description}
                       </p>
                     </div>
 
@@ -183,7 +172,7 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-sm text-accent hover:gap-3 transition-all font-semibold"
                       >
-                        {t('projects.view')}
+                        {dict.view}
                         <span>→</span>
                       </a>
                     )}
@@ -206,7 +195,7 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
             onClick={() => setShowAll(!showAll)}
             className="px-6 py-3 rounded-lg border border-border text-foreground hover:bg-muted/50 transition-colors font-semibold text-sm"
           >
-            {showAll ? t('projects.showLess') : `${t('projects.showMore')} (${filteredProjects.length - 2})`}
+            {showAll ? dict.showLess : `${dict.showMore} (${filteredProjects.length - 2})`}
           </button>
         </motion.div>
       )}

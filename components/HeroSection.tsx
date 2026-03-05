@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { slideUpFadeIn, slideInRight } from '@/lib/animations'
 import { Button } from '@/components/ui/button'
-import { useLanguage } from '@/context/language-context'
 
 const Canvas = dynamic(() => import('@react-three/fiber').then(m => m.Canvas), { ssr: false })
 const OrbitControls = dynamic(() => import('@react-three/drei').then(m => m.OrbitControls), { ssr: false })
@@ -15,9 +14,11 @@ const ModelComponent = dynamic(
   { ssr: false }
 )
 
-export default function HeroSection() {
-  const { t } = useLanguage()
+interface HeroSectionProps {
+  dict: any
+}
 
+export default function HeroSection({ dict }: HeroSectionProps) {
   return (
     <section id="home" className="relative py-20 lg:py-32">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -36,7 +37,7 @@ export default function HeroSection() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              {t('hero.welcome')}
+              {dict.welcome}
             </motion.p>
             <motion.h2
               className="text-4xl lg:text-6xl font-bold text-foreground leading-tight text-balance"
@@ -44,7 +45,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
             >
-              {t('hero.title')}
+              {dict.title}
             </motion.h2>
             <motion.p
               className="text-lg text-muted-foreground leading-relaxed max-w-lg"
@@ -52,7 +53,7 @@ export default function HeroSection() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              {t('hero.description')}
+              {dict.description}
             </motion.p>
           </div>
 
@@ -63,10 +64,10 @@ export default function HeroSection() {
             transition={{ delay: 0.5 }}
           >
             <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
-              <a href="#projects">{t('hero.viewWork')}</a>
+              <a href="#projects">{dict.viewWork}</a>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <a href="#contact">{t('hero.getInTouch')}</a>
+              <a href="#contact">{dict.getInTouch}</a>
             </Button>
           </motion.div>
 
@@ -79,15 +80,15 @@ export default function HeroSection() {
           >
             <div>
               <p className="text-xl font-bold text-foreground">5+</p>
-              <p>{t('hero.stats.experience')}</p>
+              <p>{dict.stats.experience}</p>
             </div>
             <div>
               <p className="text-xl font-bold text-foreground">50+</p>
-              <p>{t('hero.stats.projects')}</p>
+              <p>{dict.stats.projects}</p>
             </div>
             <div>
               <p className="text-xl font-bold text-foreground">30+</p>
-              <p>{t('hero.stats.clients')}</p>
+              <p>{dict.stats.clients}</p>
             </div>
           </motion.div>
         </motion.div>

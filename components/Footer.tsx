@@ -2,17 +2,20 @@
 
 import { motion } from 'framer-motion'
 import { fadeIn } from '@/lib/animations'
-import { useLanguage } from '@/context/language-context'
 
-export default function Footer() {
+interface FooterProps {
+  dict: any
+  sidebar: any
+}
+
+export default function Footer({ dict, sidebar }: FooterProps) {
   const currentYear = new Date().getFullYear()
-  const { t } = useLanguage()
 
   const quickLinks = [
-    { label: t('nav.home'), href: '#home' },
-    { label: t('nav.projects'), href: '#projects' },
-    { label: t('nav.experience'), href: '#experience' },
-    { label: t('nav.contact'), href: '#contact' },
+    { label: dict.quickLinks || 'Home', href: '#home' },
+    { label: dict.projects || 'Projects', href: '#projects' },
+    { label: dict.experience || 'Experience', href: '#experience' },
+    { label: dict.contact || 'Contact', href: '#contact' },
   ]
 
   return (
@@ -32,15 +35,15 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
         >
-          <div className="w-16 h-16 rounded-full bg-linear-to-br from-accent to-accent/50 flex items-center justify-center">
-            <span className="text-2xl font-bold text-accent-foreground">BM</span>
+          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center">
+            <span className="text-2xl font-bold text-accent-foreground">{sidebar.title}</span>
           </div>
           <div>
-            <h3 className="text-lg font-bold text-foreground">{t('sidebar.title')}</h3>
-            <p className="text-sm text-muted-foreground mt-1">{t('sidebar.subtitle')}</p>
+            <h3 className="text-lg font-bold text-foreground">{sidebar.title}</h3>
+            <p className="text-sm text-muted-foreground mt-1">{sidebar.subtitle}</p>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            {t('footer.description')}
+            {dict.description}
           </p>
         </motion.div>
 
@@ -52,7 +55,7 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          <h4 className="font-semibold text-foreground text-sm">{t('footer.quickLinks')}</h4>
+          <h4 className="font-semibold text-foreground text-sm">{dict.quickLinksTitle || 'Quick Links'}</h4>
           <div className="grid grid-cols-2 gap-4 text-sm">
             {quickLinks.map((link) => (
               <motion.a
@@ -76,13 +79,13 @@ export default function Footer() {
         viewport={{ once: true }}
         transition={{ delay: 0.3 }}
       >
-        <p>&copy; {currentYear} {t('sidebar.title')}. {t('footer.rights')}</p>
+        <p>&copy; {currentYear} {sidebar.title}. {dict.rights}</p>
         <div className="flex gap-6">
           <a href="#privacy" className="hover:text-foreground transition-colors">
-            {t('footer.privacy')}
+            {dict.privacy}
           </a>
           <a href="#terms" className="hover:text-foreground transition-colors">
-            {t('footer.terms')}
+            {dict.terms}
           </a>
         </div>
       </motion.div>

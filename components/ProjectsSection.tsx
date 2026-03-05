@@ -5,15 +5,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 import Image from 'next/image'
 import { SimpleIcon } from './SimpleIcon'
+import { useLanguage } from '@/context/language-context'
 
 interface Project {
   id: number
-  title: string
-  description: string
+  title: string | { es: string; en: string }
+  description: string | { es: string; en: string }
   image: string
   tags: string[]
   link?: string
-  details: string
+  details: string | { es: string; en: string }
 }
 
 interface Technology {
@@ -30,8 +31,9 @@ interface ProjectsSectionProps {
 
 export default function ProjectsSection({ projects, activeFilter, onFilterChange, technologies = [] }: ProjectsSectionProps) {
   const [showAll, setShowAll] = useState(false)
+  const { language, t } = useLanguage()
 
-  // Memoize technologies to prevent unnecessary re-computations and flickers
+  // Memoize technologies list calculation to prevent re-renders during animations
   const uniqueTechs = useMemo(() => 
     Array.from(new Map(technologies.map(t => [t.name, t])).values()),
     [technologies]
@@ -46,6 +48,14 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
 
   const visibleProjects = showAll ? filteredProjects : filteredProjects.slice(0, 2)
 
+  // Helper to get translated text from data.json
+  const getTxt = (field: any) => {
+    if (typeof field === 'object' && field !== null) {
+      return field[language] || field['en'] || ''
+    }
+    return field || ''
+  }
+
   return (
     <section id="projects" className="py-20 lg:py-32 space-y-12 overflow-x-hidden">
       <motion.div
@@ -54,9 +64,9 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Featured Projects</h2>
+        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">{t('projects.title')}</h2>
         <p className="text-muted-foreground max-w-lg">
-          A selection of my best work, showcasing expertise in design, development, and problem-solving.
+          {t('projects.description')}
         </p>
       </motion.div>
 
@@ -82,7 +92,7 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          All
+          {t('projects.all')}
         </motion.button>
 
         {uniqueTechs.map((tech) => (
@@ -105,7 +115,7 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
         ))}
       </motion.div>
 
-      <div className="relative min-h-[400px]">
+      <div className="relative min-h-100">
         <AnimatePresence mode="popLayout" initial={false}>
           {filteredProjects.length === 0 ? (
             <motion.div
@@ -119,7 +129,7 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
             </motion.div>
           ) : (
             <motion.div
-              key={activeFilter || 'all'}
+              key={`${activeFilter || 'all'}-${language}`}
               className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full"
               variants={staggerContainer}
               initial="hidden"
@@ -140,7 +150,7 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
                   <div className="relative h-48 overflow-hidden bg-muted">
                     <Image
                       src={project.image}
-                      alt={project.title}
+                      alt={getTxt(project.title)}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
@@ -148,9 +158,11 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
                   <div className="p-6 space-y-4">
                     <div>
                       <h3 className="text-lg font-bold text-foreground group-hover:text-accent transition-colors">
-                        {project.title}
+                        {getTxt(project.title)}
                       </h3>
-                      <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{project.description}</p>
+                      <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
+                        {getTxt(project.description)}
+                      </p>
                     </div>
 
                     <div className="flex flex-wrap gap-2">
@@ -171,7 +183,7 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-sm text-accent hover:gap-3 transition-all font-semibold"
                       >
-                        View Project
+                        {t('projects.view')}
                         <span>→</span>
                       </a>
                     )}
@@ -194,7 +206,7 @@ export default function ProjectsSection({ projects, activeFilter, onFilterChange
             onClick={() => setShowAll(!showAll)}
             className="px-6 py-3 rounded-lg border border-border text-foreground hover:bg-muted/50 transition-colors font-semibold text-sm"
           >
-            {showAll ? 'Show Less' : `Show More (${filteredProjects.length - 2})`}
+            {showAll ? t('projects.showLess') : `${t('projects.showMore')} (${filteredProjects.length - 2})`}
           </button>
         </motion.div>
       )}

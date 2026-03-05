@@ -2,9 +2,18 @@
 
 import { motion } from 'framer-motion'
 import { fadeIn } from '@/lib/animations'
+import { useLanguage } from '@/context/language-context'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+  const { t } = useLanguage()
+
+  const quickLinks = [
+    { label: t('nav.home'), href: '#home' },
+    { label: t('nav.projects'), href: '#projects' },
+    { label: t('nav.experience'), href: '#experience' },
+    { label: t('nav.contact'), href: '#contact' },
+  ]
 
   return (
     <motion.footer
@@ -23,15 +32,15 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
         >
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center">
-            <span className="text-2xl font-bold text-accent-foreground">CD</span>
+          <div className="w-16 h-16 rounded-full bg-linear-to-br from-accent to-accent/50 flex items-center justify-center">
+            <span className="text-2xl font-bold text-accent-foreground">BM</span>
           </div>
           <div>
-            <h3 className="text-lg font-bold text-foreground">Creative Developer</h3>
-            <p className="text-sm text-muted-foreground mt-1">Full-Stack Designer & Developer</p>
+            <h3 className="text-lg font-bold text-foreground">{t('sidebar.title')}</h3>
+            <p className="text-sm text-muted-foreground mt-1">{t('sidebar.subtitle')}</p>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Transforming ideas into elegant digital solutions through design, development, and creative problem-solving.
+            {t('footer.description')}
           </p>
         </motion.div>
 
@@ -43,14 +52,9 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          <h4 className="font-semibold text-foreground text-sm">Quick Links</h4>
+          <h4 className="font-semibold text-foreground text-sm">{t('footer.quickLinks')}</h4>
           <div className="grid grid-cols-2 gap-4 text-sm">
-            {[
-              { label: 'Home', href: '#home' },
-              { label: 'Projects', href: '#projects' },
-              { label: 'Experience', href: '#experience' },
-              { label: 'Contact', href: '#contact' },
-            ].map((link) => (
+            {quickLinks.map((link) => (
               <motion.a
                 key={link.label}
                 href={link.href}
@@ -72,13 +76,13 @@ export default function Footer() {
         viewport={{ once: true }}
         transition={{ delay: 0.3 }}
       >
-        <p>&copy; {currentYear} Creative Developer. All rights reserved.</p>
+        <p>&copy; {currentYear} {t('sidebar.title')}. {t('footer.rights')}</p>
         <div className="flex gap-6">
           <a href="#privacy" className="hover:text-foreground transition-colors">
-            Privacy Policy
+            {t('footer.privacy')}
           </a>
           <a href="#terms" className="hover:text-foreground transition-colors">
-            Terms of Service
+            {t('footer.terms')}
           </a>
         </div>
       </motion.div>

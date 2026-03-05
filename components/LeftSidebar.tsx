@@ -4,13 +4,8 @@ import { motion } from 'framer-motion'
 import { slideInLeft } from '@/lib/animations'
 import Link from 'next/link'
 import { SimpleIcon } from './SimpleIcon'
-
-const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Contact', href: '#contact' },
-]
+import { useLanguage } from '@/context/language-context'
+import { LanguageToggle } from './LanguageToggle'
 
 const socialLinks = [
   { name: 'GitHub', href: 'https://github.com/billalbertcode', icon: 'github' },
@@ -20,6 +15,15 @@ const socialLinks = [
 ]
 
 export default function LeftSidebar() {
+  const { t } = useLanguage()
+
+  const navItems = [
+    { label: t('nav.home'), href: '#home' },
+    { label: t('nav.projects'), href: '#projects' },
+    { label: t('nav.experience'), href: '#experience' },
+    { label: t('nav.contact'), href: '#contact' },
+  ]
+
   return (
     <motion.aside
       initial="hidden"
@@ -29,9 +33,14 @@ export default function LeftSidebar() {
     >
       {/* Logo/Name */}
       <motion.div className="mb-12" whileHover={{ scale: 1.05 }}>
-        <h1 className="text-xl font-bold text-foreground">BM</h1>
-        <p className="text-xs text-muted-foreground mt-1">Full-Stack Developer</p>
+        <h1 className="text-xl font-bold text-foreground">{t('sidebar.title')}</h1>
+        <p className="text-xs text-muted-foreground mt-1">{t('sidebar.subtitle')}</p>
       </motion.div>
+
+      {/* Language Toggle */}
+      <div className="mb-8">
+        <LanguageToggle />
+      </div>
 
       {/* Navigation */}
       <nav className="flex-1 space-y-6 mb-12">
@@ -55,7 +64,7 @@ export default function LeftSidebar() {
 
       {/* Social Links */}
       <div className="space-y-4 pt-8 border-t border-border">
-        <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">Connect</p>
+        <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">{t('contact.connect')}</p>
         <div className="flex flex-col gap-3">
           {socialLinks.map((link, index) => (
             <motion.a

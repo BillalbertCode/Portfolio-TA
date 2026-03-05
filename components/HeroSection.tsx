@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { slideUpFadeIn, slideInRight } from '@/lib/animations'
 import { Button } from '@/components/ui/button'
+import { useLanguage } from '@/context/language-context'
 
 const Canvas = dynamic(() => import('@react-three/fiber').then(m => m.Canvas), { ssr: false })
 const OrbitControls = dynamic(() => import('@react-three/drei').then(m => m.OrbitControls), { ssr: false })
@@ -15,6 +16,8 @@ const ModelComponent = dynamic(
 )
 
 export default function HeroSection() {
+  const { t } = useLanguage()
+
   return (
     <section id="home" className="relative py-20 lg:py-32">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -33,7 +36,7 @@ export default function HeroSection() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              Welcome to my portfolio
+              {t('hero.welcome')}
             </motion.p>
             <motion.h2
               className="text-4xl lg:text-6xl font-bold text-foreground leading-tight text-balance"
@@ -41,7 +44,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
             >
-              Creative Developer
+              {t('hero.title')}
             </motion.h2>
             <motion.p
               className="text-lg text-muted-foreground leading-relaxed max-w-lg"
@@ -49,7 +52,7 @@ export default function HeroSection() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              I craft beautiful, interactive digital experiences using modern web technologies. Specializing in React, Three.js, and everything in between.
+              {t('hero.description')}
             </motion.p>
           </div>
 
@@ -59,11 +62,11 @@ export default function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <Button size="lg" className="bg-accent hover:bg-accent/90">
-              View My Work
+            <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
+              <a href="#projects">{t('hero.viewWork')}</a>
             </Button>
-            <Button size="lg" variant="outline">
-              Get In Touch
+            <Button size="lg" variant="outline" asChild>
+              <a href="#contact">{t('hero.getInTouch')}</a>
             </Button>
           </motion.div>
 
@@ -76,15 +79,15 @@ export default function HeroSection() {
           >
             <div>
               <p className="text-xl font-bold text-foreground">5+</p>
-              <p>Years Experience</p>
+              <p>{t('hero.stats.experience')}</p>
             </div>
             <div>
               <p className="text-xl font-bold text-foreground">50+</p>
-              <p>Projects Completed</p>
+              <p>{t('hero.stats.projects')}</p>
             </div>
             <div>
               <p className="text-xl font-bold text-foreground">30+</p>
-              <p>Happy Clients</p>
+              <p>{t('hero.stats.clients')}</p>
             </div>
           </motion.div>
         </motion.div>

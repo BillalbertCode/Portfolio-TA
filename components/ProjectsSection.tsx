@@ -101,7 +101,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
               exit={{ opacity: 0 }}
               className="py-12 text-center w-full"
             >
-              <p className="text-muted-foreground">No projects match the selected filter.</p>
+              <p className="text-muted-foreground">{dict.noProjects}</p>
             </motion.div>
           ) : (
             <motion.div

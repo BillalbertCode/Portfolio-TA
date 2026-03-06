@@ -37,7 +37,7 @@ export default function Footer({ dict, sidebar }: FooterProps) {
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
         >
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center">
+          <div className="w-16 h-16 rounded-full bg-linear-to-br from-accent to-accent/50 flex items-center justify-center">
             <span className="text-2xl font-bold text-accent-foreground">{sidebar.title}</span>
           </div>
           <div>

@@ -28,7 +28,8 @@
     "view": "View Project",
     "showMore": "Show More",
     "showLess": "Show Less",
-    "all": "All"
+    "all": "All",
+    "noProjects": "No projects match the selected filter."
   },
   "experience_section": {
     "title": "Professional Experience",

@@ -28,7 +28,8 @@
     "view": "Ver Proyecto",
     "showMore": "Mostrar más",
     "showLess": "Mostrar menos",
-    "all": "Todos"
+    "all": "Todos",
+    "noProjects": "No hay proyectos que coincidan con el filtro seleccionado."
   },
   "experience_section": {
     "title": "Experiencia Profesional",

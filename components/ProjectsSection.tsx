@@ -5,25 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { staggerContainer, staggerItem } from '@/lib/animations'
 import Image from 'next/image'
 import { SimpleIcon } from './SimpleIcon'
-interface Project {
-  id: number
-  title: string
-  description: string
-  image: string
-  tags: string[]
-  link?: string
-  details: string
-}
-
-interface Technology {
-  name: string
-  icon: string
-}
+import { Dictionary } from '@/dictionaries/get-dictionary'
 
 interface ProjectsSectionProps {
-  projects: Project[]
-  dict: any
-  technologies?: Technology[]
+  projects: Dictionary['projects']
+  dict: Dictionary['projects_section']
+  technologies?: Dictionary['technologies']
 }
 
 export default function ProjectsSection({ projects, dict, technologies = [] }: ProjectsSectionProps) {

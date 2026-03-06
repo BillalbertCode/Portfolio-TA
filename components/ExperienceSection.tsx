@@ -4,18 +4,11 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { slideUpFadeIn } from '@/lib/animations'
 
-interface Experience {
-  id: number
-  company: string
-  role: string
-  period: string
-  description: string
-  highlights: string[]
-}
+import { Dictionary } from '@/dictionaries/get-dictionary'
 
 interface ExperienceSectionProps {
-  experiences: Experience[]
-  dict: any
+  experiences: Dictionary['experience']
+  dict: Dictionary['experience_section']
 }
 
 export default function ExperienceSection({ experiences, dict }: ExperienceSectionProps) {

@@ -6,9 +6,11 @@ import Link from 'next/link'
 import { SimpleIcon } from './SimpleIcon'
 import { LanguageToggle } from './LanguageToggle'
 
+import { Dictionary, Locale } from '@/dictionaries/get-dictionary'
+
 interface LeftSidebarProps {
-  dict: any
-  lang: string
+  dict: Dictionary
+  lang: Locale
 }
 
 const socialLinks = [

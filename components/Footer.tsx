@@ -3,9 +3,11 @@
 import { motion } from 'framer-motion'
 import { fadeIn } from '@/lib/animations'
 
+import { Dictionary } from '@/dictionaries/get-dictionary'
+
 interface FooterProps {
-  dict: any
-  sidebar: any
+  dict: Dictionary['footer']
+  sidebar: Dictionary['sidebar']
 }
 
 export default function Footer({ dict, sidebar }: FooterProps) {

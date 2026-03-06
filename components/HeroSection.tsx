@@ -14,8 +14,10 @@ const ModelComponent = dynamic(
   { ssr: false }
 )
 
+import { Dictionary } from '@/dictionaries/get-dictionary'
+
 interface HeroSectionProps {
-  dict: any
+  dict: Dictionary['hero']
 }
 
 export default function HeroSection({ dict }: HeroSectionProps) {

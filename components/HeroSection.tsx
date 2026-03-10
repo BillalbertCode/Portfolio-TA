@@ -101,7 +101,7 @@ export default function HeroSection({ dict }: HeroSectionProps) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={slideInRight}
-          className="relative h-96 lg:h-full min-h-96 rounded-lg overflow-hidden border border-border"
+          className="relative h-96 lg:h-full min-h-96 rounded-lg overflow-hidden "
         >
           <ModelComponent />
         </motion.div>

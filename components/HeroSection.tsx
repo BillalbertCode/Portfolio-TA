@@ -1,13 +1,10 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { slideUpFadeIn, slideInRight } from '@/lib/animations'
 import { Button } from '@/components/ui/button'
-
-const Canvas = dynamic(() => import('@react-three/fiber').then(m => m.Canvas), { ssr: false })
-const OrbitControls = dynamic(() => import('@react-three/drei').then(m => m.OrbitControls), { ssr: false })
-const PerspectiveCamera = dynamic(() => import('@react-three/drei').then(m => m.PerspectiveCamera), { ssr: false })
 
 const ModelComponent = dynamic(
   () => import('./ModelViewer'),
@@ -22,8 +19,10 @@ interface HeroSectionProps {
 
 export default function HeroSection({ dict }: HeroSectionProps) {
   return (
-    <section id="home" className="relative py-20 lg:py-32">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+    <section id="home" className="relative py-20 lg:py-32 overflow-hidden min-h-screen flex items-center">
+      
+
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
         {/* Left Content */}
         <motion.div
           initial="hidden"
@@ -101,7 +100,7 @@ export default function HeroSection({ dict }: HeroSectionProps) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={slideInRight}
-          className="relative h-96 lg:h-full min-h-96 rounded-lg overflow-hidden "
+          className="relative h-96 lg:h-full min-h-96 rounded-lg overflow-hidden flex items-center justify-center"
         >
           <ModelComponent />
         </motion.div>

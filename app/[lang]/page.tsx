@@ -3,35 +3,31 @@ import HeroSection from '@/components/HeroSection'
 import ProjectsSection from '@/components/ProjectsSection'
 import ExperienceSection from '@/components/ExperienceSection'
 import Footer from '@/components/Footer'
+import { AtmosphericBackground } from '@/components/AtmosphericBackground'
 import { getDictionary, Locale } from '@/dictionaries/get-dictionary'
-import Image from 'next/image'
+
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
   const dict = await getDictionary(lang as Locale)
 
   return (
     <div className="bg-background text-foreground min-h-screen">
-      <LeftSidebar dict={dict} lang={lang as Locale} />
+      {/* 1. Atmospheric Wrapper (Immersion Zone) */}
+      <div className="relative min-h-screen w-full overflow-x-hidden">
+        {/* Fullscreen background that covers sidebar and hero */}
+        <AtmosphericBackground />
+        
+        {/* Global Sidebar (it's fixed, so it will overlay the background) */}
+        <LeftSidebar dict={dict} lang={lang as Locale} />
 
-      {/* Main Content */}
-      <main className="lg:ml-60 px-4 sm:px-6 lg:px-12">
-        {/* Background Image Container - Optimized z-indexing */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Deep Overlay for contrast - Reduced opacity to 0.6 for better visibility */}
-        <div className="absolute inset-0 bg-background/60 z-10" />
-        
-        {/* Gradient mask to blend into the rest of the page */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/10 to-background z-20" />
-        
-        <Image
-          src="/Backgrounds/ZANGETSU/ZANGETSU.webp"
-          alt="Zangetsu Background"
-          fill
-          priority
-          className="object-cover blur-sm scale-105 opacity-70 transition-opacity duration-1000"
-        />
+        {/* Hero Section aligned with the atmosphere */}
+        <main className="lg:ml-60 px-4 sm:px-6 lg:px-12 relative z-10">
+          <HeroSection dict={dict.hero} />
+        </main>
       </div>
-        <HeroSection dict={dict.hero} />
+
+      {/* 2. Main Content Zone (Normal Background) */}
+      <main className="lg:ml-60 px-4 sm:px-6 lg:px-12 relative z-10 bg-background">
         <ProjectsSection 
           dict={dict.projects_section}
           projects={dict.projects} 

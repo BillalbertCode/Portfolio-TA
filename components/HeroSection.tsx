@@ -1,7 +1,6 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { slideUpFadeIn, slideInRight } from '@/lib/animations'
 import { Button } from '@/components/ui/button'
@@ -19,9 +18,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ dict }: HeroSectionProps) {
   return (
-    <section id="home" className="relative py-20 lg:py-32 overflow-hidden min-h-screen flex items-center">
-      
-
+    <section id="home" className="relative flex items-center min-h-[calc(100vh-80px)] lg:min-h-screen py-12">
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
         {/* Left Content */}
         <motion.div

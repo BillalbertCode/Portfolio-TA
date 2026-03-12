@@ -30,7 +30,7 @@ export default function HeroSection({ dict }: HeroSectionProps) {
         >
           <div className="space-y-3">
             <motion.p
-              className="text-sm text-accent font-semibold tracking-wider uppercase"
+              className="text-sm text-accent-foreground/90 font-semibold tracking-wider uppercase"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}

@@ -6,6 +6,8 @@ import { staggerContainer, staggerItem } from '@/lib/animations'
 import Image from 'next/image'
 import { SimpleIcon } from './SimpleIcon'
 import { Dictionary } from '@/dictionaries/get-dictionary'
+import { ExternalLink } from 'lucide-react'
+import { Button } from './ui/button'
 
 interface ProjectsSectionProps {
   projects: Dictionary['projects']
@@ -62,7 +64,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
           variants={staggerItem}
           className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
             activeFilter === 'All'
-              ? 'bg-accent text-accent-foreground'
+              ? 'bg-accent text-accent-foreground shadow-md'
               : 'bg-muted/50 text-foreground hover:bg-muted'
           }`}
           whileHover={{ scale: 1.05 }}
@@ -79,7 +81,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
             variants={staggerItem}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2 ${
               activeFilter === tech.name
-                ? 'bg-accent text-accent-foreground'
+                ? 'bg-accent text-accent-foreground shadow-md'
                 : 'bg-muted/50 text-foreground hover:bg-muted'
             }`}
             whileHover={{ scale: 1.05 }}
@@ -107,7 +109,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
             <motion.div
               key="projects-list"
               layout
-              className="flex flex-col gap-8 w-full"
+              className="flex flex-col gap-16 w-full"
               initial="hidden"
               animate="visible"
               variants={{
@@ -134,23 +136,25 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
                       damping: 25,
                       opacity: { duration: 0.2 }
                     }}
-                    className="group flex flex-col md:flex-row gap-6 p-4 rounded-xl bg-muted/10 hover:bg-muted/20 transition-colors cursor-pointer"
+                    className="group flex flex-col md:flex-row gap-8 items-center md:items-start"
                   >
-                    <div className="relative w-full md:w-72 h-48 shrink-0 overflow-hidden rounded-lg bg-muted">
+                    {/* Image with shadow, no border/bg */}
+                    <div className="relative w-full md:w-72 h-48 aspect-video shrink-0 overflow-hidden rounded shadow-2xl shadow-black/20">
                       <Image
                         src={project.image}
                         alt={project.title}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
+                        className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                        />
                     </div>
                     
-                    <div className="flex flex-col justify-center flex-grow space-y-4">
+                    {/* Content */}
+                    <div className="flex flex-col justify-center grow space-y-5 py-2">
                       <div>
-                        <h3 className="text-xl font-bold text-foreground group-hover:text-accent transition-colors">
+                        <h3 className="text-xl lg:text-2xl font-bold text-foreground transition-colors duration-300">
                           {project.title}
                         </h3>
-                        <p className="text-muted-foreground mt-2 max-w-2xl">
+                        <p className="text-muted-foreground mt-3 text-base lg:text-normal max-w-2xl leading-relaxed">
                           {project.description}
                         </p>
                       </div>
@@ -159,7 +163,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
                         {project.tags.map((tag, tagIndex) => (
                           <span
                             key={`${project.id}-tag-${tagIndex}`}
-                            className="px-3 py-1 text-xs rounded-full bg-accent/5 text-accent border border-accent/20 font-medium"
+                            className="px-4 py-1.5 text-xs lg:text-sm rounded-full text-accent-foreground/50 border border-accent-foreground/50 font-medium"
                           >
                             {tag}
                           </span>
@@ -168,16 +172,18 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
 
                       {project.link && (
                         <div className="pt-2">
-                          <a
+                           <a
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-sm text-accent hover:gap-3 transition-all font-semibold"
+                            className="inline-flex items-center gap-2 text-md text-accent-foreground/95 hover:gap-4 transition-all font-semibold "
                           >
-                            {dict.view}
-                            <span>→</span>
-                          </a>
+                            {dict.view} 
+                            <span className="text-xl">→</span>
+                          </a> 
+
                         </div>
+                        
                       )}
                     </div>
                   </motion.div>

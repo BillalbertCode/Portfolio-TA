@@ -81,7 +81,7 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
               >
                 <div>
                   <h3 className="text-2xl font-bold text-foreground">{selected.role}</h3>
-                  <p className="text-accent font-semibold mt-1">{selected.company}</p>
+                  <p className="text-accent-foreground font-semibold mt-1">{selected.company}</p>
                   <p className="text-sm text-muted-foreground mt-2">{selected.period}</p>
                 </div>
 
@@ -108,7 +108,7 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
                 <div className="pt-6 border-t border-border">
                   <a
                     href="#projects"
-                    className="inline-flex items-center gap-2 text-accent hover:gap-3 transition-all font-semibold text-sm"
+                    className="inline-flex items-center gap-2 text-accent-foreground/90 hover:gap-3 transition-all font-semibold text-sm"
                   >
                     {dict.relatedProjects}
                     <span>→</span>

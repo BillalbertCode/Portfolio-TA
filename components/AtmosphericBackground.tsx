@@ -34,7 +34,7 @@ export function AtmosphericBackground() {
       />
 
       {/* Layer 3: Deep blending gradient at the bottom to merge with next sections */}
-      <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-background via-background/80 to-transparent z-10" />
+      <div className="absolute inset-x-0 bottom-0 h-64 bg-linear-to-t from-background via-background/80 to-transparent z-10" />
     </div>
   )
 }

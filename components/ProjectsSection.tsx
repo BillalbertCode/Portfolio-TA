@@ -91,81 +91,98 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
         ))}
       </motion.div>
 
-      <div className="relative min-h-100">
-        <AnimatePresence mode="popLayout" initial={false}>
+      <div className="relative">
+        <AnimatePresence mode="wait">
           {filteredProjects.length === 0 ? (
             <motion.div
               key="empty-state"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
               className="py-12 text-center w-full"
             >
               <p className="text-muted-foreground">{dict.noProjects}</p>
             </motion.div>
           ) : (
             <motion.div
-              key={activeFilter}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full"
-              variants={staggerContainer}
+              key="projects-list"
+              layout
+              className="flex flex-col gap-8 w-full"
               initial="hidden"
               animate="visible"
-              exit="hidden"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.15,
+                  },
+                },
+              }}
             >
-              {visibleProjects.map((project) => (
-                <motion.div
-                  key={project.id}
-                  layout
-                  variants={staggerItem}
-                  transition={{ 
-                    layout: { duration: 0.4, type: "spring", stiffness: 350, damping: 35 },
-                    opacity: { duration: 0.2 }
-                  }}
-                  className="group rounded-lg overflow-hidden border border-border bg-muted/20 hover:border-accent/50 transition-all duration-300 cursor-pointer"
-                >
-                  <div className="relative h-48 overflow-hidden bg-muted">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="p-6 space-y-4">
-                    <div>
-                      <h3 className="text-lg font-bold text-foreground group-hover:text-accent transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
-                        {project.description}
-                      </p>
+              <AnimatePresence mode="popLayout" initial={false}>
+                {visibleProjects.map((project) => (
+                  <motion.div
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 50 }}
+                    transition={{ 
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 25,
+                      opacity: { duration: 0.2 }
+                    }}
+                    className="group flex flex-col md:flex-row gap-6 p-4 rounded-xl bg-muted/10 hover:bg-muted/20 transition-colors cursor-pointer"
+                  >
+                    <div className="relative w-full md:w-72 h-48 shrink-0 overflow-hidden rounded-lg bg-muted">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
                     </div>
+                    
+                    <div className="flex flex-col justify-center flex-grow space-y-4">
+                      <div>
+                        <h3 className="text-xl font-bold text-foreground group-hover:text-accent transition-colors">
+                          {project.title}
+                        </h3>
+                        <p className="text-muted-foreground mt-2 max-w-2xl">
+                          {project.description}
+                        </p>
+                      </div>
 
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.slice(0, 4).map((tag, tagIndex) => (
-                        <span
-                          key={`${project.id}-tag-${tagIndex}`}
-                          className="px-2 py-1 text-xs rounded-md bg-accent/10 text-accent border border-accent/30 font-medium"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag, tagIndex) => (
+                          <span
+                            key={`${project.id}-tag-${tagIndex}`}
+                            className="px-3 py-1 text-xs rounded-full bg-accent/5 text-accent border border-accent/20 font-medium"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {project.link && (
+                        <div className="pt-2">
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-sm text-accent hover:gap-3 transition-all font-semibold"
+                          >
+                            {dict.view}
+                            <span>→</span>
+                          </a>
+                        </div>
+                      )}
                     </div>
-
-                    {project.link && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-sm text-accent hover:gap-3 transition-all font-semibold"
-                      >
-                        {dict.view}
-                        <span>→</span>
-                      </a>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </motion.div>
           )}
         </AnimatePresence>

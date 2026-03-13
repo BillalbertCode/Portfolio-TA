@@ -93,7 +93,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
         ))}
       </motion.div>
 
-      <div className="relative">
+      <div className="relative w-full overflow-hidden">
         <AnimatePresence mode="wait">
           {filteredProjects.length === 0 ? (
             <motion.div
@@ -109,7 +109,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
             <motion.div
               key="projects-list"
               layout
-              className="flex flex-col gap-16 w-full"
+              className="flex flex-col gap-16 w-full overflow-hidden"
               initial="hidden"
               animate="visible"
               variants={{

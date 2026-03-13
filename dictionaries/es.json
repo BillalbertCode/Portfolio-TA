@@ -8,6 +8,7 @@
     "home": "Inicio",
     "projects": "Proyectos",
     "experience": "Experiencia",
+    "education": "Educación",
     "contact": "Contacto"
   },
   "hero": {
@@ -36,6 +37,12 @@
     "subtitle": "Una línea de tiempo de mi trayectoria profesional y el impacto que he logrado en el camino.",
     "highlightsTitle": "Logros clave:",
     "relatedProjects": "Ver proyectos relacionados"
+  },
+  "education_section": {
+    "title": "Educación y Certificaciones",
+    "subtitle": "Mi formación académica y capacitaciones especializadas que impulsan mis habilidades de desarrollo.",
+    "coursesTitle": "Cursos Destacados",
+    "viewCertificate": "Ver Certificado"
   },
   "footer": {
     "rights": "Todos los derechos reservados.",
@@ -135,5 +142,43 @@
     { "name": "PostgreSQL", "icon": "postgresql"},
     { "name": "Prisma", "icon": "prisma"},
     { "name": "Javascript", "icon": "javascript"}
+  ],
+  "education": [
+    {
+      "id": 1,
+      "school": "Colegio Universitario de Caracas (UNEXCA)",
+      "degree": "PNF Informática",
+      "period": "2023 - Presente",
+      "image": "/education_and_courses/unexca_logo.webp"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "name": "Responsive Web Design",
+      "instructor": "freeCodeCamp",
+      "link": "https://www.freecodecamp.org/certification/fcc1a56704f-3616-4004-8d9a-3d0a5cf852e3/responsive-web-design",
+      "description": "(Html, Css y Queries)",
+      "expedition": "03/2024",
+      "image": "/education_and_courses/certificate_Responsive-Web-Design_Mini.webp"
+    },
+    {
+      "id": 2,
+      "name": "Fundamentos profesionales del desarrollo de software",
+      "instructor": "Microsoft + LinkedIn",
+      "link": "https://www.linkedin.com/learning/certificates/3169680740a110b9d7766a59ff71848faf39ea4c692a38ec7cfa444023e19f93",
+      "description": "(Estructuras de datos, Python y más)",
+      "expedition": "05/2024",
+      "image": "/education_and_courses/microsoft-desarrollo_de_software.webp"
+    },
+    {
+      "id": 3,
+      "name": "Curso de TypeScript: Tipos Avanzados y Funciones",
+      "instructor": "Platzi",
+      "link": "https://platzi.com/p/billalbertcode/curso/2879-typescript-tipos-avanzados/diploma/detalle/",
+      "description": "(Tipos Avanzados y Funciones)",
+      "expedition": "11/2024",
+      "image": "/education_and_courses/diploma-typescript-tipos-avanzados.webp"
+    }
   ]
 }

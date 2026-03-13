@@ -25,6 +25,7 @@ export default function LeftSidebar({ dict, lang }: LeftSidebarProps) {
     { label: dict.nav.home, href: '#home' },
     { label: dict.nav.projects, href: '#projects' },
     { label: dict.nav.experience, href: '#experience' },
+    { label: dict.nav.education, href: '#education' },
     { label: dict.nav.contact, href: '#contact' },
   ]
 

@@ -2,6 +2,7 @@ import LeftSidebar from '@/components/LeftSidebar'
 import HeroSection from '@/components/HeroSection'
 import ProjectsSection from '@/components/ProjectsSection'
 import ExperienceSection from '@/components/ExperienceSection'
+import EducationSection from '@/components/EducationSection'
 import Footer from '@/components/Footer'
 import { AtmosphericBackground } from '@/components/AtmosphericBackground'
 import { getDictionary, Locale } from '@/dictionaries/get-dictionary'
@@ -36,6 +37,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <ExperienceSection 
           dict={dict.experience_section}
           experiences={dict.experience} 
+        />
+        <EducationSection 
+          dict={dict.education_section}
+          education={dict.education}
+          courses={dict.courses}
         />
         <Footer dict={dict.footer} sidebar={dict.sidebar} />
       </main>

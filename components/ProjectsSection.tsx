@@ -163,7 +163,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
                         {project.tags.map((tag, tagIndex) => (
                           <span
                             key={`${project.id}-tag-${tagIndex}`}
-                            className="px-4 py-1.5 text-xs lg:text-sm rounded-full text-accent-foreground/50 border border-accent-foreground/50 font-medium"
+                            className="px-2 py-1.5 text-xs lg:text-xs text-accent-foreground/70 border border-accent/80 font-medium"
                           >
                             {tag}
                           </span>

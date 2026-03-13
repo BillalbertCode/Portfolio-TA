@@ -47,16 +47,23 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className={`w-full text-left px-4 py-3 rounded-lg transition-all ${
+              transition={{ 
+                opacity: { delay: index * 0.1, duration: 0.4 },
+                x: { delay: index * 0.1, duration: 0.4 }
+              }}
+              className={`w-full text-left px-4 py-3 rounded-lg ${
                 selectedId === exp.id
                   ? 'bg-accent/10 border border-accent text-foreground'
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/30'
               }`}
-              whileHover={{ x: 4 }}
+              whileHover={{ 
+                x: 8,
+                transition: { type: "spring", stiffness: 400, damping: 10 }
+              }}
+              whileTap={{ scale: 0.98 }}
             >
-              <p className="font-semibold text-sm">{exp.company}</p>
-              <p className="text-xs text-muted-foreground mt-1">{exp.role}</p>
+              <p className="font-bold text-sm tracking-wide">{exp.company}</p>
+              <p className="text-xs text-muted-foreground mt-1 opacity-80">{exp.role}</p>
             </motion.button>
           ))}
         </motion.div>

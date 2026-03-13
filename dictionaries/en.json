@@ -43,6 +43,8 @@
     "subtitle": "My academic background and specialized training that fuels my development skills.",
     "coursesTitle": "Featured Courses",
     "educationTitle": "Formal Education",
+    "academicLabel": "Academic",
+    "certificationLabel": "Certification",
     "viewCertificate": "View Certificate"
   },
   "footer": {

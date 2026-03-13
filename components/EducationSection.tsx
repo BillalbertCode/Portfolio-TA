@@ -175,7 +175,7 @@ export default function EducationSection({ education, courses, dict }: Education
                 className="flex flex-col md:flex-row gap-8 lg:gap-10 items-center md:items-start"
               >
                 {/* Visual Content */}
-                <div className="relative w-full md:w-44 lg:w-48 aspect-square shrink-0 rounded-xl overflow-hidden bg-muted/10 shadow-xl shadow-black/10 group">
+                <div className="relative w-full md:w-44 lg:w-48 aspect-square shrink-0 rounded-xl overflow-hidden bg-muted/30 border shadow-xl shadow-black/10 group">
                   {selected.image ? (
                     <Image
                       src={selected.image}
@@ -195,11 +195,16 @@ export default function EducationSection({ education, courses, dict }: Education
                   <div>
                     <div className="flex items-center gap-2.5 mb-3">
                       <span className="text-[9px] font-bold uppercase tracking-[0.15em] px-2 py-0.5 rounded-full bg-accent text-accent-foreground border border-accent/20">
-                        {selectedType === 'education' ? 'Academic' : 'Certification'}
+                        {selectedType === 'education' ? dict.academicLabel : dict.certificationLabel}
                       </span>
                       {'period' in selected && (
                         <span className="text-[9px] font-bold text-muted-foreground/50 uppercase tracking-widest">
                           {selected.period as string}
+                        </span>
+                      )}
+                      {'expedition' in selected && (
+                        <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest">
+                          {selected.expedition as string}
                         </span>
                       )}
                     </div>

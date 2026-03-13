@@ -52,9 +52,9 @@ export default function EducationSection({ education, courses, dict }: Education
         >
           {/* Education Group */}
           <div className="space-y-2">
-            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/40 mb-3 px-2 flex items-center gap-2">
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent-foreground mb-3 px-2 flex items-center gap-2">
               <GraduationCap size={14} className="text-accent" />
-              Formal Education
+              {dict.educationTitle}
             </h3>
             <div className="flex flex-col gap-0.5">
               {education.map((edu) => (
@@ -64,7 +64,7 @@ export default function EducationSection({ education, courses, dict }: Education
                     setSelectedId(edu.id)
                     setSelectedType('education')
                   }}
-                  className={`group relative w-full text-left px-3 py-3 transition-all duration-300 rounded-lg ${
+                  className={`group relative w-full text-left px-3 py-3 transition-all duration-300 rounded ${
                     selectedId === edu.id && selectedType === 'education'
                       ? 'bg-accent/5'
                       : 'hover:bg-muted/50'
@@ -74,7 +74,7 @@ export default function EducationSection({ education, courses, dict }: Education
                     <div>
                       <p className={`font-bold text-sm transition-colors duration-300 ${
                         selectedId === edu.id && selectedType === 'education'
-                          ? 'text-accent'
+                          ? 'text-accent-foreground'
                           : 'text-muted-foreground group-hover:text-foreground'
                       }`}>
                         {edu.school}
@@ -105,7 +105,7 @@ export default function EducationSection({ education, courses, dict }: Education
 
           {/* Courses Group */}
           <div className="space-y-2">
-            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/40 mb-3 px-2 flex items-center gap-2">
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent-foreground mb-3 px-2 flex items-center gap-2">
               <Award size={14} className="text-accent" />
               {dict.coursesTitle}
             </h3>
@@ -127,7 +127,7 @@ export default function EducationSection({ education, courses, dict }: Education
                     <div>
                       <p className={`font-bold text-sm transition-colors duration-300 ${
                         selectedId === course.id && selectedType === 'course'
-                          ? 'text-accent'
+                          ? 'text-accent-foreground'
                           : 'text-muted-foreground group-hover:text-foreground'
                       }`}>
                         {course.name}
@@ -206,7 +206,7 @@ export default function EducationSection({ education, courses, dict }: Education
                     <h3 className="text-xl lg:text-2xl font-bold text-foreground leading-tight tracking-tight">
                       {'degree' in selected ? (selected.degree as string) : (selected.name as string)}
                     </h3>
-                    <p className="text-base font-bold text-accent mt-1.5">
+                    <p className="text-base font-bold text-accent-foreground/80 mt-1.5">
                       {'school' in selected ? (selected.school as string) : (selected.instructor as string)}
                     </p>
                   </div>
@@ -223,10 +223,10 @@ export default function EducationSection({ education, courses, dict }: Education
                         href={selected.link as string}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-[10px] font-bold text-accent hover:gap-3 transition-all uppercase tracking-[0.15em] group"
+                        className="inline-flex items-center gap-2 text-md text-accent-foreground hover:gap-4 transition-all font-semibold "
                       >
                         {dict.viewCertificate}
-                        <ExternalLink size={14} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                        <span className="text-xl">→</span>
                       </a>
                     )}
                   </div>

@@ -3,9 +3,8 @@
 import { useState, useMemo } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { slideUpFadeIn } from '@/lib/animations'
 import { Dictionary } from '@/dictionaries/get-dictionary'
-import { ExternalLink, Award, GraduationCap } from 'lucide-react'
+import { ExternalLink, Award, GraduationCap, ChevronRight } from 'lucide-react'
 
 interface EducationSectionProps {
   education: Dictionary['education']
@@ -29,164 +28,205 @@ export default function EducationSection({ education, courses, dict }: Education
   )
 
   return (
-    <section id="education" className="py-20 lg:py-32 space-y-12">
+    <section id="education" className="py-20 lg:py-32 space-y-10 overflow-x-hidden">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.5 }}
       >
-        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">{dict.title}</h2>
-        <p className="text-muted-foreground max-w-lg">
+        <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-3">{dict.title}</h2>
+        <p className="text-muted-foreground text-sm max-w-md leading-relaxed">
           {dict.subtitle}
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14 items-start">
         {/* Selection List (Tabs) */}
         <motion.div
           className="lg:col-span-1 space-y-6"
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
           {/* Education Group */}
           <div className="space-y-2">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/60 mb-3 px-2 flex items-center gap-2">
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/40 mb-3 px-2 flex items-center gap-2">
               <GraduationCap size={14} className="text-accent" />
-              {/* Using hardcoded or derived label if not in dict, but dict.title usually covers it */}
               Formal Education
             </h3>
-            {education.map((edu, index) => (
-              <motion.button
-                key={`edu-${edu.id}`}
-                onClick={() => {
-                  setSelectedId(edu.id)
-                  setSelectedType('education')
-                }}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-300 border ${
-                  selectedId === edu.id && selectedType === 'education'
-                    ? 'bg-accent/10 border-accent/50 text-foreground shadow-sm shadow-accent/5'
-                    : 'border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/30'
-                }`}
-                whileHover={{ x: 4 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <p className="font-bold text-sm tracking-tight line-clamp-1">{edu.school}</p>
-                <p className="text-[10px] uppercase tracking-wider text-accent-foreground/70 mt-1 font-semibold">{edu.period}</p>
-              </motion.button>
-            ))}
+            <div className="flex flex-col gap-0.5">
+              {education.map((edu) => (
+                <button
+                  key={`edu-${edu.id}`}
+                  onClick={() => {
+                    setSelectedId(edu.id)
+                    setSelectedType('education')
+                  }}
+                  className={`group relative w-full text-left px-3 py-3 transition-all duration-300 rounded-lg ${
+                    selectedId === edu.id && selectedType === 'education'
+                      ? 'bg-accent/5'
+                      : 'hover:bg-muted/50'
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <p className={`font-bold text-sm transition-colors duration-300 ${
+                        selectedId === edu.id && selectedType === 'education'
+                          ? 'text-accent'
+                          : 'text-muted-foreground group-hover:text-foreground'
+                      }`}>
+                        {edu.school}
+                      </p>
+                      <p className="text-[9px] uppercase tracking-wider text-muted-foreground/50 mt-0.5 font-bold">
+                        {edu.period}
+                      </p>
+                    </div>
+                    <ChevronRight 
+                      size={14} 
+                      className={`transition-all duration-300 ${
+                        selectedId === edu.id && selectedType === 'education'
+                          ? 'text-accent translate-x-0 opacity-100'
+                          : 'text-muted-foreground -translate-x-1.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0'
+                      }`} 
+                    />
+                  </div>
+                  {selectedId === edu.id && selectedType === 'education' && (
+                    <motion.div 
+                      layoutId="active-indicator"
+                      className="absolute left-0 top-1/4 bottom-1/4 w-0.5 bg-accent rounded-full"
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Courses Group */}
           <div className="space-y-2">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/60 mb-3 px-2 flex items-center gap-2">
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/40 mb-3 px-2 flex items-center gap-2">
               <Award size={14} className="text-accent" />
               {dict.coursesTitle}
             </h3>
-            {courses.map((course, index) => (
-              <motion.button
-                key={`course-${course.id}`}
-                onClick={() => {
-                  setSelectedId(course.id)
-                  setSelectedType('course')
-                }}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-300 border ${
-                  selectedId === course.id && selectedType === 'course'
-                    ? 'bg-accent/10 border-accent/50 text-foreground shadow-sm shadow-accent/5'
-                    : 'border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/30'
-                }`}
-                whileHover={{ x: 4 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <p className="font-bold text-sm tracking-tight line-clamp-1">{course.name}</p>
-                <p className="text-[10px] uppercase tracking-wider text-accent-foreground/70 mt-1 font-semibold">{course.instructor}</p>
-              </motion.button>
-            ))}
+            <div className="flex flex-col gap-0.5">
+              {courses.map((course) => (
+                <button
+                  key={`course-${course.id}`}
+                  onClick={() => {
+                    setSelectedId(course.id)
+                    setSelectedType('course')
+                  }}
+                  className={`group relative w-full text-left px-3 py-3 transition-all duration-300 rounded-lg ${
+                    selectedId === course.id && selectedType === 'course'
+                      ? 'bg-accent/5'
+                      : 'hover:bg-muted/50'
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <p className={`font-bold text-sm transition-colors duration-300 ${
+                        selectedId === course.id && selectedType === 'course'
+                          ? 'text-accent'
+                          : 'text-muted-foreground group-hover:text-foreground'
+                      }`}>
+                        {course.name}
+                      </p>
+                      <p className="text-[9px] uppercase tracking-wider text-muted-foreground/50 mt-0.5 font-bold">
+                        {course.instructor}
+                      </p>
+                    </div>
+                    <ChevronRight 
+                      size={14} 
+                      className={`transition-all duration-300 ${
+                        selectedId === course.id && selectedType === 'course'
+                          ? 'text-accent translate-x-0 opacity-100'
+                          : 'text-muted-foreground -translate-x-1.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0'
+                      }`} 
+                    />
+                  </div>
+                  {selectedId === course.id && selectedType === 'course' && (
+                    <motion.div 
+                      layoutId="active-indicator"
+                      className="absolute left-0 top-1/4 bottom-1/4 w-0.5 bg-accent rounded-full"
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
         </motion.div>
 
         {/* Content Area */}
-        <motion.div
-          className="lg:col-span-2 min-h-[350px] relative"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={slideUpFadeIn}
-        >
+        <div className="lg:col-span-2 min-h-[350px]">
           <AnimatePresence mode="wait">
             {selected && (
               <motion.div
                 key={`${selectedType}-${selected.id}`}
-                initial={{ opacity: 0, y: 10, filter: 'blur(8px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -10, filter: 'blur(8px)' }}
-                transition={{ duration: 0.3 }}
-                className="bg-muted/5 border border-border/50 rounded-2xl p-6 lg:p-8 flex flex-col md:flex-row gap-8 items-center md:items-start"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 25,
+                  opacity: { duration: 0.15 }
+                }}
+                className="flex flex-col md:flex-row gap-8 lg:gap-10 items-center md:items-start"
               >
                 {/* Visual Content */}
-                <div className="relative w-full md:w-48 aspect-video md:aspect-square shrink-0 rounded-xl overflow-hidden bg-background/50 border border-border group">
+                <div className="relative w-full md:w-44 lg:w-48 aspect-square shrink-0 rounded-xl overflow-hidden bg-muted/10 shadow-xl shadow-black/10 group">
                   {selected.image ? (
                     <Image
                       src={selected.image}
                       alt={'school' in selected ? (selected.school as string) : (selected.name as string)}
                       fill
-                      className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                      className="object-contain p-5 group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-muted-foreground/20">
+                    <div className="w-full h-full flex items-center justify-center text-muted-foreground/5">
                       {selectedType === 'education' ? <GraduationCap size={48} /> : <Award size={48} />}
                     </div>
                   )}
                 </div>
 
                 {/* Text Content */}
-                <div className="flex-1 space-y-5">
+                <div className="flex-1 space-y-5 py-1">
                   <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded border ${
-                        selectedType === 'education' 
-                          ? 'bg-blue-500/10 border-blue-500/20 text-blue-400' 
-                          : 'bg-accent/10 border-accent/20 text-accent'
-                      }`}>
-                        {selectedType}
+                    <div className="flex items-center gap-2.5 mb-3">
+                      <span className="text-[9px] font-bold uppercase tracking-[0.15em] px-2 py-0.5 rounded-full bg-accent text-accent-foreground border border-accent/20">
+                        {selectedType === 'education' ? 'Academic' : 'Certification'}
                       </span>
-                      {'expedition' in selected && (
-                        <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest">
-                          {selected.expedition as string}
-                        </span>
-                      )}
                       {'period' in selected && (
-                        <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest">
+                        <span className="text-[9px] font-bold text-muted-foreground/50 uppercase tracking-widest">
                           {selected.period as string}
                         </span>
                       )}
                     </div>
-                    <h3 className="text-2xl font-bold text-foreground leading-tight">
+                    <h3 className="text-xl lg:text-2xl font-bold text-foreground leading-tight tracking-tight">
                       {'degree' in selected ? (selected.degree as string) : (selected.name as string)}
                     </h3>
-                    <p className="text-accent-foreground font-semibold mt-1">
+                    <p className="text-base font-bold text-accent mt-1.5">
                       {'school' in selected ? (selected.school as string) : (selected.instructor as string)}
                     </p>
                   </div>
 
                   {'description' in selected && (
-                    <p className="text-foreground/80 leading-relaxed text-sm">
+                    <p className="text-muted-foreground leading-relaxed text-xs lg:text-sm max-w-lg">
                       {selected.description as string}
                     </p>
                   )}
 
-                  <div className="pt-6 border-t border-border/50 flex flex-wrap gap-4">
+                  <div className="pt-6 flex flex-wrap gap-4">
                     {'link' in selected && selected.link && (
                       <a
                         href={selected.link as string}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-xs font-bold text-accent hover:text-accent/80 transition-colors uppercase tracking-widest group"
+                        className="inline-flex items-center gap-2 text-[10px] font-bold text-accent hover:gap-3 transition-all uppercase tracking-[0.15em] group"
                       >
                         {dict.viewCertificate}
-                        <ExternalLink size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        <ExternalLink size={14} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                       </a>
                     )}
                   </div>
@@ -194,7 +234,7 @@ export default function EducationSection({ education, courses, dict }: Education
               </motion.div>
             )}
           </AnimatePresence>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

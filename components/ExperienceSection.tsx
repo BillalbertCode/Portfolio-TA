@@ -58,7 +58,7 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
               }`}
               whileHover={{ 
                 x: 8,
-                transition: { type: "spring", stiffness: 400, damping: 10 }
+                transition: { type: "tween", stiffness: 400, damping: 10 }
               }}
               whileTap={{ scale: 0.98 }}
             >

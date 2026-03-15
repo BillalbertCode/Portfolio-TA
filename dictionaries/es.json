@@ -1,6 +1,6 @@
 {
   "name": "Billalbert Martinez",
-  "title": "Desarrollador Fullstack",
+  "title": "Fullstack Web",
   "description": "Autodidacta con +3 años transformando ideas en apps que funcionan. De landing pages para clientes a chatbots IA, tracking live y automatizaciones serverless.",
   "location": "Guarenas, Miranda, VE (Remote/Nearshoring)",
   "email": "billalbertcode@gmail.com",
@@ -12,9 +12,9 @@
     "contact": "Contacto"
   },
   "hero": {
-    "welcome": "Bienvenido a mi portfolio",
-    "title": "Desarrollador Fullstack",
-    "description": "Creo experiencias digitales hermosas e interactivas utilizando tecnologías web modernas. Especializado en React, Node.js y todo lo que hay en medio.",
+    "welcome": "Zangetsu World",
+    "title": "Fullstack Web",
+    "description": "Creo experiencias digitales interactivas utilizando tecnologías web modernas. Especializado en React, Node.js y todo lo que hay en medio.",
     "viewWork": "Ver mi trabajo",
     "getInTouch": "Contacto",
     "stats": {
@@ -60,7 +60,7 @@
   },
   "sidebar": {
     "title": "BM",
-    "subtitle": "Desarrollador Fullstack"
+    "subtitle": "FrontEnd Web"
   },
   "common": {
     "loading": "Cargando portfolio...",

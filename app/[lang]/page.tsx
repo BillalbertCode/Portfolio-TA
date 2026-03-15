@@ -23,7 +23,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
         {/* Hero Section aligned with the atmosphere */}
         <main className="lg:ml-60 px-4 sm:px-6 lg:px-12 relative z-10">
-          <HeroSection dict={dict.hero} />
+          <HeroSection dict={dict.hero} email={dict.email} name={dict.name} />
         </main>
       </div>
 

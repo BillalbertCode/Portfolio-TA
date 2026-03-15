@@ -1,10 +1,11 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
-import { slideUpFadeIn, slideInRight } from '@/lib/animations'
+import dynamic from 'next/dynamic'
+import { SiNodedotjs, SiReact,SiTypescript } from 'react-icons/si'
+
 import { Button } from '@/components/ui/button'
-import { SiTypescript, SiNodedotjs, SiReact } from 'react-icons/si'
+import { slideInRight } from '@/lib/animations'
 
 const ModelComponent = dynamic(
   () => import('./ModelViewer'),
@@ -15,9 +16,31 @@ import { Dictionary } from '@/dictionaries/get-dictionary'
 
 interface HeroSectionProps {
   dict: Dictionary['hero']
+  name: Dictionary['name']
+  email: Dictionary['email']
 }
 
-export default function HeroSection({ dict }: HeroSectionProps) {
+export default function HeroSection({ dict, name, email }: HeroSectionProps) {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    },
+  }
+
   const iconVariants = {
     hidden: { opacity: 0, scale: 0, rotate: -20 },
     visible: (i: number) => ({
@@ -25,7 +48,6 @@ export default function HeroSection({ dict }: HeroSectionProps) {
       scale: 1,
       rotate: 0,
       transition: {
-        // The delay here is for the initial mount animation
         delay: 0.7 + i * 0.1,
         duration: 0.5,
         type: 'spring',
@@ -34,110 +56,89 @@ export default function HeroSection({ dict }: HeroSectionProps) {
       },
     }),
     hover: {
-      scale: 1.1,
+      scale: 1.15,
       rotate: 5,
-      y: -5,
+      y: -3,
       transition: { 
         type: 'spring', 
         stiffness: 400, 
-        damping: 15,
-        // Override the visible transition to remove the delay when hovering
-        delay: 0 
+        damping: 10,
+        delay: 0
       },
     },
     tap: { scale: 0.95 },
   }
 
   const techStack = [
-    { 
-      name: 'TypeScript', 
-      icon: SiTypescript, 
-      bgColor: 'bg-[#3178C6]/10', 
-      iconColor: '#3178C6',
-      borderColor: 'border-[#3178C6]/20'
-    },
-    { 
-      name: 'Node.js', 
-      icon: SiNodedotjs, 
-      bgColor: 'bg-[#339933]/10', 
-      iconColor: '#339933',
-      borderColor: 'border-[#339933]/20'
-    },
-    { 
-      name: 'React', 
-      icon: SiReact, 
-      bgColor: 'bg-[#61DAFB]/10', 
-      iconColor: '#61DAFB',
-      borderColor: 'border-[#61DAFB]/20'
-    }
+    { name: 'TypeScript', icon: SiTypescript, color: '#3178C6', bg: 'bg-accent/20' },
+    { name: 'Node.js', icon: SiNodedotjs, color: '#339933', bg: 'bg-accent/20' },
+    { name: 'React', icon: SiReact, color: '#61DAFB', bg: 'bg-accent/20' },
   ]
 
   return (
-    <section id="home" className="relative flex items-center min-h-[calc(100vh-80px)] lg:min-h-screen py-12">
+    <section id="home" className="relative min-h-[calc(100vh-80px)] lg:min-h-screen flex items-center py-12 overflow-hidden">
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
         {/* Left Content */}
         <motion.div
+          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={slideUpFadeIn}
-          className="space-y-6"
+          className="space-y-8"
         >
-          <div className="space-y-3">
+          <div className="space-y-4">
+            <motion.div variants={itemVariants} className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <span className="text-xs font-bold tracking-[0.2em] uppercase text-accent/80">
+                {dict.welcome}
+              </span>
+            </motion.div>
+
+            <div className="space-y-1">
+              <motion.h1 
+                variants={itemVariants}
+                className="text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1]"
+              >
+                {name}
+              </motion.h1>
+              <motion.p
+                variants={itemVariants}
+                className=" lg:text-2xl italic bg-linear-to-r from-primary-foreground to-primary/80 bg-clip-text text-5xl text-transparent"
+              >
+                {dict.title}
+              </motion.p>
+            </div>
+
             <motion.p
-              className="text-sm text-accent-foreground/90 font-semibold tracking-wider uppercase"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              {dict.welcome}
-            </motion.p>
-            <motion.h2
-              className="text-4xl lg:text-6xl font-bold text-foreground leading-tight text-balance"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              {dict.title}
-            </motion.h2>
-            <motion.p
+              variants={itemVariants}
               className="text-lg text-muted-foreground leading-relaxed max-w-lg"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
             >
               {dict.description}
             </motion.p>
           </div>
 
-          <motion.div
-            className="flex gap-3 flex-wrap pt-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
+          <motion.div variants={itemVariants} className="flex gap-3 flex-wrap pt-2">
+            <Button size="lg" className="bg-accent border border-transparent hover:border-ring hover:bg-accent/50 rounded px-8 h-12" asChild>
               <a href="#projects">{dict.viewWork}</a>
             </Button>
-            <Button size="lg" variant="outline" asChild>
-              <a href="mailto:billalbertcode@gmail.com">{dict.getInTouch}</a>
+            <Button size="lg" variant="outline" className="rounded-md px-8 h-12 border-border/50 hover:bg-accent/5" asChild>
+              <a href={`mailto:${email}`}>{dict.getInTouch}</a>
             </Button>
           </motion.div>
 
-          {/* Experience Stat & Animated Tech Icons */}
-          <div className="pt-8 border-t border-border flex items-center gap-10">
-            <motion.div
-              className="text-sm text-muted-foreground"
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              <p className="text-2xl font-bold text-foreground">5+</p>
-              <p className="whitespace-nowrap text-xs uppercase tracking-tighter opacity-70">{dict.stats.experience}</p>
-            </motion.div>
+          {/* Experience Stat & Tech Icons Grouped */}
+          <motion.div 
+            variants={itemVariants}
+            className="pt-8 border-t border-border flex items-center gap-10"
+          >
+            <div className="space-y-1">
+              <p className="text-3xl font-bold text-foreground leading-none">3+</p>
+              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60 whitespace-nowrap">
+                {dict.stats.experience}
+              </p>
+            </div>
 
-            {/* Tech Icons with Backgrounds */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               {techStack.map((tech, i) => (
                 <motion.div
                   key={tech.name}
@@ -147,16 +148,15 @@ export default function HeroSection({ dict }: HeroSectionProps) {
                   whileHover="hover"
                   whileTap="tap"
                   variants={iconVariants}
-                  // Using transition={{ delay: 0 }} on the motion.div to ensure no inherited delay on return
                   transition={{ delay: 0 }}
-                  className={`flex items-center justify-center w-12 h-12 rounded-xl border ${tech.bgColor} ${tech.borderColor} transition-colors duration-300`}
+                  className={`flex items-center justify-center w-11 h-11 rounded-xl border border-border/20 ${tech.bg} backdrop-blur-sm transition-colors duration-300`}
                   title={tech.name}
                 >
-                  <tech.icon size={24} color={tech.iconColor} />
+                  <tech.icon size={22} color={tech.color} />
                 </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Right - 3D Model */}
@@ -165,9 +165,11 @@ export default function HeroSection({ dict }: HeroSectionProps) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={slideInRight}
-          className="relative h-96 lg:h-full min-h-96 rounded-lg overflow-hidden flex items-center justify-center"
+          className="relative h-96 lg:h-full min-h-96 flex items-center justify-center"
         >
-          <ModelComponent />
+          <div className="w-full h-full relative z-10">
+            <ModelComponent />
+          </div>
         </motion.div>
       </div>
     </section>

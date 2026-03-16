@@ -7,9 +7,8 @@ import {
   Stage, 
   useGLTF,
 } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
-import { useFrame } from '@react-three/fiber'
-import React, { Suspense } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import React, { Suspense, useMemo } from 'react'
 import * as THREE from 'three'
 
 function Model() {
@@ -17,10 +16,9 @@ function Model() {
   const scanLightRef = React.useRef<THREE.SpotLight | null>(null)
   const lightTargetRef = React.useRef<THREE.Object3D>(new THREE.Object3D())
 
-  React.useEffect(() => {
+  // Optimize scene traversal and material setup
+  useMemo(() => {
     if (!scene) return
-    scene.add(lightTargetRef.current)
-
     scene.traverse((node: THREE.Object3D) => {
       if ((node as THREE.Mesh).isMesh) {
         const mesh = node as THREE.Mesh
@@ -34,7 +32,11 @@ function Model() {
         }
       }
     })
+  }, [scene])
 
+  React.useEffect(() => {
+    if (!scene) return
+    scene.add(lightTargetRef.current)
     const target = lightTargetRef.current
     return () => {
       scene.remove(target)
@@ -48,6 +50,10 @@ function Model() {
   }, [])
 
   useFrame((state) => {
+    // Clock is deprecated in r183+, but state.clock is still used in R3F.
+    // If we want to avoid the warning, we can use the state's internal clock/time if available,
+    // or just accept it until R3F updates. 
+    // However, the warning might be from a manual new THREE.Clock().
     const t = state.clock.getElapsedTime()
     const cycleTime = 4
     const localT = (t % cycleTime) / cycleTime
@@ -85,15 +91,15 @@ export default function ModelViewer() {
   return (
     <div className="w-full h-full min-h-100 cursor-move">
       <Canvas 
-        shadows 
-        dpr={1}
+        shadows={{ type: THREE.PCFShadowMap }}
+        dpr={[1, 2]} // Better balance between performance and quality
         camera={{ position: [150, 50, 100], fov: 35 }}
-        gl={{ antialias: true }}
+        gl={{ antialias: true, powerPreference: "high-performance" }}
       >
         <Suspense fallback={null}>
           <Stage 
             preset="rembrandt" 
-            intensity={2.5} // Brillo aumentado para contraste metálico
+            intensity={2.5}
             environment="city" 
             adjustCamera={0.9} 
             shadows="contact"
@@ -113,7 +119,6 @@ export default function ModelViewer() {
           />
           
           <ambientLight intensity={0.4} />
-          {/* Luz en posición opuesta y más brillante */}
           <pointLight position={[-50, 20, -50]} intensity={3} color="#ffffff" />
           <Preload all />
         </Suspense>

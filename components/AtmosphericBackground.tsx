@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
 const RainBackground = dynamic(
   () => import('./ui/rain').then(mod => mod.RainBackground),
@@ -9,6 +10,13 @@ const RainBackground = dynamic(
 )
 
 export function AtmosphericBackground() {
+  const [showRain, setShowRain] = useState(false)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setShowRain(true), 1800)
+    return () => clearTimeout(timeout)
+  }, [])
+
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none h-full w-full">
       {/* Layer 1: Static Image with Blur */}
@@ -24,14 +32,16 @@ export function AtmosphericBackground() {
         <div className="absolute inset-0 bg-background/60" />
       </div>
 
-      {/* Layer 2: Animated Rain */}
-      <RainBackground 
-        showBackground={false} 
-        intensity={0.8} 
-        count={200} 
-        className="opacity-40"
-        lightning={true}
-      />
+      {/* Layer 2: Animated Rain (delayed start to avoid freeze at initial load) */}
+      {showRain && (
+        <RainBackground 
+          showBackground={false} 
+          intensity={0.8} 
+          count={200} 
+          className="opacity-60"
+          lightning={true}
+        />
+      )}
 
       {/* Layer 3: Deep blending gradient at the bottom to merge with next sections */}
       <div className="absolute inset-x-0 bottom-0 h-64 bg-linear-to-t from-background via-background/80 to-transparent z-10" />

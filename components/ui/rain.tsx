@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+
 import { cn } from "@/lib/utils"
 
 export interface RainBackgroundProps {
@@ -174,9 +175,9 @@ export function RainBackground({
       {/* Fog/mist at bottom - Only if background is shown or requested */}
       <div
         className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3"
-        style={{
+        /* style={{
           background: "linear-gradient(to top, var(--background) 0%, transparent 100%)",
-        }}
+        }} */
       />
 
       {/* Content layer */}

@@ -1,11 +1,12 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import dynamic from 'next/dynamic'
+import React from 'react'
 import { SiNodedotjs, SiReact,SiTypescript } from 'react-icons/si'
 
 import { Button } from '@/components/ui/button'
-import { slideInRight } from '@/lib/animations'
+import {  staggerItem } from '@/lib/animations'
 
 const ModelComponent = dynamic(
   () => import('./ModelViewer'),
@@ -21,34 +22,14 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ dict, name, email }: HeroSectionProps) {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-    },
-  }
-
-  const iconVariants = {
+  const iconVariants: Variants = {
     hidden: { opacity: 0, scale: 0, rotate: -20 },
     visible: (i: number) => ({
       opacity: 1,
       scale: 1,
       rotate: 0,
       transition: {
-        delay: 0.7 + i * 0.1,
+        delay: 0.2 + i * 0.1,
         duration: 0.5,
         type: 'spring',
         stiffness: 260,
@@ -80,14 +61,13 @@ export default function HeroSection({ dict, name, email }: HeroSectionProps) {
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
         {/* Left Content */}
         <motion.div
-          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           className="space-y-8"
         >
           <div className="space-y-4">
-            <motion.div variants={itemVariants} className="flex items-center gap-2">
+            <motion.div variants={staggerItem} className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               <span className="text-xs font-bold tracking-[0.2em] uppercase text-accent/80">
                 {dict.welcome}
@@ -96,28 +76,28 @@ export default function HeroSection({ dict, name, email }: HeroSectionProps) {
 
             <div className="space-y-1">
               <motion.h1 
-                variants={itemVariants}
+                variants={staggerItem}
                 className="text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1]"
               >
                 {name}
               </motion.h1>
               <motion.p
-                variants={itemVariants}
-                className=" lg:text-2xl italic bg-linear-to-r from-primary-foreground to-primary/80 bg-clip-text text-5xl text-transparent"
+                variants={staggerItem}
+                className=" lg:text-2xl  italic bg-linear-to-r from-primary-foreground to-primary/80 bg-clip-text text-1xl text-transparent"
               >
                 {dict.title}
               </motion.p>
             </div>
 
             <motion.p
-              variants={itemVariants}
+              variants={staggerItem}
               className="text-lg text-muted-foreground leading-relaxed max-w-lg"
             >
               {dict.description}
             </motion.p>
           </div>
 
-          <motion.div variants={itemVariants} className="flex gap-3 flex-wrap pt-2">
+          <motion.div variants={staggerItem} className="flex gap-3 flex-wrap pt-2">
             <Button size="lg" className="bg-accent border border-transparent hover:border-ring hover:bg-accent/50 rounded px-8 h-12" asChild>
               <a href="#projects">{dict.viewWork}</a>
             </Button>
@@ -128,7 +108,7 @@ export default function HeroSection({ dict, name, email }: HeroSectionProps) {
 
           {/* Experience Stat & Tech Icons Grouped */}
           <motion.div 
-            variants={itemVariants}
+            variants={staggerItem}
             className="pt-8 border-t border-border flex items-center gap-10"
           >
             <div className="space-y-1">
@@ -148,7 +128,6 @@ export default function HeroSection({ dict, name, email }: HeroSectionProps) {
                   whileHover="hover"
                   whileTap="tap"
                   variants={iconVariants}
-                  transition={{ delay: 0 }}
                   className={`flex items-center justify-center w-11 h-11 rounded-xl border border-border/20 ${tech.bg} backdrop-blur-sm transition-colors duration-300`}
                   title={tech.name}
                 >
@@ -158,19 +137,11 @@ export default function HeroSection({ dict, name, email }: HeroSectionProps) {
             </div>
           </motion.div>
         </motion.div>
-
-        {/* Right - 3D Model */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={slideInRight}
-          className="relative h-96 lg:h-full min-h-96 flex items-center justify-center"
-        >
+        <div className="relative h-96 lg:h-full min-h-96 flex items-center justify-center">
           <div className="w-full h-full relative z-10">
             <ModelComponent />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

@@ -3,17 +3,53 @@
 import { motion, Variants } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import React from 'react'
-import { SiNodedotjs, SiReact,SiTypescript } from 'react-icons/si'
+import { SiNodedotjs, SiReact, SiTypescript } from 'react-icons/si'
 
 import { Button } from '@/components/ui/button'
-import {  staggerItem } from '@/lib/animations'
+import { Dictionary } from '@/dictionaries/get-dictionary'
+import { staggerItem } from '@/lib/animations'
 
 const ModelComponent = dynamic(
   () => import('./ModelViewer'),
-  { ssr: false }
+  { 
+    ssr: false,
+    loading: () => <div className="w-full h-96 bg-accent/5 animate-pulse rounded-2xl" /> 
+  }
 )
 
-import { Dictionary } from '@/dictionaries/get-dictionary'
+const iconVariants: Variants = {
+  hidden: { opacity: 0, scale: 0, rotate: -20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: {
+      delay: 0.2 + i * 0.1,
+      duration: 0.5,
+      type: 'spring',
+      stiffness: 260,
+      damping: 20,
+    },
+  }),
+  hover: {
+    scale: 1.15,
+    rotate: 5,
+    y: -3,
+    transition: { 
+      type: 'spring', 
+      stiffness: 400, 
+      damping: 10,
+      delay: 0
+    },
+  },
+  tap: { scale: 0.95 },
+}
+
+const techStack = [
+  { name: 'TypeScript', icon: SiTypescript, color: '#3178C6', bg: 'bg-accent/20' },
+  { name: 'Node.js', icon: SiNodedotjs, color: '#339933', bg: 'bg-accent/20' },
+  { name: 'React', icon: SiReact, color: '#61DAFB', bg: 'bg-accent/20' },
+]
 
 interface HeroSectionProps {
   dict: Dictionary['hero']
@@ -22,40 +58,6 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ dict, name, email }: HeroSectionProps) {
-  const iconVariants: Variants = {
-    hidden: { opacity: 0, scale: 0, rotate: -20 },
-    visible: (i: number) => ({
-      opacity: 1,
-      scale: 1,
-      rotate: 0,
-      transition: {
-        delay: 0.2 + i * 0.1,
-        duration: 0.5,
-        type: 'spring',
-        stiffness: 260,
-        damping: 20,
-      },
-    }),
-    hover: {
-      scale: 1.15,
-      rotate: 5,
-      y: -3,
-      transition: { 
-        type: 'spring', 
-        stiffness: 400, 
-        damping: 10,
-        delay: 0
-      },
-    },
-    tap: { scale: 0.95 },
-  }
-
-  const techStack = [
-    { name: 'TypeScript', icon: SiTypescript, color: '#3178C6', bg: 'bg-accent/20' },
-    { name: 'Node.js', icon: SiNodedotjs, color: '#339933', bg: 'bg-accent/20' },
-    { name: 'React', icon: SiReact, color: '#61DAFB', bg: 'bg-accent/20' },
-  ]
-
   return (
     <section id="home" className="relative min-h-[calc(100vh-80px)] lg:min-h-screen flex items-center py-12 overflow-hidden">
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">

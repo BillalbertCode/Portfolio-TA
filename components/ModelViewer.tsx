@@ -1,14 +1,17 @@
 'use client'
 
 import { 
+  AdaptiveDpr,
+  AdaptiveEvents,
   Center,
   OrbitControls, 
+  PerformanceMonitor,
   Preload,
   Stage, 
   useGLTF,
 } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
-import React, { Suspense, useMemo } from 'react'
+import React, { Suspense, useMemo, useState } from 'react'
 import * as THREE from 'three'
 
 function Model() {
@@ -49,12 +52,9 @@ function Model() {
     }
   }, [])
 
-  useFrame((state) => {
-    // Clock is deprecated in r183+, but state.clock is still used in R3F.
-    // If we want to avoid the warning, we can use the state's internal clock/time if available,
-    // or just accept it until R3F updates. 
-    // However, the warning might be from a manual new THREE.Clock().
-    const t = state.clock.getElapsedTime()
+  useFrame(() => {
+    // Using performance.now() to avoid the deprecated THREE.Clock warning
+    const t = performance.now() / 1000
     const cycleTime = 4
     const localT = (t % cycleTime) / cycleTime
 
@@ -67,7 +67,10 @@ function Model() {
       scanLightRef.current.position.set(xPos, 15, 5)
       lightTargetRef.current.position.set(xPos, 0, 0)
     } else {
-      scanLightRef.current.intensity = 0
+      // Avoid unnecessary updates when light is off
+      if (scanLightRef.current.intensity !== 0) {
+        scanLightRef.current.intensity = 0
+      }
     }
   })
 
@@ -81,6 +84,7 @@ function Model() {
         color="#ffffff"
         distance={40}
         castShadow
+        shadow-mapSize={[512, 512]} // Optimize shadow resolution
       />
     </group>
   )
@@ -88,14 +92,26 @@ function Model() {
 
 
 export default function ModelViewer() {
+  const [dpr, setDpr] = useState(1.5)
+
   return (
     <div className="w-full h-full min-h-100 cursor-move">
       <Canvas 
         shadows={{ type: THREE.PCFShadowMap }}
-        dpr={[1, 2]} // Better balance between performance and quality
+        dpr={dpr}
         camera={{ position: [150, 50, 100], fov: 35 }}
-        gl={{ antialias: true, powerPreference: "high-performance" }}
+        gl={{ 
+          antialias: true, 
+          powerPreference: "high-performance",
+          alpha: true,
+          stencil: false,
+          depth: true
+        }}
       >
+        <PerformanceMonitor onDecline={() => setDpr(1)} onIncline={() => setDpr(2)} />
+        <AdaptiveDpr pixelated />
+        <AdaptiveEvents />
+        
         <Suspense fallback={null}>
           <Stage 
             preset="rembrandt" 

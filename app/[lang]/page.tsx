@@ -1,10 +1,10 @@
-import LeftSidebar from '@/components/LeftSidebar'
-import HeroSection from '@/components/HeroSection'
-import ProjectsSection from '@/components/ProjectsSection'
-import ExperienceSection from '@/components/ExperienceSection'
-import EducationSection from '@/components/EducationSection'
-import Footer from '@/components/Footer'
 import { AtmosphericBackground } from '@/components/AtmosphericBackground'
+import EducationSection from '@/components/EducationSection'
+import ExperienceSection from '@/components/ExperienceSection'
+import Footer from '@/components/Footer'
+import HeroSection from '@/components/HeroSection'
+import LeftSidebar from '@/components/LeftSidebar'
+import ProjectsSection from '@/components/ProjectsSection'
 import { getDictionary, Locale } from '@/dictionaries/get-dictionary'
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
@@ -23,7 +23,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
         {/* Hero Section aligned with the atmosphere */}
         <main className="lg:ml-60 px-4 sm:px-6 lg:px-12 relative z-10">
-          <HeroSection dict={dict.hero} email={dict.email} name={dict.name} />
+          <HeroSection dict={dict.hero} email={dict.email} name={dict.name} lang={lang} />
         </main>
       </div>
 

@@ -55,9 +55,12 @@ interface HeroSectionProps {
   dict: Dictionary['hero']
   name: Dictionary['name']
   email: Dictionary['email']
+  lang: string
 }
 
-export default function HeroSection({ dict, name, email }: HeroSectionProps) {
+export default function HeroSection({ dict, name, email, lang }: HeroSectionProps) {
+  const resumeUrl = `/resume/Martinez-Billalbert-${lang.toUpperCase()}.pdf`
+
   return (
     <section id="home" className="relative min-h-[calc(100vh-80px)] lg:min-h-screen flex items-center py-12 overflow-hidden">
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
@@ -105,6 +108,9 @@ export default function HeroSection({ dict, name, email }: HeroSectionProps) {
             </Button>
             <Button size="lg" variant="outline" className="rounded-md px-8 h-12 border-border/50 hover:bg-accent/5" asChild>
               <a href={`mailto:${email}`}>{dict.getInTouch}</a>
+            </Button>
+            <Button size="lg" variant="ghost" className="rounded-md px-8 h-12 border border-border/50 hover:bg-accent/5" asChild>
+              <a href={resumeUrl} download>{dict.downloadResume}</a>
             </Button>
           </motion.div>
 

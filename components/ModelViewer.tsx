@@ -17,6 +17,7 @@ import * as THREE from 'three'
 
 function Model() {
   const { scene } = useGLTF('/ichigo_sword_the_second_mode.glb')
+  const groupRef = useRef<THREE.Group>(null)
   
   // Uniforms for the scan shader
   const uniforms = useRef({
@@ -38,7 +39,7 @@ function Model() {
           const material = mesh.material as THREE.MeshStandardMaterial
           material.roughness = 0.1
           material.metalness = 0.9
-          material.envMapIntensity = 2.5 // Increased for more reflection/light
+          material.envMapIntensity = 2.5
 
           // Inject scan effect shader
           material.onBeforeCompile = (shader) => {
@@ -84,6 +85,16 @@ function Model() {
 
   useFrame((state) => {
     const t = state.clock.elapsedTime
+    
+    // Entrance animation: smoothly lerp scale to 5
+    if (groupRef.current) {
+      const targetScale = 5
+      if (groupRef.current.scale.x < targetScale - 0.001) {
+        groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.04)
+      }
+    }
+
+    // Scan effect logic
     const cycleTime = 4
     const localT = (t % cycleTime) / cycleTime
 
@@ -97,7 +108,12 @@ function Model() {
   })
 
   return (
-    <group rotation={[Math.PI / -100, Math.PI / 2.5, 6]} scale={5}>
+    <group 
+      ref={groupRef} 
+      rotation={[Math.PI / -100, Math.PI / 2.5, 6]} 
+      position={[0, 0, 0]} 
+      scale={0} 
+    >
       <primitive object={scene} />
     </group>
   )
@@ -126,10 +142,10 @@ export default function ModelViewer() {
       <Canvas 
         shadows={{ type: THREE.PCFShadowMap }}
         dpr={dpr}
-        camera={{ position: [55, 18, 40], fov: 30 }} 
+        camera={{ position: [52.107, 34.203, 36.686], fov: 30 }} 
         gl={{ 
           antialias: false,
-          powerPreference: "high-performance",
+          powerPreference: "default",
           alpha: true,
           stencil: false,
           depth: true,
@@ -153,6 +169,7 @@ export default function ModelViewer() {
           
           <OrbitControls 
             makeDefault
+            target={[-2.893, 16.203, -3.314]}
             enableZoom={true} 
             enablePan={true}
             enableDamping={true}
@@ -160,13 +177,13 @@ export default function ModelViewer() {
             rotateSpeed={0.5}
           />
           
-          <ambientLight intensity={0.9} /> {/* Increased from 0.5 */}
-          <pointLight position={[-50, 20, -50]} intensity={5} color="#ffffff" /> {/* Increased from 3 */}
+          <ambientLight intensity={0.9} />
+          <pointLight position={[-50, 20, -50]} intensity={5} color="#ffffff" />
           <spotLight
             position={[20, 50, 20]}
             angle={0.3}
             penumbra={0.5}
-            intensity={7} // Increased from 2.5
+            intensity={7}
           />
           <directionalLight position={[10, 20, 10]} intensity={2} color="#ffffff" />
           <BakeShadows />
@@ -179,4 +196,3 @@ export default function ModelViewer() {
 
 // Pre-cargar el modelo una sola vez
 useGLTF.preload('/ichigo_sword_the_second_mode.glb')
-

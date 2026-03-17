@@ -13,7 +13,7 @@ export function AtmosphericBackground() {
   const [showRain, setShowRain] = useState(false)
 
   useEffect(() => {
-    const timeout = setTimeout(() => setShowRain(true), 1800)
+    const timeout = setTimeout(() => setShowRain(true), 500)
     return () => clearTimeout(timeout)
   }, [])
 
@@ -33,15 +33,16 @@ export function AtmosphericBackground() {
       </div>
 
       {/* Layer 2: Animated Rain (delayed start to avoid freeze at initial load) */}
-      {showRain && (
-        <RainBackground 
-          showBackground={false} 
-          intensity={0.8} 
-          count={200} 
-          className="opacity-60"
-          lightning={true}
-        />
-      )}
+      <div className={`transition-opacity duration-1000 ${showRain ? 'opacity-60' : 'opacity-0'}`}>
+        {showRain && (
+          <RainBackground 
+            showBackground={false} 
+            intensity={0.8} 
+            count={200} 
+            lightning={true}
+          />
+        )}
+      </div>
 
       {/* Layer 3: Deep blending gradient at the bottom to merge with next sections */}
       <div className="absolute inset-x-0 bottom-0 h-64 bg-linear-to-t from-background via-background/80 to-transparent z-10" />

@@ -3,127 +3,153 @@
 import { 
   AdaptiveDpr,
   AdaptiveEvents,
+  BakeShadows,
   Center,
+  Environment,
   OrbitControls, 
   PerformanceMonitor,
   Preload,
-  Stage, 
   useGLTF,
 } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
-import React, { Suspense, useMemo, useState } from 'react'
+import React, { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 
 function Model() {
   const { scene } = useGLTF('/ichigo_sword_the_second_mode.glb')
-  const scanLightRef = React.useRef<THREE.SpotLight | null>(null)
-  const lightTargetRef = React.useRef<THREE.Object3D>(new THREE.Object3D())
+  
+  // Uniforms for the scan shader
+  const uniforms = useRef({
+    uScanPos: { value: -100 },
+    uScanColor: { value: new THREE.Color('#ffffff') },
+    uScanIntensity: { value: 0 }
+  })
 
-  // Optimize scene traversal and material setup
-  useMemo(() => {
+  // Nuanced material setup with shader injection
+  useLayoutEffect(() => {
     if (!scene) return
     scene.traverse((node: THREE.Object3D) => {
       if ((node as THREE.Mesh).isMesh) {
         const mesh = node as THREE.Mesh
         mesh.castShadow = true
         mesh.receiveShadow = true
-        if (mesh.material && 'roughness' in mesh.material) {
+        
+        if (mesh.material) {
           const material = mesh.material as THREE.MeshStandardMaterial
-          material.roughness = 0.2
-          material.metalness = 0.8
-          material.emissiveIntensity = 0
+          material.roughness = 0.1
+          material.metalness = 0.9
+          material.envMapIntensity = 2.5 // Increased for more reflection/light
+
+          // Inject scan effect shader
+          material.onBeforeCompile = (shader) => {
+            shader.uniforms.uScanPos = uniforms.current.uScanPos
+            shader.uniforms.uScanColor = uniforms.current.uScanColor
+            shader.uniforms.uScanIntensity = uniforms.current.uScanIntensity
+
+            shader.vertexShader = `
+              varying vec3 vWorldPos;
+              ${shader.vertexShader}
+            `.replace(
+              '#include <worldpos_vertex>',
+              `
+              #include <worldpos_vertex>
+              vWorldPos = (modelMatrix * vec4(transformed, 1.0)).xyz;
+              `
+            )
+
+            shader.fragmentShader = `
+              varying vec3 vWorldPos;
+              uniform float uScanPos;
+              uniform vec3 uScanColor;
+              uniform float uScanIntensity;
+              ${shader.fragmentShader}
+            `.replace(
+              '#include <dithering_fragment>',
+              `
+              #include <dithering_fragment>
+              float scanWidth = 1.5;
+              float dist = abs(vWorldPos.x - uScanPos);
+              if (dist < scanWidth) {
+                float glow = 1.0 - (dist / scanWidth);
+                gl_FragColor.rgb += uScanColor * glow * uScanIntensity * 2.0;
+              }
+              `
+            )
+          }
+          material.needsUpdate = true
         }
       }
     })
   }, [scene])
 
-  React.useEffect(() => {
-    if (!scene) return
-    scene.add(lightTargetRef.current)
-    const target = lightTargetRef.current
-    return () => {
-      scene.remove(target)
-    }
-  }, [scene])
-
-  React.useEffect(() => {
-    if (scanLightRef.current) {
-      scanLightRef.current.target = lightTargetRef.current
-    }
-  }, [])
-
-  useFrame(() => {
-    // Using performance.now() to avoid the deprecated THREE.Clock warning
-    const t = performance.now() / 1000
+  useFrame((state) => {
+    const t = state.clock.elapsedTime
     const cycleTime = 4
     const localT = (t % cycleTime) / cycleTime
 
-    if (!scanLightRef.current) return
-
     if (localT < 0.4) {
       const progress = localT / 0.4
-      const xPos = THREE.MathUtils.lerp(15, -60, progress)
-      scanLightRef.current.intensity = 50
-      scanLightRef.current.position.set(xPos, 15, 5)
-      lightTargetRef.current.position.set(xPos, 0, 0)
+      uniforms.current.uScanPos.value = THREE.MathUtils.lerp(15, -60, progress)
+      uniforms.current.uScanIntensity.value = 1.0
     } else {
-      // Avoid unnecessary updates when light is off
-      if (scanLightRef.current.intensity !== 0) {
-        scanLightRef.current.intensity = 0
-      }
+      uniforms.current.uScanIntensity.value = 0
     }
   })
 
   return (
-    <group rotation={[Math.PI / -100, Math.PI / 2.5, 6]}>
+    <group rotation={[Math.PI / -100, Math.PI / 2.5, 6]} scale={5}>
       <primitive object={scene} />
-      <spotLight
-        ref={scanLightRef}
-        angle={0.2}
-        penumbra={0.5}
-        color="#ffffff"
-        distance={40}
-        castShadow
-        shadow-mapSize={[512, 512]} // Optimize shadow resolution
-      />
     </group>
   )
 }
 
-
 export default function ModelViewer() {
   const [dpr, setDpr] = useState(1.5)
+  const [shouldRender, setShouldRender] = useState(false)
+
+  // Hydration Deferral
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => setShouldRender(true))
+      } else {
+        setShouldRender(true)
+      }
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (!shouldRender) return <div className="w-full h-full min-h-100 bg-transparent" />
 
   return (
     <div className="w-full h-full min-h-100 cursor-move">
       <Canvas 
         shadows={{ type: THREE.PCFShadowMap }}
         dpr={dpr}
-        camera={{ position: [150, 50, 100], fov: 35 }}
+        camera={{ position: [55, 18, 40], fov: 30 }} 
         gl={{ 
-          antialias: true, 
+          antialias: false,
           powerPreference: "high-performance",
           alpha: true,
           stencil: false,
-          depth: true
+          depth: true,
         }}
+        flat
       >
-        <PerformanceMonitor onDecline={() => setDpr(1)} onIncline={() => setDpr(2)} />
+        <PerformanceMonitor 
+          flipflops={3}
+          onFallback={() => setDpr(1)}
+          onDecline={() => setDpr(1)} 
+          onIncline={() => setDpr(2)} 
+        />
         <AdaptiveDpr pixelated />
         <AdaptiveEvents />
         
         <Suspense fallback={null}>
-          <Stage 
-            preset="rembrandt" 
-            intensity={2.5}
-            environment="city" 
-            adjustCamera={0.9} 
-            shadows="contact"
-          >
-            <Center>
-              <Model />
-            </Center>
-          </Stage>
+          <Environment preset="city" /> 
+          <Center>
+            <Model />
+          </Center>
           
           <OrbitControls 
             makeDefault
@@ -134,8 +160,16 @@ export default function ModelViewer() {
             rotateSpeed={0.5}
           />
           
-          <ambientLight intensity={0.4} />
-          <pointLight position={[-50, 20, -50]} intensity={3} color="#ffffff" />
+          <ambientLight intensity={0.9} /> {/* Increased from 0.5 */}
+          <pointLight position={[-50, 20, -50]} intensity={5} color="#ffffff" /> {/* Increased from 3 */}
+          <spotLight
+            position={[20, 50, 20]}
+            angle={0.3}
+            penumbra={0.5}
+            intensity={7} // Increased from 2.5
+          />
+          <directionalLight position={[10, 20, 10]} intensity={2} color="#ffffff" />
+          <BakeShadows />
           <Preload all />
         </Suspense>
       </Canvas>

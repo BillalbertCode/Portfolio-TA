@@ -1,12 +1,12 @@
 'use client'
 
-import { 
+import {
   AdaptiveDpr,
   AdaptiveEvents,
   BakeShadows,
   Center,
   Environment,
-  OrbitControls, 
+  OrbitControls,
   PerformanceMonitor,
   Preload,
   useGLTF,
@@ -18,7 +18,7 @@ import * as THREE from 'three'
 function Model() {
   const { scene } = useGLTF('/ichigo_sword_the_second_mode.glb')
   const groupRef = useRef<THREE.Group>(null)
-  
+
   // Uniforms for the scan shader
   const uniforms = useRef({
     uScanPos: { value: -100 },
@@ -34,7 +34,7 @@ function Model() {
         const mesh = node as THREE.Mesh
         mesh.castShadow = true
         mesh.receiveShadow = true
-        
+
         if (mesh.material) {
           const material = mesh.material as THREE.MeshStandardMaterial
           material.roughness = 0.1
@@ -85,7 +85,7 @@ function Model() {
 
   useFrame((state) => {
     const t = state.clock.elapsedTime
-    
+
     // Entrance animation: smoothly lerp scale to 5
     if (groupRef.current) {
       const targetScale = 5
@@ -108,11 +108,11 @@ function Model() {
   })
 
   return (
-    <group 
-      ref={groupRef} 
-      rotation={[Math.PI / -100, Math.PI / 2.5, 6]} 
-      position={[0, 0, 0]} 
-      scale={0} 
+    <group
+      ref={groupRef}
+      rotation={[Math.PI / -100, Math.PI / 2.5, 6]}
+      position={[0, 0, 0]}
+      scale={0}
     >
       <primitive object={scene} />
     </group>
@@ -139,11 +139,11 @@ export default function ModelViewer() {
 
   return (
     <div className="w-full h-full min-h-100 cursor-move">
-      <Canvas 
+      <Canvas
         shadows={{ type: THREE.PCFShadowMap }}
         dpr={dpr}
-        camera={{ position: [52.107, 34.203, 36.686], fov: 30 }} 
-        gl={{ 
+        camera={{ position: [52.107, 34.203, 36.686], fov: 30 }}
+        gl={{
           antialias: false,
           powerPreference: "default",
           alpha: true,
@@ -152,31 +152,35 @@ export default function ModelViewer() {
         }}
         flat
       >
-        <PerformanceMonitor 
+        <PerformanceMonitor
           flipflops={3}
           onFallback={() => setDpr(1)}
-          onDecline={() => setDpr(1)} 
-          onIncline={() => setDpr(2)} 
+          onDecline={() => setDpr(1)}
+          onIncline={() => setDpr(2)}
         />
         <AdaptiveDpr pixelated />
         <AdaptiveEvents />
-        
+
         <Suspense fallback={null}>
-          <Environment preset="city" /> 
+          <Environment
+            preset="studio"
+            resolution={32} // Por defecto es 256, reducirlo aligera
+            background={false} // No cargar como fondo si no es necesario
+          />
           <Center>
             <Model />
           </Center>
-          
-          <OrbitControls 
+
+          <OrbitControls
             makeDefault
             target={[-2.893, 16.203, -3.314]}
-            enableZoom={true} 
+            enableZoom={true}
             enablePan={true}
             enableDamping={true}
             dampingFactor={0.07}
             rotateSpeed={0.5}
           />
-          
+
           <ambientLight intensity={0.9} />
           <pointLight position={[-50, 20, -50]} intensity={5} color="#ffffff" />
           <spotLight

@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { Menu } from 'lucide-react'
 import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
+import { useState } from 'react'
+
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -12,9 +13,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
+import { Dictionary, Locale } from '@/dictionaries/get-dictionary'
+
 import { LanguageToggle } from './LanguageToggle'
 import { SimpleIcon } from './SimpleIcon'
-import { Dictionary, Locale } from '@/dictionaries/get-dictionary'
 
 interface MobileHeaderProps {
   dict: Dictionary
@@ -38,6 +40,31 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
     { label: dict.nav.education, href: '#education' },
     { label: dict.nav.contact, href: '#contact' },
   ]
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // If it's an internal anchor
+    if (href.startsWith('#')) {
+      e.preventDefault()
+      const id = href.substring(1)
+      const element = document.getElementById(id)
+      
+      setIsOpen(false)
+      
+      if (element) {
+        // Longer delay to ensure Sheet has fully closed and body scroll is restored
+        setTimeout(() => {
+          const headerOffset = 80
+          const elementPosition = element.getBoundingClientRect().top
+          const offsetPosition = elementPosition + window.scrollY - headerOffset
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          })
+        }, 350)
+      }
+    }
+  }
 
   return (
     <header className="lg:hidden sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md px-4 h-16 flex items-center justify-between">
@@ -70,8 +97,8 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
                 >
                   <Link
                     href={`/${lang}${item.href}`}
-                    onClick={() => setIsOpen(false)}
-                    className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors block w-full"
                   >
                     {item.label}
                   </Link>

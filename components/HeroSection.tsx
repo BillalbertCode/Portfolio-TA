@@ -62,33 +62,33 @@ export default function HeroSection({ dict, name, email, lang }: HeroSectionProp
   const resumeUrl = `/resume/Martinez-Billalbert-${lang.toUpperCase()}.pdf`
 
   return (
-    <section id="home" className="relative min-h-[calc(100vh-80px)] lg:min-h-screen flex items-center py-12 overflow-hidden">
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
+    <section id="home" className="relative min-h-[calc(100vh-64px)] lg:min-h-screen flex items-center py-8 lg:py-12 overflow-hidden">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center relative z-10">
         {/* Left Content */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="space-y-8"
+          className="space-y-6 lg:space-y-8 text-center lg:text-left"
         >
           <div className="space-y-4">
-            <motion.div variants={staggerItem} className="flex items-center gap-2">
+            <motion.div variants={staggerItem} className="flex items-center justify-center lg:justify-start gap-2">
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <span className="text-xs font-bold tracking-[0.2em] uppercase text-accent/80">
+              <span className="text-[10px] lg:text-xs font-bold tracking-[0.2em] uppercase text-accent/80">
                 {dict.welcome}
               </span>
             </motion.div>
 
-            <div className="space-y-1">
+            <div className="space-y-2">
               <motion.h1 
                 variants={staggerItem}
-                className="text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1]"
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1]"
               >
                 {name}
               </motion.h1>
               <motion.p
                 variants={staggerItem}
-                className=" lg:text-2xl  italic bg-linear-to-r from-primary-foreground to-primary/80 bg-clip-text text-1xl text-transparent"
+                className="text-xl lg:text-2xl italic bg-linear-to-r from-primary-foreground to-primary/80 bg-clip-text text-transparent"
               >
                 {dict.title}
               </motion.p>
@@ -96,20 +96,20 @@ export default function HeroSection({ dict, name, email, lang }: HeroSectionProp
 
             <motion.p
               variants={staggerItem}
-              className="text-lg text-muted-foreground leading-relaxed max-w-lg"
+              className="text-base lg:text-lg text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0"
             >
               {dict.description}
             </motion.p>
           </div>
 
-          <motion.div variants={staggerItem} className="flex gap-3 flex-wrap pt-2">
-            <Button size="lg" className="bg-accent border border-transparent hover:border-ring hover:bg-accent/50 rounded px-8 h-12" asChild>
+          <motion.div variants={staggerItem} className="flex gap-3 flex-wrap justify-center lg:justify-start pt-2">
+            <Button size="lg" className="bg-accent border border-transparent hover:border-ring hover:bg-accent/50 rounded px-6 lg:px-8 h-11 lg:h-12 text-sm lg:text-base" asChild>
               <a href="#projects">{dict.viewWork}</a>
             </Button>
-            <Button size="lg" variant="outline" className="rounded-md px-8 h-12 border-border/50 hover:bg-accent/5" asChild>
+            <Button size="lg" variant="outline" className="rounded-md px-6 lg:px-8 h-11 lg:h-12 border-border/50 hover:bg-accent/5 text-sm lg:text-base" asChild>
               <a href={`mailto:${email}`}>{dict.getInTouch}</a>
             </Button>
-            <Button size="lg" variant="ghost" className="rounded-md px-8 h-12 border border-border/50 hover:bg-accent/5" asChild>
+            <Button size="lg" variant="ghost" className="rounded-md px-6 lg:px-8 h-11 lg:h-12 border border-border/50 hover:bg-accent/5 text-sm lg:text-base" asChild>
               <a href={resumeUrl} download>{dict.downloadResume}</a>
             </Button>
           </motion.div>
@@ -117,16 +117,16 @@ export default function HeroSection({ dict, name, email, lang }: HeroSectionProp
           {/* Experience Stat & Tech Icons Grouped */}
           <motion.div 
             variants={staggerItem}
-            className="pt-8 border-t border-border flex items-center gap-10"
+            className="pt-6 lg:pt-8 border-t border-border flex flex-row items-center justify-center lg:justify-start gap-8 lg:gap-10"
           >
-            <div className="space-y-1">
-              <p className="text-3xl font-bold text-foreground leading-none">3+</p>
-              <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60 whitespace-nowrap">
+            <div className="space-y-1 text-left">
+              <p className="text-2xl lg:text-3xl font-bold text-foreground leading-none">3+</p>
+              <p className="text-[9px] lg:text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60 whitespace-nowrap">
                 {dict.stats.experience}
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 lg:gap-3">
               {techStack.map((tech, i) => (
                 <motion.div
                   key={tech.name}
@@ -136,19 +136,23 @@ export default function HeroSection({ dict, name, email, lang }: HeroSectionProp
                   whileHover="hover"
                   whileTap="tap"
                   variants={iconVariants}
-                  className={`flex items-center justify-center w-11 h-11 rounded-xl border border-border/20 ${tech.bg} backdrop-blur-sm transition-colors duration-300`}
+                  className={`flex items-center justify-center w-10 h-10 lg:w-11 lg:h-11 rounded-xl border border-border/20 ${tech.bg} backdrop-blur-sm transition-colors duration-300`}
                   title={tech.name}
                 >
-                  <tech.icon size={22} color={tech.color} />
+                  <tech.icon size={20} color={tech.color} />
                 </motion.div>
               ))}
             </div>
           </motion.div>
         </motion.div>
-        <div className="relative h-96 lg:h-full min-h-96 flex items-center justify-center">
+
+        {/* Right Content (3D Model) */}
+        <div className="relative h-[300px] lg:h-full min-h-[300px] lg:min-h-96 flex items-center justify-center order-first lg:order-last">
           <div className="w-full h-full relative z-10">
             <ModelComponent />
           </div>
+          {/* Subtle glow behind the model on mobile */}
+          <div className="absolute inset-0 bg-accent/5 blur-3xl rounded-full lg:hidden" />
         </div>
       </div>
     </section>

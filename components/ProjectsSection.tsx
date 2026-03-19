@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { staggerContainer, staggerItem } from '@/lib/animations'
+import { AnimatePresence,motion } from 'framer-motion'
 import Image from 'next/image'
-import { SimpleIcon } from './SimpleIcon'
+import { useMemo,useState } from 'react'
+
 import { Dictionary } from '@/dictionaries/get-dictionary'
-import { ExternalLink } from 'lucide-react'
-import { Button } from './ui/button'
+import { staggerContainer, staggerItem } from '@/lib/animations'
+
+import { SimpleIcon } from './SimpleIcon'
 
 interface ProjectsSectionProps {
   projects: Dictionary['projects']
@@ -35,7 +35,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
   const visibleProjects = showAll ? filteredProjects : filteredProjects.slice(0, 2)
 
   return (
-    <section id="projects" className="py-20 lg:py-32 space-y-12 overflow-x-hidden">
+    <section id="projects" className="py-16 lg:py-32 space-y-10 lg:space-y-12 overflow-x-hidden">
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">{dict.title}</h2>
-        <p className="text-muted-foreground max-w-lg">
+        <p className="text-muted-foreground max-w-lg text-sm lg:text-base">
           {dict.description}
         </p>
       </motion.div>
@@ -55,14 +55,14 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
         whileInView="visible"
         viewport={{ once: true }}
         variants={staggerContainer}
-        className="flex flex-wrap gap-3 origin-top"
+        className="flex flex-wrap gap-2 lg:gap-3 origin-top"
       >
         <motion.button
           layout
           key="filter-all"
           onClick={() => setActiveFilter('All')}
           variants={staggerItem}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+          className={`px-3 py-1.5 lg:px-4 lg:py-2 rounded-full text-xs lg:text-sm font-medium transition-colors ${
             activeFilter === 'All'
               ? 'bg-accent text-accent-foreground shadow-md'
               : 'bg-muted/50 text-foreground hover:bg-muted'
@@ -79,7 +79,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
             key={`filter-${tech.name}`}
             onClick={() => setActiveFilter(tech.name)}
             variants={staggerItem}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2 ${
+            className={`px-3 py-1.5 lg:px-4 lg:py-2 rounded-full text-xs lg:text-sm font-medium transition-colors flex items-center gap-1.5 lg:gap-2 ${
               activeFilter === tech.name
                 ? 'bg-accent text-accent-foreground shadow-md'
                 : 'bg-muted/50 text-foreground hover:bg-muted'
@@ -87,7 +87,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <SimpleIcon name={tech.icon} size={16} />
+            <SimpleIcon name={tech.icon} size={14} />
             <span>{tech.name}</span>
           </motion.button>
         ))}
@@ -109,7 +109,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
             <motion.div
               key="projects-list"
               layout
-              className="flex flex-col gap-16 w-full overflow-hidden"
+              className="flex flex-col gap-12 lg:gap-16 w-full overflow-hidden"
               initial="hidden"
               animate="visible"
               variants={{
@@ -136,10 +136,10 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
                       damping: 25,
                       opacity: { duration: 0.2 }
                     }}
-                    className="group flex flex-col md:flex-row gap-8 items-center md:items-start"
+                    className="group flex flex-col md:flex-row gap-6 lg:gap-8 items-center md:items-start"
                   >
                     {/* Image with shadow, no border/bg */}
-                    <div className="relative w-full md:w-72 h-48 aspect-video shrink-0 overflow-hidden rounded shadow-2xl shadow-black/20">
+                    <div className="relative w-full md:w-72 aspect-video shrink-0 overflow-hidden rounded shadow-2xl shadow-black/20">
                       <Image
                         src={project.image}
                         alt={project.title}
@@ -149,21 +149,21 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
                     </div>
                     
                     {/* Content */}
-                    <div className="flex flex-col justify-center grow space-y-5 py-2">
+                    <div className="flex flex-col justify-center grow space-y-4 lg:space-y-5 py-1">
                       <div>
-                        <h3 className="text-xl lg:text-2xl font-bold text-foreground transition-colors duration-300">
+                        <h3 className="text-xl lg:text-2xl font-bold text-foreground transition-colors duration-300 text-center md:text-left">
                           {project.title}
                         </h3>
-                        <p className="text-muted-foreground mt-3 text-base lg:text-normal max-w-2xl leading-relaxed">
+                        <p className="text-muted-foreground mt-2 lg:mt-3 text-sm lg:text-base max-w-2xl leading-relaxed text-center md:text-left">
                           {project.description}
                         </p>
                       </div>
 
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                         {project.tags.map((tag, tagIndex) => (
                           <span
                             key={`${project.id}-tag-${tagIndex}`}
-                            className="px-2 py-1.5 text-xs lg:text-xs text-accent-foreground/70 border border-accent/80 font-medium"
+                            className="px-2 py-1 text-[10px] lg:text-xs text-accent-foreground/70 border border-accent/80 font-medium"
                           >
                             {tag}
                           </span>
@@ -171,15 +171,15 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
                       </div>
 
                       {project.link && (
-                        <div className="pt-2">
+                        <div className="pt-2 flex justify-center md:justify-start">
                            <a
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-md text-accent-foreground/95 hover:gap-4 transition-all font-semibold "
+                            className="inline-flex items-center gap-2 text-sm lg:text-md text-accent-foreground/95 hover:gap-4 transition-all font-semibold "
                           >
                             {dict.view} 
-                            <span className="text-xl">→</span>
+                            <span className="text-lg lg:text-xl">→</span>
                           </a> 
 
                         </div>

@@ -38,10 +38,16 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
     { label: dict.nav.projects, href: '#projects' },
     { label: dict.nav.experience, href: '#experience' },
     { label: dict.nav.education, href: '#education' },
-    { label: dict.nav.contact, href: '#contact' },
+    { label: dict.nav.contact, href: `mailto:${dict.email}` },
   ]
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // If it's a mailto link, let it handle naturally
+    if (href.startsWith('mailto:')) {
+      setIsOpen(false)
+      return
+    }
+
     // If it's an internal anchor
     if (href.startsWith('#')) {
       e.preventDefault()
@@ -96,7 +102,7 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
                   transition={{ delay: 0.1 + index * 0.05 }}
                 >
                   <Link
-                    href={`/${lang}${item.href}`}
+                    href={item.href.startsWith('mailto:') ? item.href : `/${lang}${item.href}`}
                     onClick={(e) => handleNavClick(e, item.href)}
                     className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors block w-full"
                   >

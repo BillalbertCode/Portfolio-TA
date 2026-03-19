@@ -1,12 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { slideInLeft } from '@/lib/animations'
 import Link from 'next/link'
-import { SimpleIcon } from './SimpleIcon'
-import { LanguageToggle } from './LanguageToggle'
 
 import { Dictionary, Locale } from '@/dictionaries/get-dictionary'
+import { slideInLeft } from '@/lib/animations'
+
+import { LanguageToggle } from './LanguageToggle'
+import { SimpleIcon } from './SimpleIcon'
 
 interface LeftSidebarProps {
   dict: Dictionary
@@ -26,7 +27,7 @@ export default function LeftSidebar({ dict, lang }: LeftSidebarProps) {
     { label: dict.nav.projects, href: '#projects' },
     { label: dict.nav.experience, href: '#experience' },
     { label: dict.nav.education, href: '#education' },
-    { label: dict.nav.contact, href: '#contact' },
+    { label: dict.nav.contact, href: `mailto:${dict.email}` },
   ]
 
   return (
@@ -57,7 +58,7 @@ export default function LeftSidebar({ dict, lang }: LeftSidebarProps) {
             transition={{ delay: 0.1 + index * 0.05 }}
           >
             <Link
-              href={`/${lang}${item.href}`}
+              href={item.href.startsWith('mailto:') ? item.href : `/${lang}${item.href}`}
               className="relative text-sm text-muted-foreground hover:text-foreground transition-colors group"
             >
               {item.label}

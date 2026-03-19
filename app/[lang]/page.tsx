@@ -4,6 +4,7 @@ import ExperienceSection from '@/components/ExperienceSection'
 import Footer from '@/components/Footer'
 import HeroSection from '@/components/HeroSection'
 import LeftSidebar from '@/components/LeftSidebar'
+import MobileHeader from '@/components/MobileHeader'
 import ProjectsSection from '@/components/ProjectsSection'
 import { getDictionary, Locale } from '@/dictionaries/get-dictionary'
 
@@ -17,7 +18,10 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <div className="relative min-h-screen w-full overflow-x-hidden">
         {/* Fullscreen background that covers sidebar and hero */}
         <AtmosphericBackground />
-        
+
+        {/* Mobile Header (visible only on small screens) */}
+        <MobileHeader dict={dict} lang={lang as Locale} />
+
         {/* Global Sidebar (it's fixed, so it will overlay the background) */}
         <LeftSidebar dict={dict} lang={lang as Locale} />
 
@@ -48,3 +52,4 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     </div>
   )
 }
+

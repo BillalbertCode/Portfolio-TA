@@ -5,14 +5,17 @@ import { motion } from 'framer-motion'
 import { Dictionary } from '@/dictionaries/get-dictionary'
 import { fadeIn } from '@/lib/animations'
 
+import { SimpleIcon } from './SimpleIcon'
+
 interface FooterProps {
   dict: Dictionary['footer']
+  common: Dictionary['common']
   title: Dictionary['title']
   email: Dictionary['email']
   name: Dictionary['name']
 }
 
-export default function Footer({ dict, title, email, name }: FooterProps) {
+export default function Footer({ dict, common, title, email, name }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
   const quickLinks = [
@@ -20,7 +23,11 @@ export default function Footer({ dict, title, email, name }: FooterProps) {
     { label: dict.projects || 'Projects', href: '#projects' },
     { label: dict.experience || 'Experience', href: '#experience' },
     { label: dict.education || 'Education', href: '#education' },
-    { label: dict.contact || 'Contact', href: `mailto:${email}` },
+  ]
+
+  const socialLinks = [
+    { name: 'GitHub', href: 'https://github.com/billalbertcode', icon: 'github' },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/billalbertcode', icon: 'linkedin' },
   ]
 
   return (
@@ -31,7 +38,7 @@ export default function Footer({ dict, title, email, name }: FooterProps) {
       variants={fadeIn}
       className="py-12 lg:py-16 border-t border-border mt-20 lg:mt-32"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 mb-12">
         {/* Profile Section */}
         <motion.div
           className="space-y-4"
@@ -57,18 +64,51 @@ export default function Footer({ dict, title, email, name }: FooterProps) {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          <h4 className="font-semibold text-foreground text-sm">{dict.quickLinksTitle || 'Quick Links'}</h4>
-          <div className="grid grid-cols-2 gap-4 text-sm">
+          <h4 className="font-semibold text-foreground text-sm uppercase tracking-wider">{dict.quickLinksTitle || 'Quick Links'}</h4>
+          <div className="flex flex-col gap-3 text-sm">
             {quickLinks.map((link) => (
               <motion.a
                 key={link.label}
                 href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors w-fit"
                 whileHover={{ x: 4 }}
               >
                 {link.label}
               </motion.a>
             ))}
+          </div>
+        </motion.div>
+
+        {/* Socials Section */}
+        <motion.div
+          className="space-y-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+        >
+          <h4 className="font-semibold text-foreground text-sm uppercase tracking-wider">{common.connect}</h4>
+          <div className="flex flex-col gap-3 text-sm">
+            {socialLinks.map((link) => (
+              <motion.a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 group w-fit"
+                whileHover={{ x: 4 }}
+              >
+                <SimpleIcon name={link.icon} size={16} className="group-hover:text-accent transition-colors" />
+                {link.name}
+              </motion.a>
+            ))}
+            <motion.a
+              href={`mailto:${email}`}
+              className="text-muted-foreground hover:text-foreground transition-colors mt-2 font-medium w-fit"
+              whileHover={{ x: 4 }}
+            >
+              {email}
+            </motion.a>
           </div>
         </motion.div>
       </div>
@@ -79,7 +119,7 @@ export default function Footer({ dict, title, email, name }: FooterProps) {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ delay: 0.3 }}
+        transition={{ delay: 0.4 }}
       >
         <p>&copy; {currentYear} {name}. {dict.rights}</p>
       </motion.div>

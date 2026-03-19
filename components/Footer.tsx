@@ -1,23 +1,26 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { fadeIn } from '@/lib/animations'
 
 import { Dictionary } from '@/dictionaries/get-dictionary'
+import { fadeIn } from '@/lib/animations'
 
 interface FooterProps {
   dict: Dictionary['footer']
-  sidebar: Dictionary['sidebar']
+  title: Dictionary['title']
+  email: Dictionary['email']
+  name: Dictionary['name']
 }
 
-export default function Footer({ dict, sidebar }: FooterProps) {
+export default function Footer({ dict, title, email, name }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
   const quickLinks = [
     { label: dict.quickLinks || 'Home', href: '#home' },
     { label: dict.projects || 'Projects', href: '#projects' },
     { label: dict.experience || 'Experience', href: '#experience' },
-    { label: dict.contact || 'Contact', href: '#contact' },
+    { label: dict.education || 'Education', href: '#education' },
+    { label: dict.contact || 'Contact', href: `mailto:${email}` },
   ]
 
   return (
@@ -37,12 +40,9 @@ export default function Footer({ dict, sidebar }: FooterProps) {
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
         >
-          <div className="w-16 h-16 rounded-full bg-linear-to-br from-accent to-accent/50 flex items-center justify-center">
-            <span className="text-2xl font-bold text-accent-foreground">{sidebar.title}</span>
-          </div>
           <div>
-            <h3 className="text-lg font-bold text-foreground">{sidebar.title}</h3>
-            <p className="text-sm text-muted-foreground mt-1">{sidebar.subtitle}</p>
+            <h3 className="text-lg font-bold text-foreground">{name}</h3>
+            <p className="text-sm text-muted-foreground mt-1">{title}</p>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed">
             {dict.description}
@@ -81,15 +81,7 @@ export default function Footer({ dict, sidebar }: FooterProps) {
         viewport={{ once: true }}
         transition={{ delay: 0.3 }}
       >
-        <p>&copy; {currentYear} {sidebar.title}. {dict.rights}</p>
-        <div className="flex gap-6">
-          <a href="#privacy" className="hover:text-foreground transition-colors">
-            {dict.privacy}
-          </a>
-          <a href="#terms" className="hover:text-foreground transition-colors">
-            {dict.terms}
-          </a>
-        </div>
+        <p>&copy; {currentYear} {name}. {dict.rights}</p>
       </motion.div>
     </motion.footer>
   )

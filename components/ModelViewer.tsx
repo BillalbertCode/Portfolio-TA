@@ -15,9 +15,14 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import React, { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 
-function Model() {
+function Model({ isMobile }: { isMobile: boolean }) {
   const { scene } = useGLTF('/ichigo_sword_the_second_mode.glb')
   const groupRef = useRef<THREE.Group>(null)
+  const [targetScale, setTargetScale] = useState<number>(5)
+
+  useEffect(() => {
+    setTargetScale(isMobile ? 3.0 : 4.9)
+  }, [isMobile])
 
   // Uniforms for the scan shader
   const uniforms = useRef({
@@ -86,10 +91,9 @@ function Model() {
   useFrame((state) => {
     const t = state.clock.elapsedTime
 
-    // Entrance animation: smoothly lerp scale to 5
+    // Entrance animation: smoothly lerp scale to targetScale
     if (groupRef.current) {
-      const targetScale = 5
-      if (groupRef.current.scale.x < targetScale - 0.001) {
+      if (Math.abs(groupRef.current.scale.x - targetScale) > 0.001) {
         groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.04)
       }
     }
@@ -122,9 +126,14 @@ function Model() {
 export default function ModelViewer() {
   const [dpr, setDpr] = useState(1.5)
   const [shouldRender, setShouldRender] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
-  // Hydration Deferral
+  // Hydration Deferral and Screen Size Check
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
     const timer = setTimeout(() => {
       if ('requestIdleCallback' in window) {
         window.requestIdleCallback(() => setShouldRender(true))
@@ -132,7 +141,10 @@ export default function ModelViewer() {
         setShouldRender(true)
       }
     }, 100)
-    return () => clearTimeout(timer)
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('resize', checkMobile)
+    }
   }, [])
 
   if (!shouldRender) return <div className="w-full h-full min-h-100 bg-transparent" />
@@ -167,15 +179,15 @@ export default function ModelViewer() {
             resolution={32} // Por defecto es 256, reducirlo aligera
             background={false} // No cargar como fondo si no es necesario
           />
-          <Center>
-            <Model />
+          <Center top={isMobile}>
+            <Model isMobile={isMobile} />
           </Center>
 
           <OrbitControls
             makeDefault
-            target={[-2.893, 16.203, -3.314]}
+            target={isMobile ? [0, 5, 0] : [-2.893, 16.203, -3.314]}
             enableZoom={true}
-            enablePan={true}
+            enablePan={!isMobile}
             enableDamping={true}
             dampingFactor={0.07}
             rotateSpeed={0.5}

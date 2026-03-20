@@ -62,14 +62,14 @@ export default function HeroSection({ dict, name, email, lang }: HeroSectionProp
   const resumeUrl = `/resume/Martinez-Billalbert-${lang.toUpperCase()}.pdf`
 
   return (
-    <section id="home" className="relative min-h-[calc(100vh-64px)] lg:min-h-screen flex items-center py-8 lg:py-12 overflow-hidden">
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center relative z-10">
+    <section id="home" className="relative min-h-[calc(100vh-64px)] lg:min-h-screen flex items-center py-10 lg:py-12">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center relative">
         {/* Left Content */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="space-y-6 lg:space-y-8 text-center lg:text-left"
+          className="space-y-6 lg:space-y-8 text-center lg:text-left z-20"
         >
           <div className="space-y-4">
             <motion.div variants={staggerItem} className="flex items-center justify-center lg:justify-start gap-2">
@@ -147,8 +147,8 @@ export default function HeroSection({ dict, name, email, lang }: HeroSectionProp
         </motion.div>
 
         {/* Right Content (3D Model) */}
-        <div className="relative h-[300px] lg:h-full min-h-[300px] lg:min-h-96 flex items-center justify-center order-first lg:order-last">
-          <div className="w-full h-full relative z-10">
+        <div className="relative h-[260px] lg:h-full min-h-[260px] lg:min-h-96 flex items-center justify-center order-first lg:order-last ">
+          <div className="w-full h-full relative z-10 pointer-events-none">
             <ModelComponent />
           </div>
           {/* Subtle glow behind the model on mobile */}

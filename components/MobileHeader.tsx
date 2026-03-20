@@ -101,13 +101,23 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + index * 0.05 }}
                 >
-                  <Link
-                    href={item.href.startsWith('mailto:') ? item.href : `/${lang}${item.href}`}
-                    onClick={(e) => handleNavClick(e, item.href)}
-                    className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors block w-full"
-                  >
-                    {item.label}
-                  </Link>
+                  {item.href.startsWith('mailto:') ? (
+                    <a
+                      href={item.href}
+                      onClick={() => setIsOpen(false)}
+                      className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors block w-full"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={`/${lang}${item.href}`}
+                      onClick={(e) => handleNavClick(e, item.href)}
+                      className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors block w-full"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </nav>

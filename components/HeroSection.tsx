@@ -147,13 +147,14 @@ export default function HeroSection({ dict, name, email, lang }: HeroSectionProp
         </motion.div>
 
         {/* Right Content (3D Model) */}
-        <div className="relative h-[260px] lg:h-full min-h-[260px] lg:min-h-96 flex items-center justify-center order-first lg:order-last ">
+        <div className="relative h-[260px] lg:h-full min-h-[260px] lg:min-h-[600px] flex items-center justify-center order-first lg:order-last ">
           <div className="w-full h-full relative z-10 pointer-events-none">
             <ModelComponent />
           </div>
           {/* Subtle glow behind the model on mobile */}
           <div className="absolute inset-0 bg-accent/5 blur-3xl rounded-full lg:hidden" />
         </div>
+
       </div>
     </section>
   )

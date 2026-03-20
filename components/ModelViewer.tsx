@@ -21,7 +21,7 @@ function Model({ isMobile }: { isMobile: boolean }) {
   const [targetScale, setTargetScale] = useState<number>(5)
 
   useEffect(() => {
-    setTargetScale(isMobile ? 3.0 : 4.9)
+    setTargetScale(isMobile ? 3.0 : 3.8)
   }, [isMobile])
 
   // Uniforms for the scan shader
@@ -185,9 +185,9 @@ export default function ModelViewer() {
 
           <OrbitControls
             makeDefault
-            target={isMobile ? [0, 5, 0] : [-2.893, 16.203, -3.314]}
-            enableZoom={true}
-            enablePan={!isMobile}
+            target={isMobile ? [0, 5, 0] : [-2.893, 13.3, -3.314]}
+            enableZoom={false}
+            enablePan={false}
             enableDamping={true}
             dampingFactor={0.07}
             rotateSpeed={0.5}

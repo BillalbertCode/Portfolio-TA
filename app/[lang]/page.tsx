@@ -14,13 +14,13 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
   return (
     <div className="bg-background text-foreground min-h-screen">
+      {/* Mobile Header (visible only on small screens) - Moved to root for global stickiness */}
+      <MobileHeader dict={dict} lang={lang as Locale} />
+
       {/* 1. Atmospheric Wrapper (Immersion Zone) */}
       <div className="relative min-h-screen w-full overflow-x-hidden">
         {/* Fullscreen background that covers sidebar and hero */}
         <AtmosphericBackground />
-
-        {/* Mobile Header (visible only on small screens) */}
-        <MobileHeader dict={dict} lang={lang as Locale} />
 
         {/* Global Sidebar (it's fixed, so it will overlay the background) */}
         <LeftSidebar dict={dict} lang={lang as Locale} />

@@ -23,6 +23,7 @@ export default function Footer({ dict, common, title, email, name }: FooterProps
     { label: dict.projects || 'Projects', href: '#projects' },
     { label: dict.experience || 'Experience', href: '#experience' },
     { label: dict.education || 'Education', href: '#education' },
+    { label: dict.contact || 'Contact', href: `mailto:${email}` },
   ]
 
   const socialLinks = [

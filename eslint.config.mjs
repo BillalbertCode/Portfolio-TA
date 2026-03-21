@@ -27,10 +27,20 @@ const eslintConfig = defineConfig([
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
 
       // 3. React 19 & Next.js Performance
-      'react-hooks/refs': 'error', 
-      'react-hooks/purity': 'error', 
+      'react-hooks/refs': 'error',
+      'react-hooks/purity': 'error',
       '@next/next/no-img-element': 'error',
-      'react/react-in-jsx-scope': 'off', 
+      'react/react-in-jsx-scope': 'off',
+      
+      "unused-imports/no-unused-vars": [
+        "warn",
+        {
+          "vars": "all",
+          "varsIgnorePattern": "^_",
+          "args": "after-used",
+          "argsIgnorePattern": "^_"
+        }
+      ]
     },
   },
 ])

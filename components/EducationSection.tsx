@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { AnimatePresence,motion } from 'framer-motion'
+import { Award, ChevronRight, GraduationCap } from 'lucide-react'
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useMemo,useState } from 'react'
+
 import { Dictionary } from '@/dictionaries/get-dictionary'
-import { ExternalLink, Award, GraduationCap, ChevronRight } from 'lucide-react'
 
 interface EducationSectionProps {
   education: Dictionary['education']
@@ -28,7 +29,7 @@ export default function EducationSection({ education, courses, dict }: Education
   )
 
   return (
-    <section id="education" className="py-16 lg:py-32 space-y-8 lg:space-y-10 overflow-x-hidden">
+    <section id="education" className="py-16 lg:py-32 space-y-8 lg:space-y-10 overflow-x-hidden scroll-mt-20">
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}

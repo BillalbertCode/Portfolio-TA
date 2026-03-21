@@ -1,7 +1,8 @@
-import type { Metadata } from 'next'
-import { Inter, Source_Serif_4, JetBrains_Mono } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
 import '../globals.css'
+
+import { Analytics } from '@vercel/analytics/next'
+import type { Metadata } from 'next'
+import { Inter, JetBrains_Mono,Source_Serif_4 } from 'next/font/google'
 
 const fontSans = Inter({
   subsets: ["latin"],

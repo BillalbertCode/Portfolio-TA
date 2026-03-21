@@ -1,10 +1,10 @@
 'use client'
 
+import { AnimatePresence,motion } from 'framer-motion'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { slideUpFadeIn } from '@/lib/animations'
 
 import { Dictionary } from '@/dictionaries/get-dictionary'
+import { slideUpFadeIn } from '@/lib/animations'
 
 interface ExperienceSectionProps {
   experiences: Dictionary['experience']
@@ -17,7 +17,7 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
   const selected = experiences.find((exp) => exp.id === selectedId)
 
   return (
-    <section id="experience" className="py-16 lg:py-32 space-y-10 lg:space-y-12">
+    <section id="experience" className="py-16 lg:py-32 space-y-10 lg:space-y-12 scroll-mt-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

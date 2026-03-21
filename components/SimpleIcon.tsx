@@ -1,28 +1,27 @@
 import React, { memo } from 'react';
+import { IconType } from 'react-icons';
 import { 
-  SiReact, 
-  SiNextdotjs, 
-  SiTypescript, 
-  SiNodedotjs, 
-  SiExpress, 
-  SiTailwindcss, 
-  SiFirebase, 
   SiDocker, 
-  SiMongodb, 
-  SiVercel, 
-  SiShopify, 
-  SiGooglecloud, 
-  SiGithub, 
-  SiLinkedin, 
-  SiX, 
-  SiInstagram,
+  SiExpress, 
+  SiFirebase, 
   SiFramer,
+  SiGithub, 
+  SiGooglecloud, 
+  SiInstagram,
+  SiJavascript,
+  SiLinkedin, 
+  SiMongodb, 
+  SiNextdotjs, 
+  SiNodedotjs, 
   SiPostgresql,
   SiPrisma,
-  SiJavascript,
-  SiVite
-} from 'react-icons/si';
-import { IconType } from 'react-icons';
+  SiReact, 
+  SiShopify, 
+  SiTailwindcss, 
+  SiTypescript, 
+  SiVercel, 
+  SiVite,
+  SiX} from 'react-icons/si';
 
 interface SimpleIconProps {
   name: string;

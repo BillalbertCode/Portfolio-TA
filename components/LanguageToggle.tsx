@@ -1,7 +1,7 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
+import { usePathname, useRouter } from 'next/navigation'
 
 export function LanguageToggle() {
   const pathname = usePathname()

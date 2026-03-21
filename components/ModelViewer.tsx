@@ -18,11 +18,7 @@ import * as THREE from 'three'
 function Model({ isMobile }: { isMobile: boolean }) {
   const { scene } = useGLTF('/ichigo_sword_the_second_mode.glb')
   const groupRef = useRef<THREE.Group>(null)
-  const [targetScale, setTargetScale] = useState<number>(5)
-
-  useEffect(() => {
-    setTargetScale(isMobile ? 3.0 : 3.8)
-  }, [isMobile])
+  const targetScale = isMobile ? 3.0 : 3.8
 
   // Uniforms for the scan shader
   const uniforms = useRef({

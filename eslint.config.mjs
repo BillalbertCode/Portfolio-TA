@@ -32,15 +32,6 @@ const eslintConfig = defineConfig([
       '@next/next/no-img-element': 'error',
       'react/react-in-jsx-scope': 'off',
       
-      "unused-imports/no-unused-vars": [
-        "warn",
-        {
-          "vars": "all",
-          "varsIgnorePattern": "^_",
-          "args": "after-used",
-          "argsIgnorePattern": "^_"
-        }
-      ]
     },
   },
 ])

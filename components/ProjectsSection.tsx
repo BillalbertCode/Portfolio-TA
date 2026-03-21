@@ -35,7 +35,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
   const visibleProjects = showAll ? filteredProjects : filteredProjects.slice(0, 2)
 
   return (
-    <section id="projects" className="py-16 lg:py-32 space-y-10 lg:space-y-12 overflow-x-hidden">
+    <section id="projects" className="py-16 lg:py-32 space-y-10 lg:space-y-12 overflow-x-hidden scroll-mt-20">
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -170,21 +170,33 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
                         ))}
                       </div>
 
-                      {project.link && (
-                        <div className="pt-2 flex justify-center md:justify-start">
+                      <div className="pt-2 flex flex-wrap justify-center md:justify-start gap-4 lg:gap-6">
+                        {project.github && (
+                           <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-sm lg:text-md text-muted-foreground hover:text-foreground transition-all font-semibold "
+                          >
+                            <SimpleIcon name="github" size={18} />
+                            {dict.viewGithub}
+                          </a> 
+                        )}
+                        
+                        {project.link && (
                            <a
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-sm lg:text-md text-accent-foreground/95 hover:gap-4 transition-all font-semibold "
+                            className="inline-flex items-center gap-2 text-sm lg:text-md text-accent-foreground/95 hover:gap-3 transition-all font-semibold "
                           >
                             {dict.view} 
                             <span className="text-lg lg:text-xl">→</span>
                           </a> 
+                        )}
 
-                        </div>
                         
-                      )}
+                      </div>
                     </div>
                   </motion.div>
                 ))}

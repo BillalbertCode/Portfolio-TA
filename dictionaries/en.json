@@ -28,6 +28,7 @@
     "title": "Featured Projects",
     "description": "A selection of my best work, showcasing expertise in design, development, and problem-solving.",
     "view": "View Project",
+    "viewGithub": "Source Code",
     "showMore": "Show More",
     "showLess": "Show Less",
     "all": "All",
@@ -77,6 +78,7 @@
       "image": "/project1.webp",
       "tags": ["Next.js", "Vercel AI SDK", "TypeScript", "React"],
       "link": "https://job-chatbot-ia.vercel.app/",
+      "github": "https://github.com/BillalbertCode/job-chatbot-ia",
       "details": "Implementation of streaming logic with AI and interactive tools."
     },
     {
@@ -85,7 +87,6 @@
       "description": "Real-time order tracking.",
       "image": "/project-sistema-seguimiento.webp",
       "tags": ["Firebase", "Node.js", "API Integration", "React", "Tailwind CSS", "TypeScript", "Vite"],
-      "link": "#",
       "details": "Serverless proxy with Firebase Functions for secure logistics data management."
     },
     {
@@ -95,6 +96,7 @@
       "image": "/project-raices.webp",
       "tags": ["React", "Express", "JWT", "Docker", "MongoDB", "Node.js", "Javascript"],
       "link": "https://raicesworkspace.vercel.app/",
+      "github": "https://github.com/BillalbertCode/RaicesWorkSpace_Frontend",
       "details": "Fullstack architecture deployed on Railway using Docker containers."
     },
     {
@@ -103,7 +105,6 @@
       "description": "Automation of Shopify gift card credits via email parsing.",
       "image": "/GCP-Docker.webp",
       "tags": ["Google Cloud", "Serverless", "Shopify API", "Express", "Node.js", "Docker"],
-      "link": "#",
       "details": "Serverless system on Google Cloud Platform with Looker Studio monitoring."
     }
   ],

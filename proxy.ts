@@ -4,16 +4,18 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
 const locales = ['en', 'es']
-const defaultLocale = 'es'
+const defaultLocale = 'en'
 
 function getLocale(request: NextRequest) {
-  const negotiatorHeaders: Record<string, string> = {}
-  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
+  try {
+    const negotiatorHeaders: Record<string, string> = {}
+    request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
 
-  const languages = new Negotiator({ headers: negotiatorHeaders }).languages()
-  // Filtramos '*' o tags inválidos que rompen Intl.getCanonicalLocales
-  const validLanguages = languages.filter(lang => lang !== '*')
-  return match(validLanguages, locales, defaultLocale)
+    const languages = new Negotiator({ headers: negotiatorHeaders }).languages()
+    return match(languages, locales, defaultLocale)
+  } catch (e) {
+    return defaultLocale
+  }
 }
 
 export function proxy(request: NextRequest) {

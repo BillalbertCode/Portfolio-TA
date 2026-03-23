@@ -12,7 +12,7 @@ import {
   useGLTF,
 } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
-import React, { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useLayoutEffect, useReducer, useRef } from 'react'
 import * as THREE from 'three'
 
 function Model({ isMobile }: { isMobile: boolean }) {
@@ -119,27 +119,56 @@ function Model({ isMobile }: { isMobile: boolean }) {
   )
 }
 
+type State = {
+  dpr: number
+  shouldRender: boolean
+  isMobile: boolean
+}
+
+type Action = 
+  | { type: 'SET_DPR'; payload: number }
+  | { type: 'SET_MOBILE'; payload: boolean }
+  | { type: 'SET_RENDER'; payload: boolean }
+  | { type: 'INIT'; isMobile: boolean }
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'SET_DPR': return { ...state, dpr: action.payload }
+    case 'SET_MOBILE': return { ...state, isMobile: action.payload }
+    case 'SET_RENDER': return { ...state, shouldRender: action.payload }
+    case 'INIT': return { ...state, isMobile: action.isMobile, shouldRender: true }
+    default: return state
+  }
+}
+
 export default function ModelViewer() {
-  const [dpr, setDpr] = useState(1.5)
-  const [shouldRender, setShouldRender] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  const [state, dispatch] = useReducer(reducer, {
+    dpr: 1.5,
+    shouldRender: false,
+    isMobile: false
+  })
+
+  const { dpr, shouldRender, isMobile } = state
 
   // Hydration Deferral and Screen Size Check
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
+    const checkMobile = () => window.innerWidth < 1024
+    
+    const onResize = () => dispatch({ type: 'SET_MOBILE', payload: checkMobile() })
+    window.addEventListener('resize', onResize)
 
     const timer = setTimeout(() => {
+      const initialMobile = checkMobile()
       if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(() => setShouldRender(true))
+        window.requestIdleCallback(() => dispatch({ type: 'INIT', isMobile: initialMobile }))
       } else {
-        setShouldRender(true)
+        dispatch({ type: 'INIT', isMobile: initialMobile })
       }
     }, 100)
+
     return () => {
       clearTimeout(timer)
-      window.removeEventListener('resize', checkMobile)
+      window.removeEventListener('resize', onResize)
     }
   }, [])
 
@@ -162,9 +191,9 @@ export default function ModelViewer() {
       >
         <PerformanceMonitor
           flipflops={3}
-          onFallback={() => setDpr(1)}
-          onDecline={() => setDpr(1)}
-          onIncline={() => setDpr(2)}
+          onFallback={() => dispatch({ type: 'SET_DPR', payload: 1 })}
+          onDecline={() => dispatch({ type: 'SET_DPR', payload: 1 })}
+          onIncline={() => dispatch({ type: 'SET_DPR', payload: 2 })}
         />
         <AdaptiveDpr pixelated />
         <AdaptiveEvents />
@@ -172,8 +201,8 @@ export default function ModelViewer() {
         <Suspense fallback={null}>
           <Environment
             preset="studio"
-            resolution={32} // Por defecto es 256, reducirlo aligera
-            background={false} // No cargar como fondo si no es necesario
+            resolution={32}
+            background={false}
           />
           <Center top={isMobile}>
             <Model isMobile={isMobile} />

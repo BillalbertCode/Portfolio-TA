@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 
 import { Dictionary } from '@/dictionaries/get-dictionary'
 import { fadeIn } from '@/lib/animations'
@@ -32,7 +32,7 @@ export default function Footer({ dict, common, title, email, name }: FooterProps
   ]
 
   return (
-    <motion.footer
+    <m.footer
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
@@ -41,7 +41,7 @@ export default function Footer({ dict, common, title, email, name }: FooterProps
     >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 mb-12 text-center md:text-left">
         {/* Profile Section */}
-        <motion.div
+        <m.div
           className="space-y-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -55,10 +55,10 @@ export default function Footer({ dict, common, title, email, name }: FooterProps
           <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mx-auto md:mx-0">
             {dict.description}
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Links Section */}
-        <motion.div
+        <m.div
           className="space-y-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -68,20 +68,20 @@ export default function Footer({ dict, common, title, email, name }: FooterProps
           <h4 className="font-semibold text-foreground text-xs uppercase tracking-wider">{dict.quickLinksTitle || 'Quick Links'}</h4>
           <div className="flex flex-col items-center md:items-start gap-3 text-sm">
             {quickLinks.map((link) => (
-              <motion.a
+              <m.a
                 key={link.label}
                 href={link.href}
                 className="text-muted-foreground hover:text-foreground transition-colors w-fit"
                 whileHover={{ x: 4 }}
               >
                 {link.label}
-              </motion.a>
+              </m.a>
             ))}
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Socials Section */}
-        <motion.div
+        <m.div
           className="space-y-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -92,7 +92,7 @@ export default function Footer({ dict, common, title, email, name }: FooterProps
           <div className="flex flex-col items-center md:items-start gap-3 text-sm">
             <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-3">
               {socialLinks.map((link) => (
-                <motion.a
+                <m.a
                   key={link.name}
                   href={link.href}
                   target="_blank"
@@ -102,22 +102,22 @@ export default function Footer({ dict, common, title, email, name }: FooterProps
                 >
                   <SimpleIcon name={link.icon} size={18} className="group-hover:text-accent transition-colors" />
                   <span className="hidden md:inline">{link.name}</span>
-                </motion.a>
+                </m.a>
               ))}
             </div>
-            <motion.a
+            <m.a
               href={`mailto:${email}`}
               className="text-muted-foreground hover:text-foreground transition-colors mt-2 font-medium w-fit border-b border-transparent hover:border-accent transition-all"
               whileHover={{ scale: 1.05 }}
             >
               {email}
-            </motion.a>
+            </m.a>
           </div>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* Bottom Bar */}
-      <motion.div
+      <m.div
         className="pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-muted-foreground"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -125,7 +125,7 @@ export default function Footer({ dict, common, title, email, name }: FooterProps
         transition={{ delay: 0.4 }}
       >
         <p>&copy; {currentYear} {name}. {dict.rights}</p>
-      </motion.div>
-    </motion.footer>
+      </m.div>
+    </m.footer>
   )
 }

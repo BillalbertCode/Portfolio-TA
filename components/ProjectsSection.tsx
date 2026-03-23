@@ -1,6 +1,6 @@
 'use client'
 
-import { AnimatePresence,motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import Image from 'next/image'
 import { useMemo,useState } from 'react'
 
@@ -9,13 +9,15 @@ import { staggerContainer, staggerItem } from '@/lib/animations'
 
 import { SimpleIcon } from './SimpleIcon'
 
+const EMPTY_TECH: Dictionary['technologies'] = []
+
 interface ProjectsSectionProps {
   projects: Dictionary['projects']
   dict: Dictionary['projects_section']
   technologies?: Dictionary['technologies']
 }
 
-export default function ProjectsSection({ projects, dict, technologies = [] }: ProjectsSectionProps) {
+export default function ProjectsSection({ projects, dict, technologies = EMPTY_TECH }: ProjectsSectionProps) {
   const [showAll, setShowAll] = useState(false)
   const [activeFilter, setActiveFilter] = useState('All')
 
@@ -36,7 +38,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
 
   return (
     <section id="projects" className="py-16 lg:py-32 space-y-10 lg:space-y-12 overflow-x-hidden scroll-mt-20">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -46,10 +48,10 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
         <p className="text-muted-foreground max-w-lg text-sm lg:text-base">
           {dict.description}
         </p>
-      </motion.div>
+      </m.div>
 
       {/* Technology Filters - Fixed jumping with layout and stable animations */}
-      <motion.div
+      <m.div
         layout
         initial="hidden"
         whileInView="visible"
@@ -57,7 +59,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
         variants={staggerContainer}
         className="flex flex-wrap gap-2 lg:gap-3 origin-top"
       >
-        <motion.button
+        <m.button
           layout
           key="filter-all"
           onClick={() => setActiveFilter('All')}
@@ -71,10 +73,10 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
           whileTap={{ scale: 0.95 }}
         >
           {dict.all}
-        </motion.button>
+        </m.button>
 
         {uniqueTechs.map((tech) => (
-          <motion.button
+          <m.button
             layout
             key={`filter-${tech.name}`}
             onClick={() => setActiveFilter(tech.name)}
@@ -89,14 +91,14 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
           >
             <SimpleIcon name={tech.icon} size={14} />
             <span>{tech.name}</span>
-          </motion.button>
+          </m.button>
         ))}
-      </motion.div>
+      </m.div>
 
       <div className="relative w-full overflow-hidden">
         <AnimatePresence mode="wait">
           {filteredProjects.length === 0 ? (
-            <motion.div
+            <m.div
               key="empty-state"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -104,9 +106,9 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
               className="py-12 text-center w-full"
             >
               <p className="text-muted-foreground">{dict.noProjects}</p>
-            </motion.div>
+            </m.div>
           ) : (
-            <motion.div
+            <m.div
               key="projects-list"
               layout
               className="flex flex-col gap-12 lg:gap-16 w-full overflow-hidden"
@@ -124,7 +126,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
             >
               <AnimatePresence mode="popLayout" initial={false}>
                 {visibleProjects.map((project) => (
-                  <motion.div
+                  <m.div
                     key={project.id}
                     layout
                     initial={{ opacity: 0, x: -50 }}
@@ -144,6 +146,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
                         src={project.image}
                         alt={project.title}
                         fill
+                        sizes="(max-width: 768px) 100vw, 300px"
                         className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                         />
                     </div>
@@ -198,16 +201,16 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
                         
                       </div>
                     </div>
-                  </motion.div>
+                  </m.div>
                 ))}
               </AnimatePresence>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>
 
       {filteredProjects.length > 2 && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -219,7 +222,7 @@ export default function ProjectsSection({ projects, dict, technologies = [] }: P
           >
             {showAll ? dict.showLess : `${dict.showMore} (${filteredProjects.length - 2})`}
           </button>
-        </motion.div>
+        </m.div>
       )}
     </section>
   )

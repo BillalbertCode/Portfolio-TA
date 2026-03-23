@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { usePathname, useRouter } from 'next/navigation'
 
 export function LanguageToggle() {
@@ -38,7 +38,7 @@ export function LanguageToggle() {
         EN
       </button>
       
-      <motion.div layout className="sr-only" />
+      <m.div layout className="sr-only" />
     </div>
   )
 }

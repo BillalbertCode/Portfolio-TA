@@ -1,6 +1,6 @@
 'use client'
 
-import { AnimatePresence,motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { Award, ChevronRight, GraduationCap } from 'lucide-react'
 import Image from 'next/image'
 import { useMemo,useState } from 'react'
@@ -30,7 +30,7 @@ export default function EducationSection({ education, courses, dict }: Education
 
   return (
     <section id="education" className="py-16 lg:py-32 space-y-8 lg:space-y-10 overflow-x-hidden scroll-mt-20">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -41,11 +41,11 @@ export default function EducationSection({ education, courses, dict }: Education
         <p className="text-muted-foreground text-sm lg:text-base max-w-md mx-auto lg:mx-0 leading-relaxed">
           {dict.subtitle}
         </p>
-      </motion.div>
+      </m.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-14 items-start">
         {/* Selection List (Tabs) */}
-        <motion.div
+        <m.div
           className="lg:col-span-1 flex flex-col gap-6"
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -145,13 +145,13 @@ export default function EducationSection({ education, courses, dict }: Education
               ))}
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Content Area */}
         <div className="lg:col-span-2 min-h-[300px] lg:min-h-[350px]">
           <AnimatePresence mode="wait">
             {selected && (
-              <motion.div
+              <m.div
                 key={`${selectedType}-${selected.id}`}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -171,7 +171,8 @@ export default function EducationSection({ education, courses, dict }: Education
                       src={selected.image}
                       alt={'school' in selected ? (selected.school as string) : (selected.name as string)}
                       fill
-                      className="object-contain p-4 lg:p-5 group-hover:scale-105 transition-transform duration-500 ease-out"
+                      sizes="(max-width: 768px) 100vw, 200px"
+                      className="object-cover p-4 lg:p-5 group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-muted-foreground/5">
@@ -226,7 +227,7 @@ export default function EducationSection({ education, courses, dict }: Education
                     )}
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
         </div>

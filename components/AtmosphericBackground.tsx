@@ -26,6 +26,7 @@ export function AtmosphericBackground() {
           alt="Zangetsu Background"
           fill
           priority
+          sizes="100vw"
           className="object-cover blur-sm scale-105 opacity-60 transition-opacity duration-1000"
         />
         {/* Overlay to darken and add mood */}

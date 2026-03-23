@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Menu } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -95,7 +95,7 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
           <div className="flex-1 overflow-y-auto py-6 px-6">
             <nav className="flex flex-col gap-6">
               {navItems.map((item, index) => (
-                <motion.div
+                <m.div
                   key={item.label}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -118,7 +118,7 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
                       {item.label}
                     </Link>
                   )}
-                </motion.div>
+                </m.div>
               ))}
             </nav>
 
@@ -129,7 +129,7 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
                 </p>
                 <div className="flex gap-4">
                   {socialLinks.map((link, index) => (
-                    <motion.a
+                    <m.a
                       key={link.name}
                       href={link.href}
                       target="_blank"
@@ -141,7 +141,7 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
                     >
                       <SimpleIcon name={link.icon} size={20} />
                       <span className="sr-only">{link.name}</span>
-                    </motion.a>
+                    </m.a>
                   ))}
                 </div>
               </div>

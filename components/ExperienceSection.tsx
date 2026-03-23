@@ -1,6 +1,6 @@
 'use client'
 
-import { AnimatePresence,motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { useState } from 'react'
 
 import { Dictionary } from '@/dictionaries/get-dictionary'
@@ -18,7 +18,7 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
 
   return (
     <section id="experience" className="py-16 lg:py-32 space-y-10 lg:space-y-12 scroll-mt-20">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -29,11 +29,11 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
         <p className="text-muted-foreground max-w-lg mx-auto lg:mx-0 text-sm lg:text-base">
           {dict.subtitle}
         </p>
-      </motion.div>
+      </m.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
         {/* Companies List (Tabs) */}
-        <motion.div
+        <m.div
           className="lg:col-span-1 flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible gap-2 lg:space-y-2 pb-4 lg:pb-0 scrollbar-hide"
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           initial="hidden"
@@ -42,7 +42,7 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
           transition={{ duration: 0.6 }}
         >
           {experiences.map((exp, index) => (
-            <motion.button
+            <m.button
               key={exp.id}
               onClick={() => setSelectedId(exp.id)}
               initial={{ opacity: 0, x: -20 }}
@@ -65,12 +65,12 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
             >
               <p className="font-bold text-xs lg:text-sm tracking-wide truncate">{exp.company}</p>
               <p className="text-[10px] lg:text-xs text-muted-foreground mt-1 opacity-80 truncate">{exp.role}</p>
-            </motion.button>
+            </m.button>
           ))}
-        </motion.div>
+        </m.div>
 
         {/* Experience Details Content */}
-        <motion.div
+        <m.div
           className="lg:col-span-2"
           initial="hidden"
           whileInView="visible"
@@ -79,7 +79,7 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
         >
           <AnimatePresence mode="wait">
             {selected && (
-              <motion.div
+              <m.div
                 key={selected.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -99,8 +99,8 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
                   <h4 className="font-semibold text-foreground text-xs lg:text-sm uppercase tracking-wider text-center lg:text-left">{dict.highlightsTitle}</h4>
                   <ul className="space-y-2 lg:space-y-3">
                     {selected.highlights.map((highlight, index) => (
-                      <motion.li
-                        key={index}
+                      <m.li
+                        key={highlight}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
@@ -108,7 +108,7 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
                       >
                         <span className="text-accent font-bold min-w-fit">→</span>
                         <span>{highlight}</span>
-                      </motion.li>
+                      </m.li>
                     ))}
                   </ul>
                 </div>
@@ -122,10 +122,10 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
                     <span>→</span>
                   </a>
                 </div>
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

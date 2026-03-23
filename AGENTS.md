@@ -8,7 +8,16 @@
 - **Dev:** `npm run dev` (Runs on `localhost:3000`)
 - **Build:** `npm run build`
 - **Lint:** `npm run lint` (Mandatory check before completion)
+- **Test:** `npm test` (Runs Playwright E2E & A11y tests)
+- **Test UI:** `npm run test:ui` (Interactive test runner)
 - **Constraint:** Use **npm** exclusively; maintain strict TypeScript types (no `any`).
+
+## Testing Strategy (Playwright)
+**Core Mandate:** Ensure the "first impression" and usability are flawless.
+- **Smoke Tests (`tests/smoke.spec.ts`):** Confirms the page loads, the main heading is visible, and the Three.js/Rain canvas is mounted correctly.
+- **i18n Tests (`tests/i18n.spec.ts`):** Validates that switching between `/es` and `/en` updates the content using the dictionary system and persists language on refresh.
+- **Accessibility Audit (`tests/a11y.spec.ts`):** Runs automated WCAG 2.1 AA audits using `@axe-core/playwright`. Essential for a professional developer portfolio.
+- **Note:** Test results and reports are excluded from Git via `.gitignore`.
 
 ## Core Architecture Concepts
 - **i18n:** Dictionary-based translations in `dictionaries/`. Pass `dict` prop from server components to children.

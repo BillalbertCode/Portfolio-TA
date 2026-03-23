@@ -11,7 +11,9 @@ function getLocale(request: NextRequest) {
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
 
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages()
-  return match(languages, locales, defaultLocale)
+  // Filtramos '*' o tags inválidos que rompen Intl.getCanonicalLocales
+  const validLanguages = languages.filter(lang => lang !== '*')
+  return match(validLanguages, locales, defaultLocale)
 }
 
 export function proxy(request: NextRequest) {

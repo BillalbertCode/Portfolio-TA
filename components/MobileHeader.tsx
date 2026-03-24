@@ -75,8 +75,8 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
   return (
     <header className="lg:hidden sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md px-4 h-16 flex items-center justify-between">
       <Link href={`/${lang}`} className="flex items-center gap-2">
-        <span className="text-xl font-bold tracking-tighter text-foreground">
-          {dict.sidebar.title}
+        <span className="text-lg font-bold tracking-tighter text-foreground">
+          {dict.name}
         </span>
       </Link>
 
@@ -89,7 +89,14 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
         </SheetTrigger>
         <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background/95 backdrop-blur-lg border-l border-border/40 flex flex-col p-0">
           <SheetHeader className="p-6 border-b border-border/40 text-left">
-            <SheetTitle className="text-xl font-bold">{dict.sidebar.title}</SheetTitle>
+            <SheetTitle className="text-xl font-bold">{dict.name}</SheetTitle>
+            <p className="text-xs text-muted-foreground mt-1">{dict.title}</p>
+            <a
+              href={`mailto:${dict.email}`}
+              className="text-muted-foreground hover:text-foreground transition-colors mt-2 font-medium w-fit border-b border-transparent hover:border-accent transition-all text-xs"
+            >
+              {dict.email}
+            </a>
           </SheetHeader>
           
           <div className="flex-1 overflow-y-auto py-6 px-6">

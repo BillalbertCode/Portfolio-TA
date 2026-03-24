@@ -38,9 +38,16 @@ export default function LeftSidebar({ dict, lang }: LeftSidebarProps) {
       className="hidden lg:flex lg:w-60 lg:flex-col lg:fixed lg:left-0 lg:top-0 lg:h-screen lg:border-r lg:border-border lg:bg-background/50 lg:backdrop-blur-sm lg:p-8"
     >
       {/* Logo/Name */}
-      <m.div className="mb-12" whileHover={{ scale: 1.05 }}>
-        <h1 className="text-xl font-bold text-foreground">{dict.sidebar.title}</h1>
-        <p className="text-xs text-muted-foreground mt-1">{dict.sidebar.subtitle}</p>
+      <m.div className="mb-12 flex flex-col">
+        <h1 className="text-xl font-bold text-foreground">{dict.name}</h1>
+        <p className="text-xs text-muted-foreground mt-1">{dict.title}</p>
+        <m.a
+          href={`mailto:${dict.email}`}
+          className="text-muted-foreground hover:text-foreground transition-colors mt-2 font-medium w-fit border-b border-transparent hover:border-accent transition-all text-xs"
+          whileHover={{ scale: 1.05 }}
+        >
+          {dict.email}
+        </m.a>
       </m.div>
 
       {/* Language Toggle */}

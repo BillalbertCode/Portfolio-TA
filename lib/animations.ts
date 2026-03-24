@@ -45,3 +45,39 @@ export const hoverScale = {
   whileHover: { scale: 1.05 },
   transition: { type: 'spring', stiffness: 400, damping: 10 },
 }
+
+export const staggerList: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.1,
+    },
+  },
+}
+
+export const staggerItemX: Variants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { 
+    opacity: 1, 
+    x: 0, 
+    transition: { 
+      type: 'spring', 
+      stiffness: 100, 
+      damping: 15,
+      duration: 0.4 
+    } 
+  },
+}
+
+export const staggerItemHighlight: Variants = {
+  hidden: { opacity: 0, x: -10 },
+  visible: { 
+    opacity: 1, 
+    x: 0, 
+    transition: { 
+      duration: 0.3 
+    } 
+  },
+}

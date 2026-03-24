@@ -4,7 +4,7 @@ import { AnimatePresence, m } from 'framer-motion'
 import { useState } from 'react'
 
 import { Dictionary } from '@/dictionaries/get-dictionary'
-import { slideUpFadeIn } from '@/lib/animations'
+import { slideUpFadeIn, staggerItemHighlight, staggerItemX, staggerList } from '@/lib/animations'
 
 interface ExperienceSectionProps {
   experiences: Dictionary['experience']
@@ -19,10 +19,10 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
   return (
     <section id="experience" className="py-16 lg:py-32 space-y-10 lg:space-y-12 scroll-mt-20">
       <m.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        variants={slideUpFadeIn}
+        initial="hidden"
+        whileInView="visible"
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
         className="text-center lg:text-left"
       >
         <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">{dict.title}</h2>
@@ -35,24 +35,17 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
         {/* Companies List (Tabs) */}
         <m.div
           className="lg:col-span-1 flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible gap-2 lg:space-y-2 pb-4 lg:pb-0 scrollbar-hide"
-          variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
+          variants={staggerList}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
         >
-          {experiences.map((exp, index) => (
+          {experiences.map((exp) => (
             <m.button
               key={exp.id}
               onClick={() => setSelectedId(exp.id)}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ 
-                opacity: { delay: index * 0.1, duration: 0.4 },
-                x: { delay: index * 0.1, duration: 0.4 }
-              }}
-              className={`min-w-[140px] lg:w-full text-left px-4 py-3 rounded-lg border transition-all ${
+              variants={staggerItemX}
+              className={`min-w-[140px] lg:w-full text-left px-4 py-3 rounded-lg border transition-colors duration-200 ${
                 selectedId === exp.id
                   ? 'bg-accent/10 border-accent text-foreground shadow-sm'
                   : 'text-muted-foreground border-transparent hover:text-foreground hover:bg-muted/30'
@@ -81,10 +74,10 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
             {selected && (
               <m.div
                 key={selected.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
+                variants={slideUpFadeIn}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
                 className="space-y-5 lg:space-y-6"
               >
                 <div className="text-center lg:text-left">
@@ -97,20 +90,23 @@ export default function ExperienceSection({ experiences, dict }: ExperienceSecti
 
                 <div className="space-y-3">
                   <h4 className="font-semibold text-foreground text-xs lg:text-sm uppercase tracking-wider text-center lg:text-left">{dict.highlightsTitle}</h4>
-                  <ul className="space-y-2 lg:space-y-3">
-                    {selected.highlights.map((highlight, index) => (
+                  <m.ul 
+                    className="space-y-2 lg:space-y-3"
+                    variants={staggerList}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    {selected.highlights.map((highlight) => (
                       <m.li
                         key={highlight}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
+                        variants={staggerItemHighlight}
                         className="flex gap-3 text-xs lg:text-sm text-muted-foreground"
                       >
                         <span className="text-accent font-bold min-w-fit">→</span>
                         <span>{highlight}</span>
                       </m.li>
                     ))}
-                  </ul>
+                  </m.ul>
                 </div>
 
                 <div className="pt-6 border-t border-border flex justify-center lg:justify-start">

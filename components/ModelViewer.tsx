@@ -13,31 +13,32 @@ import {
 } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
 import React, { Suspense, useEffect, useLayoutEffect, useReducer, useRef } from 'react'
-import * as THREE from 'three'
+import { Color, Group,MathUtils,Mesh,MeshStandardMaterial,Object3D,PCFShadowMap,Timer, Vector3 } from 'three'
 
 function Model({ isMobile }: { isMobile: boolean }) {
   const { scene } = useGLTF('/ichigo_sword_the_second_mode.glb')
-  const groupRef = useRef<THREE.Group>(null)
+  const groupRef = useRef<Group>(null)
+  const timerRef = useRef(new Timer())
   const targetScale = isMobile ? 3.0 : 3.8
 
   // Uniforms for the scan shader
   const uniforms = useRef({
     uScanPos: { value: -100 },
-    uScanColor: { value: new THREE.Color('#ffffff') },
+    uScanColor: { value: new Color('#ffffff') },
     uScanIntensity: { value: 0 }
   })
 
   // Nuanced material setup with shader injection
   useLayoutEffect(() => {
     if (!scene) return
-    scene.traverse((node: THREE.Object3D) => {
-      if ((node as THREE.Mesh).isMesh) {
-        const mesh = node as THREE.Mesh
+    scene.traverse((node: Object3D) => {
+      if ((node as Mesh).isMesh) {
+        const mesh = node as Mesh
         mesh.castShadow = true
         mesh.receiveShadow = true
 
         if (mesh.material) {
-          const material = mesh.material as THREE.MeshStandardMaterial
+          const material = mesh.material as MeshStandardMaterial
           material.roughness = 0.1
           material.metalness = 0.9
           material.envMapIntensity = 2.5
@@ -84,13 +85,15 @@ function Model({ isMobile }: { isMobile: boolean }) {
     })
   }, [scene])
 
-  useFrame((state) => {
-    const t = state.clock.elapsedTime
+  useFrame(() => {
+    // Update the timer for precise delta and elapsed time
+    timerRef.current.update()
+    const t = timerRef.current.getElapsed()
 
     // Entrance animation: smoothly lerp scale to targetScale
     if (groupRef.current) {
       if (Math.abs(groupRef.current.scale.x - targetScale) > 0.001) {
-        groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.04)
+        groupRef.current.scale.lerp(new Vector3(targetScale, targetScale, targetScale), 0.04)
       }
     }
 
@@ -100,7 +103,7 @@ function Model({ isMobile }: { isMobile: boolean }) {
 
     if (localT < 0.4) {
       const progress = localT / 0.4
-      uniforms.current.uScanPos.value = THREE.MathUtils.lerp(15, -60, progress)
+      uniforms.current.uScanPos.value = MathUtils.lerp(15, -60, progress)
       uniforms.current.uScanIntensity.value = 1.0
     } else {
       uniforms.current.uScanIntensity.value = 0
@@ -141,7 +144,7 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-export default function ModelViewer() {
+const ModelViewer = React.memo(function ModelViewer() {
   const [state, dispatch] = useReducer(reducer, {
     dpr: 1.5,
     shouldRender: false,
@@ -177,7 +180,7 @@ export default function ModelViewer() {
   return (
     <div className="w-full h-full min-h-100 cursor-move">
       <Canvas
-        shadows={{ type: THREE.PCFShadowMap }}
+        shadows={{ type: PCFShadowMap }}
         dpr={dpr}
         camera={{ position: [52.107, 34.203, 36.686], fov: 30 }}
         gl={{
@@ -233,7 +236,9 @@ export default function ModelViewer() {
       </Canvas>
     </div>
   )
-}
+})
+
+export default ModelViewer
 
 // Pre-cargar el modelo una sola vez
 useGLTF.preload('/ichigo_sword_the_second_mode.glb')

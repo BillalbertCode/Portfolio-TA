@@ -62,7 +62,7 @@ const SimpleIconComponent: React.FC<SimpleIconProps> = ({ name, className, size 
     return <span className={className} style={{ width: size, height: size, display: 'inline-block' }}>◆</span>;
   }
 
-  return <IconComponent className={className} size={size} />;
+  return <IconComponent className={className} size={size} title={name} />;
 };
 
 // React.memo evita re-renders innecesarios de iconos estáticos

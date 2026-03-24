@@ -56,7 +56,7 @@ export default async function RootLayout({
   const { lang } = await params
   
   return (
-    <html lang={lang} className="dark">
+    <html lang={lang} className="dark" data-scroll-behavior="smooth">
       <body className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable} font-sans antialiased bg-background text-foreground`}>
         {children}
         <Analytics />

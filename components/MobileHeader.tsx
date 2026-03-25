@@ -74,11 +74,24 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
 
   return (
     <header className="lg:hidden sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md px-4 h-16 flex items-center justify-between">
-      <Link href={`/${lang}`} className="flex items-center gap-2">
-        <span className="text-lg font-bold tracking-tighter text-foreground">
-          {dict.name}
-        </span>
-      </Link>
+      <div className="flex items-center gap-3">
+        <Link href={`/${lang}`} className="flex items-center gap-2">
+          <span className="text-lg font-bold tracking-tighter text-foreground">
+            {dict.name}
+          </span>
+        </Link>
+        <div className="flex items-center gap-3 border-l border-border pl-3">
+          <m.a
+            href="https://github.com/billalbertcode"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+            whileTap={{ scale: 0.9 }}
+          >
+            <SimpleIcon name="github" size={18} />
+          </m.a>
+        </div>
+      </div>
 
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>

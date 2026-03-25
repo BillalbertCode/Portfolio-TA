@@ -88,7 +88,7 @@ export default function HeroSection({ dict, name, email, lang }: HeroSectionProp
               </m.h1>
               <m.p
                 variants={staggerItem}
-                className="text-xl lg:text-2xl italic bg-linear-to-r from-primary-foreground to-primary/80 bg-clip-text text-transparent"
+                className="text-xl lg:text-2xl bg-linear-to-br from-primary-foreground to-primary-foreground/10 bg-clip-text text-transparent"
               >
                 {dict.title}
               </m.p>
@@ -120,7 +120,7 @@ export default function HeroSection({ dict, name, email, lang }: HeroSectionProp
             className="pt-6 lg:pt-8 border-t border-border flex flex-row items-center justify-center lg:justify-start gap-8 lg:gap-10"
           >
             <div className="space-y-1 text-left">
-              <p className="text-2xl lg:text-3xl font-bold text-foreground leading-none">3+</p>
+              <p className="text-2xl lg:text-3xl font-bold text-foreground leading-none">2+</p>
               <p className="text-[9px] lg:text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60 whitespace-nowrap">
                 {dict.stats.experience}
               </p>

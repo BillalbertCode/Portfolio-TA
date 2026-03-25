@@ -138,8 +138,10 @@ export default function HeroSection({ dict, name, email, lang }: HeroSectionProp
                   variants={iconVariants}
                   className={`flex items-center justify-center w-10 h-10 lg:w-11 lg:h-11 rounded-xl border border-border/20 ${tech.bg} backdrop-blur-sm transition-colors duration-300`}
                   title={tech.name}
+                  role="img"
+                  aria-label={tech.name}
                 >
-                  <tech.icon size={20} color={tech.color} />
+                  <tech.icon size={20} color={tech.color} aria-hidden="true" />
                 </m.div>
               ))}
             </div>

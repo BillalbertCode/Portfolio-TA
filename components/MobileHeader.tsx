@@ -87,6 +87,7 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground transition-colors"
             whileTap={{ scale: 0.9 }}
+            aria-label="GitHub"
           >
             <SimpleIcon name="github" size={18} />
           </m.a>
@@ -95,15 +96,19 @@ export default function MobileHeader({ dict, lang }: MobileHeaderProps) {
 
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="h-10 w-10">
-            <Menu className="h-6 w-6" />
+          <Button variant="ghost" size="icon" className="h-10 w-10" aria-label="Toggle Menu">
+            <Menu className="h-6 w-6" aria-hidden="true" />
             <span className="sr-only">Toggle Menu</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background/95 backdrop-blur-lg border-l border-border/40 flex flex-col p-0">
+        <SheetContent 
+          side="right" 
+          className="w-[300px] sm:w-[400px] bg-background/95 backdrop-blur-lg border-l border-border/40 flex flex-col p-0"
+          aria-describedby="mobile-menu-description"
+        >
           <SheetHeader className="p-6 border-b border-border/40 text-left">
             <SheetTitle className="text-xl font-bold">{dict.name}</SheetTitle>
-            <p className="text-xs text-muted-foreground mt-1">{dict.title}</p>
+            <p id="mobile-menu-description" className="text-xs text-muted-foreground mt-1">{dict.title}</p>
             <a
               href={`mailto:${dict.email}`}
               className="text-muted-foreground hover:text-foreground transition-colors mt-2 font-medium w-fit border-b border-transparent hover:border-accent transition-all text-xs"

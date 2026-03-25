@@ -81,7 +81,7 @@ export default function EducationSection({ education, courses, dict }: Education
                       }`}>
                         {edu.school}
                       </p>
-                      <p className="text-[8px] lg:text-[9px] uppercase tracking-wider text-muted-foreground/50 mt-0.5 font-bold">
+                      <p className="text-[8px] lg:text-[9px] uppercase tracking-wider text-muted-foreground mt-0.5 font-bold">
                         {edu.period}
                       </p>
                     </div>
@@ -128,7 +128,7 @@ export default function EducationSection({ education, courses, dict }: Education
                       }`}>
                         {course.name}
                       </p>
-                      <p className="text-[8px] lg:text-[9px] uppercase tracking-wider text-muted-foreground/50 mt-0.5 font-bold">
+                      <p className="text-[8px] lg:text-[9px] uppercase tracking-wider text-muted-foreground mt-0.5 font-bold">
                         {course.instructor}
                       </p>
                     </div>
@@ -189,7 +189,7 @@ export default function EducationSection({ education, courses, dict }: Education
                         {selectedType === 'education' ? dict.academicLabel : dict.certificationLabel}
                       </span>
                       {'period' in selected && (
-                        <span className="text-[8px] lg:text-[9px] font-bold text-muted-foreground/50 uppercase tracking-widest">
+                        <span className="text-[8px] lg:text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
                           {selected.period as string}
                         </span>
                       )}

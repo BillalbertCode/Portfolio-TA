@@ -22,7 +22,6 @@ const fontMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Billalbert - Portfolio',
   description: 'A modern, interactive portfolio showcasing design and development work',
-  generator: 'v0.app',
   icons: {
     icon: [
       {
@@ -54,10 +53,31 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>
 }) {
   const { lang } = await params
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Billalbert Martinez',
+    alternateName: 'BillalbertCode',
+    url: 'https://bill.caribito.com',
+    image: 'https://avatars.githubusercontent.com/u/156066236',
+    sameAs: [
+      'https://github.com/BillalbertCode',
+      'https://linkedin.com/in/billalbertcode',
+      'https://twitter.com/BillalbertCode',
+      'https://www.instagram.com/billalbertcode/',
+      'https://www.threads.net/@billalbertcode'
+    ],
+    jobTitle: 'Web Developer',
+  }
   
   return (
     <html lang={lang} className="dark" data-scroll-behavior="smooth">
       <body className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable} font-sans antialiased bg-background text-foreground`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
         <Analytics />
       </body>

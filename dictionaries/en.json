@@ -1,7 +1,16 @@
 {
   "name": "Billalbert Martinez",
+  "seo": {
+    "title": "Billalbert Martinez | Web Developer & Project Hub",
+    "description": "Hi! I'm Billalbert Martinez, a passionate Web Developer with a direct focus on efficient and creative programming. Personal portfolio where you can find my most outstanding projects.",
+    "keywords": "Billalbert Martinez, BillalbertCode, Web Developer, Portfolio, Programmer, React, Next.js",
+    "twitter": {
+      "title": "Billalbert Martinez (@BillalbertCode)",
+      "description": "Hi! I'm Billalbert Martinez, a passionate Web Developer with a direct focus on efficient and creative programming."
+    }
+  },
   "title": "Web Developer",
-  "description": "Self-taught with +3 years transforming ideas into functional apps. From client landing pages to AI chatbots, live tracking, and serverless automations.",
+  "description": "Self-taught with +2 years transforming ideas into functional apps. From client landing pages to AI chatbots, live tracking, and serverless automations.",
   "location": "Guarenas, Miranda, VE (Remote/Nearshoring)",
   "email": "billalbertcode@gmail.com",
   "nav": {

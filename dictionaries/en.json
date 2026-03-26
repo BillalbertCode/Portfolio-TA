@@ -74,6 +74,10 @@
     "title": "BM",
     "subtitle": "FrontEnd Web"
   },
+  "credits": {
+    "modelAuthor": "3D Model: BenAissa_Karim",
+    "via": "via Sketchfab"
+  },
   "common": {
     "loading": "Loading portfolio...",
     "allProjects": "All Projects",
@@ -84,7 +88,7 @@
       "id": 1,
       "title": "Job Chatbot IA",
       "description": "Intelligent Chatbot, based on dynamic UI for job assistance.",
-      "image": "/project1.webp",
+      "image": "/project/project1.webp",
       "tags": ["Next.js", "Vercel AI SDK", "TypeScript", "React"],
       "link": "https://job-chatbot-ia.vercel.app/",
       "github": "https://github.com/BillalbertCode/job-chatbot-ia",
@@ -94,7 +98,7 @@
       "id": 2,
       "title": "Sistema Seguimiento - Carbone",
       "description": "Real-time order tracking.",
-      "image": "/project-sistema-seguimiento.webp",
+      "image": "/project/project-sistema-seguimiento.webp",
       "tags": ["Firebase", "Node.js", "API Integration", "React", "Tailwind CSS", "TypeScript", "Vite"],
       "details": "Serverless proxy with Firebase Functions for secure logistics data management."
     },
@@ -102,7 +106,7 @@
       "id": 4,
       "title": "Raíces Workspace",
       "description": "Social platform clone with user and post management.",
-      "image": "/project-raices.webp",
+      "image": "/project/project-raices.webp",
       "tags": ["React", "Express", "JWT", "Docker", "MongoDB", "Node.js", "Javascript"],
       "link": "https://raicesworkspace.vercel.app/",
       "github": "https://github.com/BillalbertCode/RaicesWorkSpace_Frontend",
@@ -112,7 +116,7 @@
       "id": 3,
       "title": "Orquestador Emails Empresarial",
       "description": "Automation of Shopify gift card credits via email parsing.",
-      "image": "/GCP-Docker.webp",
+      "image": "/project/GCP-Docker.webp",
       "tags": ["Google Cloud", "Serverless", "Shopify API", "Express", "Node.js", "Docker"],
       "details": "Serverless system on Google Cloud Platform with Looker Studio monitoring."
     }

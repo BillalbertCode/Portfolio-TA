@@ -144,7 +144,7 @@ export default function ProjectsSection({ projects, dict, technologies = EMPTY_T
                     <div className="relative w-full md:w-72 aspect-video shrink-0 overflow-hidden rounded shadow-2xl shadow-black/20">
                       <Image
                         src={project.image}
-                        alt={project.title}
+                        alt={project.imageAlt || project.title}
                         fill
                         sizes="(max-width: 768px) 100vw, 300px"
                         className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"

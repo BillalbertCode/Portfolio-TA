@@ -89,6 +89,7 @@
       "title": "Job Chatbot IA",
       "description": "Intelligent Chatbot, based on dynamic UI for job assistance.",
       "image": "/project/project1.webp",
+      "imageAlt": "Screenshot of Job Chatbot IA developed by BillalbertCode, showing a modern and intelligent chat interface.",
       "tags": ["Next.js", "Vercel AI SDK", "TypeScript", "React"],
       "link": "https://job-chatbot-ia.vercel.app/",
       "github": "https://github.com/BillalbertCode/job-chatbot-ia",
@@ -99,6 +100,7 @@
       "title": "Sistema Seguimiento - Carbone",
       "description": "Real-time order tracking.",
       "image": "/project/project-sistema-seguimiento.webp",
+      "imageAlt": "Real-time order tracking interface for Carbone, optimized by BillalbertCode.",
       "tags": ["Firebase", "Node.js", "API Integration", "React", "Tailwind CSS", "TypeScript", "Vite"],
       "details": "Serverless proxy with Firebase Functions for secure logistics data management."
     },
@@ -107,6 +109,7 @@
       "title": "Raíces Workspace",
       "description": "Social platform clone with user and post management.",
       "image": "/project/project-raices.webp",
+      "imageAlt": "Raíces Workspace social platform built by BillalbertCode, featuring profile and post management.",
       "tags": ["React", "Express", "JWT", "Docker", "MongoDB", "Node.js", "Javascript"],
       "link": "https://raicesworkspace.vercel.app/",
       "github": "https://github.com/BillalbertCode/RaicesWorkSpace_Frontend",
@@ -117,6 +120,7 @@
       "title": "Orquestador Emails Empresarial",
       "description": "Automation of Shopify gift card credits via email parsing.",
       "image": "/project/GCP-Docker.webp",
+      "imageAlt": "Email automation dashboard on Google Cloud, a serverless solution by BillalbertCode.",
       "tags": ["Google Cloud", "Serverless", "Shopify API", "Express", "Node.js", "Docker"],
       "details": "Serverless system on Google Cloud Platform with Looker Studio monitoring."
     }

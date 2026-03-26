@@ -10,12 +10,13 @@ import { SimpleIcon } from './SimpleIcon'
 interface FooterProps {
   dict: Dictionary['footer']
   common: Dictionary['common']
+  credits: Dictionary['credits']
   title: Dictionary['title']
   email: Dictionary['email']
   name: Dictionary['name']
 }
 
-export default function Footer({ dict, common, title, email, name }: FooterProps) {
+export default function Footer({ dict, common, credits, title, email, name }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
   const quickLinks = [
@@ -125,6 +126,11 @@ export default function Footer({ dict, common, title, email, name }: FooterProps
         transition={{ delay: 0.4 }}
       >
         <p>&copy; {currentYear} {name}. {dict.rights}</p>
+        <p className="opacity-50 hover:opacity-100 transition-opacity">
+          <a href="https://sketchfab.com/BenAissa_Karim" target="_blank" rel="noopener noreferrer">
+            {credits.modelAuthor} ({credits.via})
+          </a>
+        </p>
       </m.div>
     </m.footer>
   )

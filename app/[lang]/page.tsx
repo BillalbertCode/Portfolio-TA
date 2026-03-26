@@ -83,7 +83,13 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
           {/* Hero Section aligned with the atmosphere */}
           <main className="lg:ml-60 px-4 sm:px-6 lg:px-12 relative z-10">
-            <HeroSection dict={dict.hero} email={dict.email} name={dict.name} lang={lang} />
+            <HeroSection 
+              dict={dict.hero} 
+              credits={dict.credits} 
+              email={dict.email} 
+              name={dict.name} 
+              lang={lang} 
+            />
           </main>
         </div>
 
@@ -103,7 +109,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             education={dict.education}
             courses={dict.courses}
           />
-          <Footer dict={dict.footer} common={dict.common} title={dict.title} email={dict.email} name={dict.name} />
+          <Footer 
+            dict={dict.footer} 
+            common={dict.common} 
+            credits={dict.credits}
+            title={dict.title} 
+            email={dict.email} 
+            name={dict.name} 
+          />
         </main>
       </div>
     </LazyMotion>

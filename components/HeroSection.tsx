@@ -53,12 +53,13 @@ const techStack = [
 
 interface HeroSectionProps {
   dict: Dictionary['hero']
+  credits: Dictionary['credits']
   name: Dictionary['name']
   email: Dictionary['email']
   lang: string
 }
 
-export default function HeroSection({ dict, name, email, lang }: HeroSectionProps) {
+export default function HeroSection({ dict, credits, name, email, lang }: HeroSectionProps) {
   const resumeUrl = `/resume/Martinez-Billalbert-${lang.toUpperCase()}.pdf`
 
   return (
@@ -149,10 +150,23 @@ export default function HeroSection({ dict, name, email, lang }: HeroSectionProp
         </m.div>
 
         {/* Right Content (3D Model) */}
-        <div className="relative h-[260px] lg:h-full min-h-[260px] lg:min-h-[600px] flex items-center justify-center order-first lg:order-last ">
-          <div className="w-full h-full relative z-10 pointer-events-none">
-            <ModelComponent />
+        <div className="relative h-[260px] lg:h-full min-h-[260px] lg:min-h-[600px] flex flex-col items-center justify-center order-first lg:order-last">
+          <div className="w-full h-full relative z-10">
+            <ModelComponent credits={credits} />
           </div>
+          
+          {/* Subtle Credit Caption */}
+          <m.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            whileHover={{ opacity: 0.8 }}
+            className="absolute bottom-4 text-[10px] text-muted-foreground/50 font-medium tracking-wider uppercase pointer-events-auto z-20 hidden lg:block"
+          >
+            <a href="https://sketchfab.com/BenAissa_Karim" target="_blank" rel="noopener noreferrer">
+              {credits.modelAuthor}
+            </a>
+          </m.div>
+
           {/* Subtle glow behind the model on mobile */}
           <div className="absolute inset-0 bg-accent/5 blur-3xl rounded-full lg:hidden" />
         </div>

@@ -19,6 +19,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     title: dict.seo.title,
     description: dict.seo.description,
     keywords: dict.seo.keywords,
+    icons: {
+      icon: '/icon.svg',
+      apple: '/icon.svg',
+    },
     authors: [{ name: dict.name, url: 'https://github.com/BillalbertCode' }],
     creator: dict.name,
     openGraph: {

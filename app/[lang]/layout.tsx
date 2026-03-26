@@ -13,33 +13,10 @@ const fontSerif = Source_Serif_4({
   subsets: ["latin"],
   variable: "--font-serif",
 });
-
 const fontMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
 });
-
-export const metadata: Metadata = {
-  title: 'Billalbert - Portfolio',
-  description: 'A modern, interactive portfolio showcasing design and development work',
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
-  },
-}
 
 export async function generateStaticParams() {
   return [{ lang: 'en' }, { lang: 'es' }]

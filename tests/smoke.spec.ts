@@ -12,7 +12,7 @@ test.describe('Smoke Tests', () => {
     await expect(page.locator('main').first().getByRole('heading', { name: 'Billalbert Martinez' })).toBeVisible();
 
     // Check for the Three.js/Rain canvas
-    const canvas = page.locator('canvas');
+    const canvas = page.locator('canvas').first();
     await expect(canvas).toBeVisible();
   });
 

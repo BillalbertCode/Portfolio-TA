@@ -60,7 +60,7 @@
   },
   "footer": {
     "rights": "Todos los derechos reservados.",
-    "description": "Transformando ideas en soluciones digitales elegantes mediante diseño, desarrollo y resolución creativa de problemas.",
+    "description": "Especializado en el ecosistema TypeScript para la entrega de soluciones escalables de extremo a extremo.",
     "quickLinksTitle": "Enlaces Rápidos",
     "quickLinks": "Inicio",
     "projects": "Proyectos",
@@ -95,8 +95,8 @@
     },
     {
       "id": 2,
-      "title": "Sistema Seguimiento - Carbone",
-      "description": "Web App de Tracking de Pedidos con Mapas en Tiempo Real.",
+      "title": "Sistema de Seguimiento de Pedidos",
+      "description": "Web app de seguimientos de pedidos con orden de factura, productos del envio, estado de entrega y mapas en tiempo real",
       "image": "/project/project-sistema-seguimiento.webp",
       "imageAlt": "Interfaz de seguimiento de pedidos en tiempo real de Carbone, optimizada por BillalbertCode.",
       "tags": ["Firebase", "Node.js", "API Integration", "React", "Tailwind CSS", "TypeScript", "Vite"],
@@ -142,7 +142,7 @@
     },
     {
       "id": 2,
-      "company": "Independiente",
+      "company": "Colectivo Freelance",
       "role": "Desarrollador Frontend Freelance",
       "period": "Mar 2019 - Dic 2021",
       "description": "Colaboré directamente con clientes externos para convertir sus requerimientos en sitios web funcionales. Participé en equipos multidisciplinarios junto a diseñadores, backend y producto para garantizar una experiencia de usuario óptima.",

@@ -23,7 +23,7 @@
   "hero": {
     "welcome": "Zangetsu World",
     "title": "Web Developer",
-    "description": "Developing web projects from 0 to production, prioritizing security with strict typing.",
+    "description": "Specialized in the TypeScript ecosystem for delivering scalable end-to-end solutions.",
     "viewWork": "View My Work",
     "getInTouch": "Get In Touch",
     "downloadResume": "Download CV",
@@ -60,7 +60,7 @@
   },
   "footer": {
     "rights": "All rights reserved.",
-    "description": "Transforming ideas into elegant digital solutions through design, development, and creative problem-solving.",
+    "description": "Specialized in the TypeScript ecosystem for delivering scalable end-to-end solutions.",
     "quickLinksTitle": "Quick Links",
     "quickLinks": "Home",
     "projects": "Projects",
@@ -95,8 +95,8 @@
     },
     {
       "id": 2,
-      "title": "Sistema Seguimiento - Carbone",
-      "description": "Real-time Order Tracking Web App with Maps.",
+      "title": "Order Tracking System",
+      "description": "Web app for tracking orders by invoice, showing shipping products, delivery status, and real-time maps.",
       "image": "/project/project-sistema-seguimiento.webp",
       "imageAlt": "Real-time order tracking interface for Carbone, optimized by BillalbertCode.",
       "tags": ["Firebase", "Node.js", "API Integration", "React", "Tailwind CSS", "TypeScript", "Vite"],
@@ -142,7 +142,7 @@
     },
     {
       "id": 2,
-      "company": "Independent",
+      "company": "Freelance Collective",
       "role": "Freelance Frontend Developer",
       "period": "Mar 2019 - Dec 2021",
       "description": "Collaborated directly with external clients to transform requirements into functional websites. Worked in multidisciplinary teams alongside design, backend, and product teams to ensure an optimal user experience.",

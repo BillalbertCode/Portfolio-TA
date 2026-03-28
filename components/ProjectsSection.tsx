@@ -160,7 +160,14 @@ export default function ProjectsSection({ projects, dict, technologies = EMPTY_T
                         <p className="text-muted-foreground mt-2 lg:mt-3 text-sm lg:text-base max-w-2xl leading-relaxed text-center md:text-left">
                           {project.description}
                         </p>
-                      </div>
+                        {project.details && (
+                          <div className="mt-3 overflow-hidden">
+                            <p className="text-muted-foreground/80 group-hover:text-accent-foreground transition-colors duration-500 text-xs lg:text-sm border-l border-accent/20 group-hover:border-accent/80 pl-4 py-1 text-center md:text-left">
+                              {project.details}
+                            </p>
+                          </div>
+                        )}
+                        </div>
 
                       <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                         {project.tags.map((tag, tagIndex) => (

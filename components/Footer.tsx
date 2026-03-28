@@ -126,9 +126,9 @@ export default function Footer({ dict, common, credits, title, email, name }: Fo
         transition={{ delay: 0.4 }}
       >
         <p>&copy; {currentYear} {name}. {dict.rights}</p>
-        <p className="opacity-50 hover:opacity-100 transition-opacity">
-          <a href="https://sketchfab.com/BenAissa_Karim" target="_blank" rel="noopener noreferrer">
-            {credits.modelAuthor} ({credits.via})
+        <p className="text-sm opacity-70 hover:opacity-100 transition-opacity">
+          <a href="https://sketchfab.com/BenAissa_Karim" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+            {credits.modelAuthor} <span className="text-[10px] opacity-60 uppercase tracking-tight ml-1">({credits.via})</span>
           </a>
         </p>
       </m.div>

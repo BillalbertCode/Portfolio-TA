@@ -15,8 +15,6 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import React, { Suspense, useEffect, useLayoutEffect, useReducer, useRef } from 'react'
 import { Color, Group,MathUtils,Mesh,MeshStandardMaterial,Object3D,PCFShadowMap,Timer, Vector3 } from 'three'
 
-import { Dictionary } from '@/dictionaries/get-dictionary'
-
 function Model({ isMobile }: { isMobile: boolean }) {
   const { scene } = useGLTF('/ichigo_sword_the_second_mode.glb')
   const groupRef = useRef<Group>(null)
@@ -146,7 +144,7 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-const ModelViewer = React.memo(function ModelViewer({ credits }: { credits: Dictionary['credits'] }) {
+const ModelViewer = React.memo(function ModelViewer() {
   const [state, dispatch] = useReducer(reducer, {
     dpr: 1.5,
     shouldRender: false,

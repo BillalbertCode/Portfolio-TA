@@ -85,7 +85,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           <main className="lg:ml-60 px-4 sm:px-6 lg:px-12 relative z-10">
             <HeroSection 
               dict={dict.hero} 
-              credits={dict.credits} 
               email={dict.email} 
               name={dict.name} 
               lang={lang} 

@@ -23,7 +23,7 @@
   "hero": {
     "welcome": "Zangetsu World",
     "title": "Web Developer",
-    "description": "I craft interactive digital experiences using modern web technologies. Specializing in TypeScript, React, Node.js, and everything in between.",
+    "description": "Developing web projects from 0 to production, prioritizing security with strict typing.",
     "viewWork": "View My Work",
     "getInTouch": "Get In Touch",
     "downloadResume": "Download CV",
@@ -98,11 +98,11 @@
     {
       "id": 2,
       "title": "Sistema Seguimiento - Carbone",
-      "description": "Real-time order tracking.",
+      "description": "Real-time Order Tracking Web App with Maps.",
       "image": "/project/project-sistema-seguimiento.webp",
       "imageAlt": "Real-time order tracking interface for Carbone, optimized by BillalbertCode.",
       "tags": ["Firebase", "Node.js", "API Integration", "React", "Tailwind CSS", "TypeScript", "Vite"],
-      "details": "Serverless proxy with Firebase Functions for secure logistics data management."
+      "details": "API integration on Firebase (GCP) with 500+ monthly visits, featuring interactive maps and real-time driver data."
     },
     {
       "id": 4,
@@ -122,7 +122,7 @@
       "image": "/project/GCP-Docker.webp",
       "imageAlt": "Email automation dashboard on Google Cloud, a serverless solution by BillalbertCode.",
       "tags": ["Google Cloud", "Serverless", "Shopify API", "Express", "Node.js", "Docker"],
-      "details": "Serverless system on Google Cloud Platform with Looker Studio monitoring."
+      "details": "Absolute precision in real monetary credit management and regulatory compliance auditing (500+ emails/15 days)."
     }
   ],
   "experience": [
@@ -131,13 +131,13 @@
       "company": "Soy el Geek",
       "role": "Web Developer",
       "period": "Oct 2024 - Jan 2026",
-      "description": "E-commerce optimization and corporate solution development.",
+      "description": "Responsible for the complete lifecycle (full build) of critical web applications.",
       "highlights": [
-        "Automation and Web Applications",
-        "Optimized landing pages + WooCommerce e-commerce",
-        "+30% load speed implementing CDN", 
-        "Database migration and optimization",
-        "Collaboration with PMs and agile teams"
+        "End-to-end development with TypeScript, React, Node, and WordPress",
+        "Financial systems management with real-world monetary credit precision",
+        "+30% load speed improvement by implementing CDN", 
+        "Direct technical communication with stakeholders and external teams",
+        "Migration and optimization of critical databases"
       ]
     },
     {
@@ -145,11 +145,11 @@
       "company": "Independent",
       "role": "Freelance Frontend Developer",
       "period": "Mar 2019 - Dec 2021",
-      "description": "Development of custom projects for external clients.",
+      "description": "Collaborated directly with external clients to transform requirements into functional websites. Worked in multidisciplinary teams alongside design, backend, and product teams to ensure an optimal user experience.",
       "highlights": [
-        "+5 web projects delivered on time",
-        "Close collaboration with external clients",
-        "Solving complex technical problems"
+        "UI development with React and JavaScript alongside design and product teams",
+        "Maintenance and support of MVC systems in CakePHP and Laravel",
+        "On-time delivery of projects with high client satisfaction"
       ]
     }
   ],

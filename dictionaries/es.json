@@ -23,7 +23,7 @@
   "hero": {
     "welcome": "Zangetsu World",
     "title": "Desarrollador Web",
-    "description": "Creo experiencias digitales interactivas utilizando tecnologías web modernas. Especializado en Typescript, React, Node.js y todo lo que hay en medio.",
+    "description": "Desarrollo proyectos web de 0 a producción, priorizando seguridad con tipado estricto.",
     "viewWork": "Ver mi trabajo",
     "getInTouch": "Contacto",
     "downloadResume": "Descargar CV",
@@ -98,11 +98,11 @@
     {
       "id": 2,
       "title": "Sistema Seguimiento - Carbone",
-      "description": "Tracking real-time de pedidos.",
+      "description": "Web App de Tracking de Pedidos con Mapas en Tiempo Real.",
       "image": "/project/project-sistema-seguimiento.webp",
       "imageAlt": "Interfaz de seguimiento de pedidos en tiempo real de Carbone, optimizada por BillalbertCode.",
       "tags": ["Firebase", "Node.js", "API Integration", "React", "Tailwind CSS", "TypeScript", "Vite"],
-      "details": "Proxy serverless con Firebase Functions for gestión segura de datos de logística."
+      "details": "Integración de APIs sobre Firebase (GCP) con +500 visitas mensuales, mapas interactivos y datos del chofer en tiempo real."
     },
     {
       "id": 4,
@@ -118,11 +118,11 @@
     {
       "id": 3,
       "title": "Orquestador Emails Empresarial",
-      "description": "Automatización de creditos a giftcards de Shopify mediante el parsing de emails.",
+      "description": "Automatización de créditos a giftcards de Shopify mediante el parsing de emails.",
       "image": "/project/GCP-Docker.webp",
       "imageAlt": "Dashboard de automatización de correos electrónicos en Google Cloud, una solución serverless de BillalbertCode.",
       "tags": ["Google Cloud", "Serverless", "Shopify API", "Express", "Node.js", "Docker"],
-      "details": "Sistema serverless en Google Cloud Platform con monitoreo en Looker Studio."
+      "details": "Precisión absoluta en la gestión de créditos monetarios reales y auditoría de cumplimiento normativo (+500 emails/15 días)."
     }
   ],
   "experience": [
@@ -131,13 +131,13 @@
       "company": "Soy el Geek",
       "role": "Desarrollador Web",
       "period": "Oct 2024 - Ene 2026",
-      "description": "Optimización de e-commerce y desarrollo de soluciones corporativas.",
+      "description": "Responsable del ciclo de vida completo (build completa) de aplicaciones web críticas.",
       "highlights": [
-        "Automatización y Aplicaciones Web",
-        "Landing pages + e-commerce WooCommerce optimizados",
-        "+30% velocidad carga implementando CDN", 
-        "Migración y optimización bases de datos",
-        "Colaboración con PMs y equipos ágiles"
+        "Desarrollo end-to-end con TypeScript, React, Node y WordPress",
+        "Gestión de sistemas financieros con precisión de créditos reales",
+        "+30% mejora en velocidad de carga implementando CDN", 
+        "Comunicación técnica directa con stakeholders y equipos externos",
+        "Migración y optimización de bases de datos críticas"
       ]
     },
     {
@@ -145,11 +145,11 @@
       "company": "Independiente",
       "role": "Desarrollador Frontend Freelance",
       "period": "Mar 2019 - Dic 2021",
-      "description": "Desarrollo de proyectos personalizados para clientes externos.",
+      "description": "Colaboré directamente con clientes externos para convertir sus requerimientos en sitios web funcionales. Participé en equipos multidisciplinarios junto a diseñadores, backend y producto para garantizar una experiencia de usuario óptima.",
       "highlights": [
-        "+5 proyectos web entregados a tiempo",
-        "Colaboración estrecha con clientes externos",
-        "Resolución de problemas técnicos complejos"
+        "Desarrollo de interfaces con React y JavaScript junto a equipos de diseño y producto",
+        "Mantenimiento y soporte de sistemas MVC en CakePHP y Laravel",
+        "Entrega puntual de proyectos con alta satisfacción del cliente"
       ]
     }
   ],

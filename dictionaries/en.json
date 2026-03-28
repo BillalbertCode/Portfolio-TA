@@ -85,15 +85,13 @@
   },
   "projects": [
     {
-      "id": 1,
-      "title": "Job Chatbot IA",
-      "description": "Intelligent Chatbot, based on dynamic UI for job assistance.",
-      "image": "/project/project1.webp",
-      "imageAlt": "Screenshot of Job Chatbot IA developed by BillalbertCode, showing a modern and intelligent chat interface.",
-      "tags": ["Next.js", "Vercel AI SDK", "TypeScript", "React"],
-      "link": "https://job-chatbot-ia.vercel.app/",
-      "github": "https://github.com/BillalbertCode/job-chatbot-ia",
-      "details": "Implementation of streaming logic with AI and interactive tools."
+      "id": 3,
+      "title": "Orquestador Emails Empresarial",
+      "description": "Automation of credits and other processes through email parsing.",
+      "image": "/project/GCP-Docker.webp",
+      "imageAlt": "Email automation dashboard on Google Cloud, a serverless solution by BillalbertCode.",
+      "tags": ["Google Cloud", "Serverless", "Shopify API", "Express", "Node.js", "Docker"],
+      "details": "Absolute precision in real monetary credit management and regulatory compliance auditing (500+ emails/15 days)."
     },
     {
       "id": 2,
@@ -105,24 +103,26 @@
       "details": "API integration on Firebase (GCP) with 500+ monthly visits, featuring interactive maps and real-time driver data."
     },
     {
+      "id": 1,
+      "title": "Job Chatbot IA",
+      "description": "Intelligent assistant using generative AI to optimize work processes and automated support.",
+      "image": "/project/project1.webp",
+      "imageAlt": "Screenshot of Job Chatbot IA developed by BillalbertCode, showing a modern and intelligent chat interface.",
+      "tags": ["Next.js", "Vercel AI SDK", "TypeScript", "React"],
+      "link": "https://job-chatbot-ia.vercel.app/",
+      "github": "https://github.com/BillalbertCode/job-chatbot-ia",
+      "details": "Vercel AI SDK implementation featuring real-time response streaming and dynamic UI components for an interactive experience."
+    },
+    {
       "id": 4,
       "title": "Raíces Workspace",
-      "description": "Social platform clone with user and post management.",
+      "description": "Fullstack social ecosystem with scalable architecture for community management and interactive content.",
       "image": "/project/project-raices.webp",
       "imageAlt": "Raíces Workspace social platform built by BillalbertCode, featuring profile and post management.",
       "tags": ["React", "Express", "JWT", "Docker", "MongoDB", "Node.js", "Javascript"],
       "link": "https://raicesworkspace.vercel.app/",
       "github": "https://github.com/BillalbertCode/RaicesWorkSpace_Frontend",
-      "details": "Fullstack architecture deployed on Railway using Docker containers."
-    },
-    {
-      "id": 3,
-      "title": "Orquestador Emails Empresarial",
-      "description": "Automation of Shopify gift card credits via email parsing.",
-      "image": "/project/GCP-Docker.webp",
-      "imageAlt": "Email automation dashboard on Google Cloud, a serverless solution by BillalbertCode.",
-      "tags": ["Google Cloud", "Serverless", "Shopify API", "Express", "Node.js", "Docker"],
-      "details": "Absolute precision in real monetary credit management and regulatory compliance auditing (500+ emails/15 days)."
+      "details": "Full-stack development using MERN stack, secure JWT authentication, and professional deployment via Docker containers."
     }
   ],
   "experience": [

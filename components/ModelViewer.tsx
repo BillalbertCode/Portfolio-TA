@@ -20,6 +20,7 @@ function Model({ isMobile }: { isMobile: boolean }) {
   const groupRef = useRef<Group>(null)
   const timerRef = useRef(new Timer())
   const targetScale = isMobile ? 3.0 : 3.8
+  const [canScan, setCanScan] = React.useState(false)
 
   // Uniforms for the scan shader
   const uniforms = useRef({
@@ -27,6 +28,27 @@ function Model({ isMobile }: { isMobile: boolean }) {
     uScanColor: { value: new Color('#ffffff') },
     uScanIntensity: { value: 0 }
   })
+
+  // Signal that the model is ready and listen for rain to start scan
+  useEffect(() => {
+    if (scene) {
+      // Small delay after scene is available to ensure it's rendered at least once
+      const timer = setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('3d-model-ready'))
+      }, 500)
+
+      const onRainReady = () => {
+        // Delay scan slightly after rain starts
+        setTimeout(() => setCanScan(true), 1500)
+      }
+
+      window.addEventListener('rain-ready', onRainReady)
+      return () => {
+        clearTimeout(timer)
+        window.removeEventListener('rain-ready', onRainReady)
+      }
+    }
+  }, [scene])
 
   // Nuanced material setup with shader injection
   useLayoutEffect(() => {
@@ -97,7 +119,9 @@ function Model({ isMobile }: { isMobile: boolean }) {
       }
     }
 
-    // Scan effect logic
+    // Scan effect logic - only runs if canScan is true
+    if (!canScan) return
+
     const cycleTime = 4
     const localT = (t % cycleTime) / cycleTime
 

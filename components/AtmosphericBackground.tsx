@@ -13,8 +13,22 @@ export function AtmosphericBackground() {
   const [showRain, setShowRain] = useState(false)
 
   useEffect(() => {
-    const timeout = setTimeout(() => setShowRain(true), 500)
-    return () => clearTimeout(timeout)
+    const onModelReady = () => {
+      // Start rain after a small delay to let the entrance animation breathe
+      setTimeout(() => {
+        setShowRain(true)
+        // Signal that rain is starting (the scan effect will wait for this)
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('rain-ready'))
+        }, 1000)
+      }, 1000)
+    }
+
+    window.addEventListener('3d-model-ready', onModelReady)
+    
+    return () => {
+      window.removeEventListener('3d-model-ready', onModelReady)
+    }
   }, [])
 
   return (

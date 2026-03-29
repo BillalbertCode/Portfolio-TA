@@ -9,27 +9,27 @@ const RainBackground = dynamic(
   { ssr: false }
 )
 
-export function AtmosphericBackground() {
+interface AtmosphericBackgroundProps {
+  active?: boolean
+  onRainStarted?: () => void
+}
+
+export function AtmosphericBackground({ active, onRainStarted }: AtmosphericBackgroundProps) {
   const [showRain, setShowRain] = useState(false)
 
   useEffect(() => {
-    const onModelReady = () => {
-      // Start rain after a small delay to let the entrance animation breathe
-      setTimeout(() => {
+    if (active) {
+      const timer = setTimeout(() => {
         setShowRain(true)
-        // Signal that rain is starting (the scan effect will wait for this)
-        setTimeout(() => {
-          window.dispatchEvent(new CustomEvent('rain-ready'))
+        // Signal that rain is starting
+        const rainReadyTimer = setTimeout(() => {
+          if (onRainStarted) onRainStarted()
         }, 1000)
+        return () => clearTimeout(rainReadyTimer)
       }, 1000)
+      return () => clearTimeout(timer)
     }
-
-    window.addEventListener('3d-model-ready', onModelReady)
-    
-    return () => {
-      window.removeEventListener('3d-model-ready', onModelReady)
-    }
-  }, [])
+  }, [active, onRainStarted])
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none h-full w-full">

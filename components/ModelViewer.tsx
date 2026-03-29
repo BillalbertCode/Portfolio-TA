@@ -12,15 +12,22 @@ import {
   useGLTF,
 } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
-import React, { Suspense, useEffect, useLayoutEffect, useReducer, useRef } from 'react'
-import { Color, Group,MathUtils,Mesh,MeshStandardMaterial,Object3D,PCFShadowMap,Timer, Vector3 } from 'three'
+import React, { Suspense, useEffect, useLayoutEffect, useReducer, useRef, useState } from 'react'
+import { Color, Group, MathUtils, Mesh, MeshStandardMaterial, Object3D, PCFShadowMap, Timer, Vector3 } from 'three'
 
-function Model({ isMobile }: { isMobile: boolean }) {
+interface ModelProps {
+  isMobile: boolean
+  onLoadComplete?: () => void
+  isRainReady?: boolean
+}
+
+function Model({ isMobile, onLoadComplete, isRainReady }: ModelProps) {
   const { scene } = useGLTF('/ichigo_sword_the_second_mode.glb')
   const groupRef = useRef<Group>(null)
   const timerRef = useRef(new Timer())
   const targetScale = isMobile ? 3.0 : 3.8
-  const [canScan, setCanScan] = React.useState(false)
+  const [canScan, setCanScan] = useState(false)
+  const hasNotifiedRef = useRef(false)
 
   // Uniforms for the scan shader
   const uniforms = useRef({
@@ -29,26 +36,24 @@ function Model({ isMobile }: { isMobile: boolean }) {
     uScanIntensity: { value: 0 }
   })
 
-  // Signal that the model is ready and listen for rain to start scan
+  // 1. Signal that the model is ready (only once)
   useEffect(() => {
-    if (scene) {
-      // Small delay after scene is available to ensure it's rendered at least once
+    if (scene && onLoadComplete && !hasNotifiedRef.current) {
       const timer = setTimeout(() => {
-        window.dispatchEvent(new CustomEvent('3d-model-ready'))
+        onLoadComplete()
+        hasNotifiedRef.current = true
       }, 500)
-
-      const onRainReady = () => {
-        // Delay scan slightly after rain starts
-        setTimeout(() => setCanScan(true), 1500)
-      }
-
-      window.addEventListener('rain-ready', onRainReady)
-      return () => {
-        clearTimeout(timer)
-        window.removeEventListener('rain-ready', onRainReady)
-      }
+      return () => clearTimeout(timer)
     }
-  }, [scene])
+  }, [scene, onLoadComplete])
+
+  // 2. React to rain ready to start the scan effect
+  useEffect(() => {
+    if (isRainReady) {
+      const timer = setTimeout(() => setCanScan(true), 1500)
+      return () => clearTimeout(timer)
+    }
+  }, [isRainReady])
 
   // Nuanced material setup with shader injection
   useLayoutEffect(() => {
@@ -65,7 +70,6 @@ function Model({ isMobile }: { isMobile: boolean }) {
           material.metalness = 0.9
           material.envMapIntensity = 2.5
 
-          // Inject scan effect shader
           material.onBeforeCompile = (shader) => {
             shader.uniforms.uScanPos = uniforms.current.uScanPos
             shader.uniforms.uScanColor = uniforms.current.uScanColor
@@ -108,7 +112,6 @@ function Model({ isMobile }: { isMobile: boolean }) {
   }, [scene])
 
   useFrame(() => {
-    // Update the timer for precise delta and elapsed time
     timerRef.current.update()
     const t = timerRef.current.getElapsed()
 
@@ -168,7 +171,12 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-const ModelViewer = React.memo(function ModelViewer() {
+interface ModelViewerProps {
+  onLoadComplete?: () => void
+  isRainReady?: boolean
+}
+
+const ModelViewer = React.memo(function ModelViewer({ onLoadComplete, isRainReady }: ModelViewerProps) {
   const [state, dispatch] = useReducer(reducer, {
     dpr: 1.5,
     shouldRender: false,
@@ -177,10 +185,8 @@ const ModelViewer = React.memo(function ModelViewer() {
 
   const { dpr, shouldRender, isMobile } = state
 
-  // Hydration Deferral and Screen Size Check
   useEffect(() => {
     const checkMobile = () => window.innerWidth < 1024
-    
     const onResize = () => dispatch({ type: 'SET_MOBILE', payload: checkMobile() })
     window.addEventListener('resize', onResize)
 
@@ -232,7 +238,11 @@ const ModelViewer = React.memo(function ModelViewer() {
             background={false}
           />
           <Center top={isMobile}>
-            <Model isMobile={isMobile} />
+            <Model 
+              isMobile={isMobile} 
+              onLoadComplete={onLoadComplete} 
+              isRainReady={isRainReady} 
+            />
           </Center>
 
           <OrbitControls
@@ -264,5 +274,4 @@ const ModelViewer = React.memo(function ModelViewer() {
 
 export default ModelViewer
 
-// Pre-cargar el modelo una sola vez
 useGLTF.preload('/ichigo_sword_the_second_mode.glb')

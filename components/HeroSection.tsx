@@ -56,9 +56,11 @@ interface HeroSectionProps {
   name: Dictionary['name']
   email: Dictionary['email']
   lang: string
+  onModelLoad?: () => void
+  isRainReady?: boolean
 }
 
-export default function HeroSection({ dict, name, email, lang }: HeroSectionProps) {
+export default function HeroSection({ dict, name, email, lang, onModelLoad, isRainReady }: HeroSectionProps) {
   const resumeUrl = `/resume/Martinez-Billalbert-${lang.toUpperCase()}.pdf`
 
   return (
@@ -151,7 +153,10 @@ export default function HeroSection({ dict, name, email, lang }: HeroSectionProp
         {/* Right Content (3D Model) */}
         <div className="relative h-[260px] lg:h-full min-h-[260px] lg:min-h-[600px] flex flex-col items-center justify-center order-first lg:order-last">
           <div className="w-full h-full relative z-10">
-            <ModelComponent />
+            <ModelComponent 
+              onLoadComplete={onModelLoad} 
+              isRainReady={isRainReady} 
+            />
           </div>
           
           {/* Subtle glow behind the model on mobile */}

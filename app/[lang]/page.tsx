@@ -1,12 +1,10 @@
 import { domAnimation,LazyMotion } from 'framer-motion'
 import { Metadata } from 'next'
 
-import { AtmosphericBackground } from '@/components/AtmosphericBackground'
 import EducationSection from '@/components/EducationSection'
 import ExperienceSection from '@/components/ExperienceSection'
 import Footer from '@/components/Footer'
-import HeroSection from '@/components/HeroSection'
-import LeftSidebar from '@/components/LeftSidebar'
+import { ImmersionZone } from '@/components/ImmersionZone'
 import MobileHeader from '@/components/MobileHeader'
 import ProjectsSection from '@/components/ProjectsSection'
 import { getDictionary, Locale } from '@/dictionaries/get-dictionary'
@@ -74,23 +72,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <MobileHeader dict={dict} lang={lang as Locale} />
 
         {/* 1. Atmospheric Wrapper (Immersion Zone) */}
-        <div className="relative min-h-screen w-full overflow-x-hidden">
-          {/* Fullscreen background that covers sidebar and hero */}
-          <AtmosphericBackground />
-
-          {/* Global Sidebar (it's fixed, so it will overlay the background) */}
-          <LeftSidebar dict={dict} lang={lang as Locale} />
-
-          {/* Hero Section aligned with the atmosphere */}
-          <main className="lg:ml-60 px-4 sm:px-6 lg:px-12 relative z-10">
-            <HeroSection 
-              dict={dict.hero} 
-              email={dict.email} 
-              name={dict.name} 
-              lang={lang} 
-            />
-          </main>
-        </div>
+        <ImmersionZone dict={dict} lang={lang as Locale} />
 
         {/* 2. Main Content Zone (Normal Background) */}
         <main className="lg:ml-60 px-4 sm:px-6 lg:px-12 relative z-10 bg-background">

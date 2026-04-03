@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://bill.caribito.com/sitemap.xml',
+    sitemap: 'https://billalbertcode.vercel.app/sitemap.xml',
   }
 }

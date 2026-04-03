@@ -36,7 +36,7 @@ export default async function RootLayout({
     '@type': 'Person',
     name: 'Billalbert Martinez',
     alternateName: 'BillalbertCode',
-    url: 'https://bill.caribito.com',
+    url: 'https://billalbertcode.vercel.app',
     image: 'https://avatars.githubusercontent.com/u/156066236',
     sameAs: [
       'https://github.com/BillalbertCode',

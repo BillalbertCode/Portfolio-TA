@@ -52,6 +52,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       languages: {
         'en-US': 'https://billalbertcode.vercel.app/en',
         'es-ES': 'https://billalbertcode.vercel.app/es',
+        'en': 'https://billalbertcode.vercel.app/en',
+        'es': 'https://billalbertcode.vercel.app/es',
+        'x-default': 'https://billalbertcode.vercel.app/en',
       },
     },
     robots: {

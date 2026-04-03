@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     openGraph: {
       title: dict.seo.title,
       description: dict.seo.description,
-      url: `https://bill.caribito.com/${lang}`,
+      url: `https://billalbertcode.vercel.app/${lang}`,
       siteName: 'Billalbert Martinez Portfolio',
       images: [
         {
@@ -48,10 +48,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       images: ['https://avatars.githubusercontent.com/u/156066236'],
     },
     alternates: {
-      canonical: `https://bill.caribito.com/${lang}`,
+      canonical: `https://billalbertcode.vercel.app/${lang}`,
       languages: {
-        'en-US': 'https://bill.caribito.com/en',
-        'es-ES': 'https://bill.caribito.com/es',
+        'en-US': 'https://billalbertcode.vercel.app/en',
+        'es-ES': 'https://billalbertcode.vercel.app/es',
       },
     },
     robots: {

@@ -70,7 +70,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <div className="bg-background text-foreground min-h-screen">
         {/* Mobile Header (visible only on small screens) - Moved to root for global stickiness */}
         <MobileHeader dict={dict} lang={lang as Locale} />
-        {/* 1. Atmospheric Wrapper (Immersion Zone) ola soi omelo chino */}
+        {/* 1. Atmospheric Wrapper (Immersion Zone) Mardito trump */}
 
         <ImmersionZone dict={dict} lang={lang as Locale} />
 

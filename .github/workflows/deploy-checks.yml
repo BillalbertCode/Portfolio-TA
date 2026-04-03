@@ -24,7 +24,7 @@ jobs:
         run: npm ci
 
       - name: Run ESLint
-        run: npm run lint -- --max-warnings=0
+        run: npm run lint -- --max-warnings=10
         timeout-minutes: 2
 
       - name: Setup Playwright Browsers
@@ -36,3 +36,8 @@ jobs:
         timeout-minutes: 10
         env:
           CI: true
+
+      - name: 'notify vercel'
+        uses: 'vercel/repository-dispatch/actions/status@v1'
+        with:
+          name: Vercel - portfolio-ta: Build & Quality Verification

@@ -141,6 +141,30 @@
       ]
     },
     {
+      "id": 3,
+      "company": "Freelance",
+      "role": "Full Stack Developer",
+      "period": "Jan 2022 - Sep 2024",
+      "description": "Development of custom web applications for clients in various sectors, managing the entire project cycle: from requirements gathering to deployment and maintenance.",
+      "highlights": [
+        "Technologies used: Javascript, React, PHP, SQL, BootstrapCSS",
+        "End-to-end project lifecycle management",
+        "Customized solutions for different business sectors"
+      ]
+    },
+    {
+      "id": 4,
+      "company": "Soluciones y Servicios",
+      "role": "Technical Support Specialist",
+      "period": "Oct 2022 - Nov 2023",
+      "description": "Provided on-site and remote technical support for the Nena drugstore chain through the contractor Soluciones y Servicios, ensuring the operational continuity of their systems and inventory management.",
+      "highlights": [
+        "Diagnosis and resolution of technical incidents",
+        "Documentation of technical procedures and user training",
+        "Support for inventory management systems"
+      ]
+    },
+    {
       "id": 2,
       "company": "Freelance Collective",
       "role": "Freelance Frontend Developer",

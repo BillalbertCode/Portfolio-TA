@@ -141,6 +141,30 @@
       ]
     },
     {
+      "id": 3,
+      "company": "Autónomo",
+      "role": "Programador full stack",
+      "period": "Ene 2022 - Sept 2024",
+      "description": "Desarrollo de aplicaciones web a medida para clientes en distintos rubros, gestionando el ciclo completo del proyecto: desde la captación de requerimientos hasta el despliegue y mantenimiento.",
+      "highlights": [
+        "Tecnologías utilizadas: Javascript, React, PHP, SQL, BootstrapCSS",
+        "Gestión integral del ciclo de vida del proyecto",
+        "Soluciones personalizadas para diversos sectores comerciales"
+      ]
+    },
+    {
+      "id": 4,
+      "company": "Soluciones y Servicios",
+      "role": "Especialista en soporte técnico",
+      "period": "Oct 2022 - Nov 2023",
+      "description": "Brindé soporte técnico presencial y remoto para la cadena de droguerías Nena a través de la contratista Soluciones y Servicios, asegurando la continuidad operativa de sus sistemas y gestión de inventario.",
+      "highlights": [
+        "Diagnóstico y resolución de incidencias técnicas",
+        "Documentación de procedimientos técnicos y capacitación a usuarios",
+        "Soporte de sistemas de gestión de inventario"
+      ]
+    },
+    {
       "id": 2,
       "company": "Colectivo Freelance",
       "role": "Desarrollador Frontend Freelance",
